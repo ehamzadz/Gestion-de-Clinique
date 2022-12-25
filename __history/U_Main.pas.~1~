@@ -1,0 +1,49 @@
+unit U_Main;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
+  FMX.Ani;
+
+type
+  TForm2 = class(TForm)
+    nav_bar: TRectangle;
+    Rect_Logo: TRectangle;
+    Rectangle1: TRectangle;
+    logo: TImage;
+    Rect_Exit: TRectangle;
+    Rectangle15: TRectangle;
+    Image6: TImage;
+    Text4: TText;
+    ColorAnimation5: TColorAnimation;
+    Circle1: TCircle;
+    N_of_Users_Invts: TText;
+    Rectangle7: TRectangle;
+    Image3: TImage;
+    ColorAnimation3: TColorAnimation;
+    Rect_dashboard: TRectangle;
+    Image4: TImage;
+    ColorAnimation4: TColorAnimation;
+    current_tab: TRectangle;
+    Rect_patients: TRectangle;
+    Image8: TImage;
+    ColorAnimation6: TColorAnimation;
+    Rect_users: TRectangle;
+    Image11: TImage;
+    ColorAnimation9: TColorAnimation;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.fmx}
+
+end.

@@ -1,0 +1,56 @@
+unit U_Auth;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
+  FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit;
+
+type
+  TForm1 = class(TForm)
+    Rectangle1: TRectangle;
+    Rectangle2: TRectangle;
+    Rectangle3: TRectangle;
+    Text1: TText;
+    Text2: TText;
+    Text3: TText;
+    Rectangle4: TRectangle;
+    pink: TBrushObject;
+    Text4: TText;
+    Text5: TText;
+    Text6: TText;
+    Edit1: TEdit;
+    Text7: TText;
+    Rectangle5: TRectangle;
+    Text8: TText;
+    CheckBox1: TCheckBox;
+    StyleBook1: TStyleBook;
+    Rectangle6: TRectangle;
+    Rectangle7: TRectangle;
+    Edit2: TEdit;
+    Brush1: TBrushObject;
+    ColorAnimation1: TColorAnimation;
+    procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Single);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.fmx}
+
+
+procedure TForm1.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
+end;
+
+end.

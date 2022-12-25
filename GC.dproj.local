@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2022/12/23 15:43:30.748,=C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/12/23 16:25:35.405,=C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2022/12/23 18:56:00.011,D:\Github\Desktop App\Gestion de Clinique\U_Auth.pas=C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/12/23 18:56:00.011,D:\Github\Desktop App\Gestion de Clinique\U_Auth.fmx=C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2022/12/23 18:56:16.781,D:\Github\Desktop App\Gestion de Clinique\GC.dproj=C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2022/12/23 19:34:48.718,=D:\Github\Desktop App\Gestion de Clinique\Unit1.pas</Transaction>
+    <Transaction>2022/12/23 20:48:17.777,=D:\Github\Desktop App\Gestion de Clinique\Unit2.pas</Transaction>
+    <Transaction>2022/12/23 20:48:47.217,D:\Github\Desktop App\Gestion de Clinique\U_Main.fmx=D:\Github\Desktop App\Gestion de Clinique\Unit2.fmx</Transaction>
+    <Transaction>2022/12/23 20:48:47.217,D:\Github\Desktop App\Gestion de Clinique\U_Main.pas=D:\Github\Desktop App\Gestion de Clinique\Unit2.pas</Transaction>
+  </Transactions>
+</BorlandProject>
