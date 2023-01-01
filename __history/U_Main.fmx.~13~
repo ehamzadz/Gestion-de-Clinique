@@ -4,6 +4,7 @@ object Form2: TForm2
   Caption = 'Form2'
   ClientHeight = 753
   ClientWidth = 1209
+  WindowState = wsMaximized
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]

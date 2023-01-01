@@ -36,17 +36,16 @@ object Form2: TForm2
       HitTest = False
       Position.Y = 10.000000000000000000
       Size.Width = 73.000000000000000000
-      Size.Height = 31.000000000000000000
+      Size.Height = 86.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = None
       object Rectangle1: TRectangle
         Align = Top
         Fill.Color = x00000FFF
         Size.Width = 73.000000000000000000
-        Size.Height = 57.000000000000000000
+        Size.Height = 73.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
-        Visible = False
         object logo: TImage
           MultiResBitmap.Height = 1170
           MultiResBitmap.Width = 1380
@@ -3040,7 +3039,7 @@ object Form2: TForm2
           Margins.Right = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
           Size.Width = 63.000000000000000000
-          Size.Height = 47.000000000000000000
+          Size.Height = 63.000000000000000000
           Size.PlatformDefault = False
         end
       end
@@ -6556,7 +6555,7 @@ object Form2: TForm2
       Fill.Color = x002EB8C6
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
-      Position.Y = 52.000000000000000000
+      Position.Y = 107.000000000000000000
       Size.Width = 73.000000000000000000
       Size.Height = 55.000000000000000000
       Size.PlatformDefault = False
@@ -7575,7 +7574,7 @@ object Form2: TForm2
       Fill.Color = x002EB8C6
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
-      Position.Y = 125.000000000000000000
+      Position.Y = 180.000000000000000000
       Size.Width = 73.000000000000000000
       Size.Height = 55.000000000000000000
       Size.PlatformDefault = False
@@ -7629,7 +7628,7 @@ object Form2: TForm2
       Fill.Color = x002EB8C6
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
-      Position.Y = 198.000000000000000000
+      Position.Y = 253.000000000000000000
       Size.Width = 73.000000000000000000
       Size.Height = 55.000000000000000000
       Size.PlatformDefault = False

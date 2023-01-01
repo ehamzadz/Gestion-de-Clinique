@@ -36,7 +36,7 @@ object Form2: TForm2
       HitTest = False
       Position.Y = 10.000000000000000000
       Size.Width = 73.000000000000000000
-      Size.Height = 31.000000000000000000
+      Size.Height = 39.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = None
       object Rectangle1: TRectangle
@@ -6556,7 +6556,7 @@ object Form2: TForm2
       Fill.Color = x002EB8C6
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
-      Position.Y = 52.000000000000000000
+      Position.Y = 60.000000000000000000
       Size.Width = 73.000000000000000000
       Size.Height = 55.000000000000000000
       Size.PlatformDefault = False
@@ -7575,7 +7575,7 @@ object Form2: TForm2
       Fill.Color = x002EB8C6
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
-      Position.Y = 125.000000000000000000
+      Position.Y = 133.000000000000000000
       Size.Width = 73.000000000000000000
       Size.Height = 55.000000000000000000
       Size.PlatformDefault = False
@@ -7629,7 +7629,7 @@ object Form2: TForm2
       Fill.Color = x002EB8C6
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
-      Position.Y = 198.000000000000000000
+      Position.Y = 206.000000000000000000
       Size.Width = 73.000000000000000000
       Size.Height = 55.000000000000000000
       Size.PlatformDefault = False

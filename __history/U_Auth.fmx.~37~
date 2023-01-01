@@ -19,9 +19,11 @@ object Form1: TForm1
     Stroke.Kind = None
     XRadius = 20.000000000000000000
     YRadius = 20.000000000000000000
+    OnMouseDown = Rectangle1MouseDown
     object Rectangle2: TRectangle
       Align = Left
       Fill.Color = claWhite
+      HitTest = False
       Padding.Left = 50.000000000000000000
       Padding.Top = 30.000000000000000000
       Padding.Right = 50.000000000000000000
@@ -34,6 +36,7 @@ object Form1: TForm1
       YRadius = 20.000000000000000000
       object Text5: TText
         Align = Top
+        HitTest = False
         Margins.Top = 50.000000000000000000
         Position.X = 50.000000000000000000
         Position.Y = 80.000000000000000000
@@ -48,6 +51,7 @@ object Form1: TForm1
       end
       object Text6: TText
         Align = Top
+        HitTest = False
         Opacity = 0.800000011920929000
         Margins.Top = 30.000000000000000000
         Position.X = 50.000000000000000000
@@ -64,6 +68,7 @@ object Form1: TForm1
       end
       object Text7: TText
         Align = Top
+        HitTest = False
         Opacity = 0.800000011920929000
         Margins.Top = 20.000000000000000000
         Position.X = 50.000000000000000000
@@ -80,6 +85,7 @@ object Form1: TForm1
       end
       object Rectangle5: TRectangle
         Align = Top
+        Cursor = crHandPoint
         Fill.Color = xFF10A19D
         Margins.Top = 20.000000000000000000
         Position.X = 50.000000000000000000
@@ -90,6 +96,7 @@ object Form1: TForm1
         Stroke.Kind = None
         XRadius = 25.000000000000000000
         YRadius = 25.000000000000000000
+        OnClick = Rectangle5Click
         object Text8: TText
           Align = Center
           HitTest = False
@@ -101,6 +108,14 @@ object Form1: TForm1
           TextSettings.Font.Size = 18.000000000000000000
           TextSettings.Font.StyleExt = {00050000000000000004000000}
           TextSettings.FontColor = xDCFFFFFF
+        end
+        object ColorAnimation2: TColorAnimation
+          Duration = 0.200000002980232200
+          PropertyName = 'Fill.Color'
+          StartValue = xFF10A19D
+          StopValue = xFF097B78
+          Trigger = 'IsMouseOver=true'
+          TriggerInverse = 'IsMouseOver=false'
         end
       end
       object CheckBox1: TCheckBox
@@ -166,6 +181,14 @@ object Form1: TForm1
           StyledSettings = [Style, FontColor]
         end
       end
+      object FloatAnimation2: TFloatAnimation
+        Duration = 0.200000002980232200
+        Interpolation = Circular
+        OnFinish = FloatAnimation2Finish
+        PropertyName = 'Width'
+        StartValue = 369.000000000000000000
+        StopValue = 0.000000000000000000
+      end
     end
     object Rectangle3: TRectangle
       Align = Client
@@ -183,74 +206,108 @@ object Form1: TForm1
       Fill.Gradient.StartPosition.Y = 0.500000000000000000
       Fill.Gradient.StopPosition.X = 1.000000000000000000
       Fill.Gradient.StopPosition.Y = 0.500000000000000000
+      HitTest = False
       Size.Width = 580.000000000000000000
       Size.Height = 505.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = None
-      XRadius = 20.000000000000000000
-      YRadius = 20.000000000000000000
-      object Text1: TText
-        Position.X = 80.000000000000000000
-        Position.Y = 111.000000000000000000
-        Size.Width = 369.000000000000000000
-        Size.Height = 49.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'Bienvenue '#224
-        TextSettings.Font.Family = 'Russo One'
-        TextSettings.Font.Size = 36.000000000000000000
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
-        TextSettings.FontColor = claWhite
-        TextSettings.HorzAlign = Leading
-      end
-      object Text2: TText
-        Position.X = 80.000000000000000000
-        Position.Y = 168.000000000000000000
-        Size.Width = 449.000000000000000000
-        Size.Height = 50.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'Lotus Medical Center'
-        TextSettings.Font.Family = 'Russo One'
-        TextSettings.Font.Size = 36.000000000000000000
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
-        TextSettings.FontColor = xDCFFFFFF
-        TextSettings.HorzAlign = Leading
-      end
-      object Text3: TText
-        Position.X = 80.000000000000000000
-        Position.Y = 210.000000000000000000
-        Size.Width = 449.000000000000000000
-        Size.Height = 23.000000000000000000
-        Size.PlatformDefault = False
-        Text = #1605#1585#1603#1586' '#1575#1604#1578#1588#1582#1610#1589' '#1575#1604#1591#1576#1610' - '#1575#1604#1604#1608#1578#1587
-        TextSettings.Font.Family = 'Russo One'
-        TextSettings.Font.Size = 16.000000000000000000
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
-        TextSettings.FontColor = xDCFFFFFF
-        TextSettings.HorzAlign = Leading
-      end
-      object Rectangle4: TRectangle
-        Fill.Color = xFFF7559A
-        Position.X = 80.000000000000000000
-        Position.Y = 280.000000000000000000
-        Size.Width = 145.000000000000000000
-        Size.Height = 50.000000000000000000
+      object Rectangle8: TRectangle
+        Align = Center
+        Fill.Kind = None
+        Size.Width = 476.000000000000000000
+        Size.Height = 263.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
-        XRadius = 25.000000000000000000
-        YRadius = 25.000000000000000000
-        object Text4: TText
-          Align = Center
-          HitTest = False
-          Margins.Right = 5.000000000000000000
-          Margins.Bottom = 7.000000000000000000
+        object Rectangle4: TRectangle
+          Cursor = crHandPoint
+          Fill.Color = xFFF7559A
+          Position.Y = 152.000000000000000000
           Size.Width = 145.000000000000000000
-          Size.Height = 26.000000000000000000
+          Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
-          Text = ' Inscrivez-vous '
-          TextSettings.Font.Family = 'rpt'
-          TextSettings.Font.Size = 18.000000000000000000
+          Stroke.Kind = None
+          XRadius = 25.000000000000000000
+          YRadius = 25.000000000000000000
+          object Text4: TText
+            Align = Center
+            HitTest = False
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 7.000000000000000000
+            Size.Width = 145.000000000000000000
+            Size.Height = 26.000000000000000000
+            Size.PlatformDefault = False
+            Text = ' Inscrivez-vous '
+            TextSettings.Font.Family = 'rpt'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = xDCFFFFFF
+          end
+          object ColorAnimation1: TColorAnimation
+            Duration = 0.200000002980232200
+            PropertyName = 'Fill.Color'
+            StartValue = xFFF7559A
+            StopValue = xFFDA0861
+            Trigger = 'IsMouseOver=true'
+            TriggerInverse = 'IsMouseOver=false'
+          end
+        end
+        object Text1: TText
+          HitTest = False
+          Size.Width = 369.000000000000000000
+          Size.Height = 49.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Bienvenue '#224
+          TextSettings.Font.Family = 'Russo One'
+          TextSettings.Font.Size = 36.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.HorzAlign = Leading
+        end
+        object Text2: TText
+          HitTest = False
+          Position.Y = 57.000000000000000000
+          Size.Width = 449.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Lotus Medical Center'
+          TextSettings.Font.Family = 'Russo One'
+          TextSettings.Font.Size = 36.000000000000000000
           TextSettings.Font.StyleExt = {00070000000000000004000000}
           TextSettings.FontColor = xDCFFFFFF
+          TextSettings.HorzAlign = Leading
+        end
+        object Text3: TText
+          HitTest = False
+          Position.Y = 99.000000000000000000
+          Size.Width = 449.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1605#1585#1603#1586' '#1575#1604#1578#1588#1582#1610#1589' '#1575#1604#1591#1576#1610' - '#1575#1604#1604#1608#1578#1587
+          TextSettings.Font.Family = 'Russo One'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = xDCFFFFFF
+          TextSettings.HorzAlign = Leading
+        end
+      end
+      object Line1: TLine
+        Align = Bottom
+        LineType = Bottom
+        Margins.Right = 949.000000000000000000
+        Margins.Bottom = 3.000000000000000000
+        Position.Y = 493.000000000000000000
+        Size.Width = 0.000000000000000000
+        Size.Height = 9.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFF10A19D
+        Stroke.Thickness = 3.000000000000000000
+        object FloatAnimation1: TFloatAnimation
+          Duration = 2.000000000000000000
+          Interpolation = Exponential
+          OnFinish = FloatAnimation1Finish
+          PropertyName = 'Margins.Right'
+          StartValue = 949.000000000000000000
+          StopValue = 0.000000000000000000
         end
       end
     end
