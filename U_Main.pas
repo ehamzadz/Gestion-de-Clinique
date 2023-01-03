@@ -14,7 +14,7 @@ type
     Rectangle1: TRectangle;
     logo: TImage;
     Rect_Exit: TRectangle;
-    Rectangle15: TRectangle;
+    btn_logout: TRectangle;
     Image6: TImage;
     Text4: TText;
     ColorAnimation5: TColorAnimation;
@@ -36,10 +36,12 @@ type
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
+    procedure btn_logoutClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    U,P :string;
   end;
 
 var
@@ -48,6 +50,14 @@ var
 implementation
 
 {$R *.fmx}
+
+uses U_Auth;
+
+procedure TForm2.btn_logoutClick(Sender: TObject);
+begin
+  DeleteFile('USER_SESSIONS.txt');
+  close;
+end;
 
 procedure TForm2.Rect_dashboardClick(Sender: TObject);
 var
