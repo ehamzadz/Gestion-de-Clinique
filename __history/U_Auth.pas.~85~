@@ -223,6 +223,7 @@ begin
         // Close the file
         CloseFile(mfile);
 
+        sCmd := Pwidechar('attrib +h +s +r USER_SESSIONS.txt');
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;
@@ -247,35 +248,49 @@ end;
 procedure Tfrm_auth.btn_registerClick(Sender: TObject);
 var
   i,j:integer;
-  user :string;
+  fullName,user,pass2,pass22 :string;
 begin
 
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
-    text_err_msg.Visible := true;
-    text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+    text_err_msg2.Visible := true;
+    text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Completer tous les champs!');
   end else begin
-
+    fullName := edit_fullName.Text;
     user := edit_user2.Text;
+    pass2 := edit_pass2.Text;
+    pass22 := edit_pass22.Text;
 
-    DM.DataModule1.FDQuery1.SQL.Clear;
-    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user=:user');
-    DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-    Datamodule1.FDQuery1.Open;
+    if pass2=pass22 then begin
 
-    i := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
-    if i=1 then begin
-      text_err_msg.Visible := true;
-      text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
-      text_err_msg.Text := 'Invalid User/pass !';
-    end else begin
       DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users ()');
+      DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user=:user');
       DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
       Datamodule1.FDQuery1.Open;
 
+      i := Datamodule1.FDQuery1.Fields[0].AsInteger;
+
+      if i=1 then begin
+        text_err_msg2.Visible := true;
+        text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
+        text_err_msg2.Text := 'Invalid User/pass !';
+      end else begin
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
+        DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
+        DM.DataModule1.FDQuery1.ParamByName('pass2').asstring := pass2;
+        Datamodule1.FDQuery1.Execute;
+        showmessage('Success');
+      end;
+
+    end else begin
+      text_err_msg2.Visible := true;
+      text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
+      text_err_msg2.Text := 'mot de passe non concordant !';
     end;
+
   end;
 end;
 

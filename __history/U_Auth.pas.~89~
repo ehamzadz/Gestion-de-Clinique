@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param,
-  FMX.TabControl;
+  FMX.TabControl, Winapi.ShellAPI, Winapi.Windows;
 
 type
   Tfrm_auth = class(TForm)
@@ -223,6 +223,7 @@ begin
         // Close the file
         CloseFile(mfile);
 
+        //ShellExecute(0, nil, 'cmd.exe', 'atrrib +h+s +r USER_SESSIONS.txt', nil, SW_HIDE);
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;
@@ -251,8 +252,8 @@ var
 begin
 
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
-    text_err_msg.Visible := true;
-    text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+    text_err_msg2.Visible := true;
+    text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Completer tous les champs!');
   end else begin
     fullName := edit_fullName.Text;
@@ -260,7 +261,7 @@ begin
     pass2 := edit_pass2.Text;
     pass22 := edit_pass22.Text;
 
-    if pass2=pass22 then
+    if pass2=pass22 then begin
 
 
       DM.DataModule1.FDQuery1.SQL.Clear;
@@ -271,19 +272,25 @@ begin
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
       if i=1 then begin
-        text_err_msg.Visible := true;
-        text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
-        text_err_msg.Text := 'Invalid User/pass !';
+        text_err_msg2.Visible := true;
+        text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
+        text_err_msg2.Text := 'Invalid User/pass !';
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
-        DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-        DM.DataModule1.FDQuery1.ParamByName('user').asstring := pass2;
-        Datamodule1.FDQuery1.Open;
-
+        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
+        Datamodule1.FDQuery1.Execute;
+        showmessage('Success');
       end;
+
+    end else begin
+      text_err_msg2.Visible := true;
+      text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
+      text_err_msg2.Text := 'mot de passe non concordant !';
     end;
+
   end;
 end;
 
