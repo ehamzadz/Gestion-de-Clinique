@@ -12,7 +12,7 @@ type
      usr : string[50];
      pswd  : string[50];
   end;
-  TForm3 = class(TForm)
+  Tfrm_load = class(TForm)
     Rectangle1: TRectangle;
     Rectangle3: TRectangle;
     FloatAnimation3: TFloatAnimation;
@@ -20,9 +20,10 @@ type
     FloatAnimation2: TFloatAnimation;
     Timer1: TTimer;
     text_welcome: TText;
+    Image1: TImage;
     procedure FormShow(Sender: TObject);
-    procedure FloatAnimation2Finish(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure FloatAnimation2Finish(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,7 +32,7 @@ type
   end;
 
 var
-  Form3: TForm3;
+  frm_load: Tfrm_load;
 
 implementation
 
@@ -39,18 +40,19 @@ implementation
 
 uses U_Auth, U_Main;
 
-procedure TForm3.FloatAnimation2Finish(Sender: TObject);
+procedure Tfrm_load.FloatAnimation2Finish(Sender: TObject);
 begin
-  Visible := False; // Makes Form1 invisible
-  try
-    Timer1.enabled := false;
-    form1.ShowModal; // Shows the Form
-  finally
-    close;
-  end;
+
+//  Visible := False; // Makes Form1 invisible
+//  try
+//    Timer1.enabled := false;
+//    frm_auth.ShowModal; // Shows the Form
+//  finally
+//    close;
+//  end;
 end;
 
-procedure TForm3.FormShow(Sender: TObject);
+procedure Tfrm_load.FormShow(Sender: TObject);
 var
   sCmd: string;
   mfile   : File of TUsers;  // A file of customer records
@@ -96,13 +98,13 @@ begin
 
 end;
 
-procedure TForm3.Timer1Timer(Sender: TObject);
+procedure Tfrm_load.Timer1Timer(Sender: TObject);
 begin
 
   Visible := False; // Makes Form1 invisible
   try
     Timer1.enabled := false;
-    form1.ShowModal; // Shows the Form
+    frm_auth.ShowModal; // Shows the Form
   finally
     close;
   end;

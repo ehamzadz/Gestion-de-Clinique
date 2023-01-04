@@ -8,7 +8,7 @@ uses
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls;
 
 type
-  TForm2 = class(TForm)
+  Tfrm_main = class(TForm)
     nav_bar: TRectangle;
     Rect_Logo: TRectangle;
     Rectangle1: TRectangle;
@@ -45,7 +45,7 @@ type
   end;
 
 var
-  Form2: TForm2;
+  frm_main: Tfrm_main;
 
 implementation
 
@@ -53,13 +53,13 @@ implementation
 
 uses U_Auth;
 
-procedure TForm2.btn_logoutClick(Sender: TObject);
+procedure Tfrm_main.btn_logoutClick(Sender: TObject);
 begin
   DeleteFile('USER_SESSIONS.txt');
   close;
 end;
 
-procedure TForm2.Rect_dashboardClick(Sender: TObject);
+procedure Tfrm_main.Rect_dashboardClick(Sender: TObject);
 var
   this :TButton;
 begin
@@ -71,7 +71,7 @@ begin
   //tabcontrol1.TabIndex := 3;
 end;
 
-procedure TForm2.Rect_patientsClick(Sender: TObject);
+procedure Tfrm_main.Rect_patientsClick(Sender: TObject);
 var
   this :TButton;
 begin
@@ -82,7 +82,7 @@ begin
   Rect_users.Opacity := 0.5;
 end;
 
-procedure TForm2.Rect_usersClick(Sender: TObject);
+procedure Tfrm_main.Rect_usersClick(Sender: TObject);
 var
   this :TButton;
 begin

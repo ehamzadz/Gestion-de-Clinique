@@ -8,7 +8,7 @@ uses
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param;
 
 type
-  TForm1 = class(TForm)
+  Tfrm_auth = class(TForm)
     Rectangle1: TRectangle;
     Rectangle2: TRectangle;
     Rectangle3: TRectangle;
@@ -53,7 +53,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frm_auth: Tfrm_auth;
 
 implementation
 
@@ -62,24 +62,24 @@ implementation
 uses U_Main, U_Load, DM;
 
 
-procedure TForm1.FloatAnimation1Finish(Sender: TObject);
+procedure Tfrm_auth.FloatAnimation1Finish(Sender: TObject);
 begin
   showmessage('Done');
 
   Visible := False; // Makes Form1 invisible
   try
-    form2.ShowModal; // Shows the Form
+    frm_main.ShowModal; // Shows the Form
   finally
     close;
   end;
 end;
 
-procedure TForm1.FloatAnimation2Finish(Sender: TObject);
+procedure Tfrm_auth.FloatAnimation2Finish(Sender: TObject);
 begin
   floatanimation1.Enabled := true;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure Tfrm_auth.FormCreate(Sender: TObject);
 begin
 //
 //  edit_user.text := '';
@@ -102,22 +102,22 @@ begin
 //  end;
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
+procedure Tfrm_auth.FormShow(Sender: TObject);
 begin
 
   edit_user.text := '';
   edit_pass.text := '';
   text_err_msg.text := '';
 
-  if (form3.U='') and (form3.P='') then begin
+  if (frm_load.U='') and (frm_load.P='') then begin
 
   end else begin
-    user := form3.U;
-    pswd := form3.P;
+    user := frm_load.U;
+    pswd := frm_load.P;
 
     Visible := False; // Makes Form1 invisible
     try
-      form2.ShowModal; // Shows the Form
+      frm_main.ShowModal; // Shows the Form
     finally
       Visible := true;
       // Makes Form1 visible again
@@ -125,13 +125,13 @@ begin
   end;
 end;
 
-procedure TForm1.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
+procedure Tfrm_auth.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
   if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
-procedure TForm1.btn_loginClick(Sender: TObject);
+procedure Tfrm_auth.btn_loginClick(Sender: TObject);
 var
   i,j : integer;
   mfile   : File of TUsers;  // A file of customer records

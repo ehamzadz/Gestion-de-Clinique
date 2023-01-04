@@ -3,18 +3,18 @@ program GC;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  U_Auth in 'U_Auth.pas' {Form1},
-  U_Main in 'U_Main.pas' {Form2},
+  U_Auth in 'U_Auth.pas' {frm_auth},
+  U_Main in 'U_Main.pas' {frm_main},
   DM in 'DM.pas' {DataModule1: TDataModule},
-  U_Load in 'U_Load.pas' {Form3};
+  U_Load in 'U_Load.pas' {frm_load};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm3, Form3);
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(Tfrm_load, frm_load);
+  Application.CreateForm(Tfrm_auth, frm_auth);
+  Application.CreateForm(Tfrm_main, frm_main);
   Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
 end.
