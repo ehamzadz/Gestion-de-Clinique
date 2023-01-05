@@ -37,7 +37,6 @@ type
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
     procedure btn_logoutClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,12 +57,6 @@ procedure Tfrm_main.btn_logoutClick(Sender: TObject);
 begin
   DeleteFile('USER_SESSIONS.txt');
   close;
-end;
-
-procedure Tfrm_main.FormShow(Sender: TObject);
-begin
-  Rect_patients.Opacity := 0.5;
-  Rect_users.Opacity := 0.5;
 end;
 
 procedure Tfrm_main.Rect_dashboardClick(Sender: TObject);

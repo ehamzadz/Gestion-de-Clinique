@@ -1,7 +1,6 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
-  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
@@ -9,7 +8,7 @@ object DataModule1: TDataModule1
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=D:\db.mdb'
+      'Database=D:\Github\Desktop App\Gestion-de-Clinique\DB\db.mdb'
       'DriverID=MSAcc')
     LoginPrompt = False
     Left = 80

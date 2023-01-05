@@ -12,8 +12,8 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(Tfrm_auth, frm_auth);
   Application.CreateForm(Tfrm_load, frm_load);
+  Application.CreateForm(Tfrm_auth, frm_auth);
   Application.CreateForm(Tfrm_main, frm_main);
   Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
