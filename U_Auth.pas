@@ -9,6 +9,10 @@ uses
   FMX.TabControl, Winapi.ShellAPI, Winapi.Windows;
 
 type
+  TUsers = Record
+     usr : string[50];
+     pswd  : string[50];
+  end;
   Tfrm_auth = class(TForm)
     Rectangle1: TRectangle;
     Rectangle2: TRectangle;
@@ -74,21 +78,29 @@ type
     Text19: TText;
     Rectangle17: TRectangle;
     edit_pass22: TEdit;
+    tab_load: TTabItem;
+    Rectangle11: TRectangle;
+    text_welcome: TText;
+    Rectangle18: TRectangle;
+    Image1: TImage;
+    FloatAnimation5: TFloatAnimation;
+    Timer1: TTimer;
     procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure btn_loginClick(Sender: TObject);
     procedure FloatAnimation2Finish(Sender: TObject);
     procedure FloatAnimation1Finish(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btn_go_to_register_formClick(Sender: TObject);
     procedure btn_go_to_login_formClick(Sender: TObject);
     procedure btn_registerClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     user,pswd : string;
+    U,P: string;
   end;
 
 var
@@ -98,7 +110,7 @@ implementation
 
 {$R *.fmx}
 
-uses U_Main, U_Load, DM;
+uses U_Main, DM;
 
 
 procedure Tfrm_auth.FloatAnimation1Finish(Sender: TObject);
@@ -107,7 +119,7 @@ begin
   try
     frm_main.ShowModal; // Shows the Form
   finally
-    close;
+    application.Terminate;
   end;
 end;
 
@@ -116,49 +128,37 @@ begin
   floatanimation1.Enabled := true;
 end;
 
-procedure Tfrm_auth.FormCreate(Sender: TObject);
-begin
-//
-//  edit_user.text := '';
-//  edit_pass.text := '';
-////  label5.text := '';
-//
-//  if (form2.U='') and (form2.P='') then begin
-//
-//  end else begin
-//    user := form2.U;
-//    pswd := form2.P;
-//
-//    Visible := False; // Makes Form1 invisible
-//    try
-////      frm_home.ShowModal; // Shows the Form
-//    finally
-//      Visible := true;
-//      // Makes Form1 visible again
-//    end;
-//  end;
-end;
-
 procedure Tfrm_auth.FormShow(Sender: TObject);
+var
+  sCmd: string;
+  mfile   : File of TUsers;  // A file of customer records
+  User : TUsers;          // A customer record variable
 begin
-
-  edit_user.text := '';
-  edit_pass.text := '';
-  text_err_msg.text := '';
-
-  if (frm_load.U='') and (frm_load.P='') then begin
+  //sCmd := Pwidechar('ping 8.8.8.8');
+  //ShellExecute (Application.Handle, 'open', PChar('I:\Projects\Delphi\New folder\Win32\Debug\ping.bat'), nil, nil, SW_SHOW);
+  if FileExists('USER_SESSIONS.txt') then begin
+    AssignFile(mFile, 'USER_SESSIONS.txt');
+    // Reopen the file in read only mode
+    FileMode := fmOpenRead;
+    Reset(mFile);
+    // Display the file contents
+    while not Eof(mFile) do begin
+      Read(mFile, User);
+      U := User.usr;
+      P := User.pswd;
+    end;
+    // Close the file for the last time
+    CloseFile(mFile);
+    text_welcome.text := 'Bienvenue ' + U + ' ..';
+    timer1.Enabled := true;
 
   end else begin
-    user := frm_load.U;
-    pswd := frm_load.P;
-
-    Visible := False; // Makes Form1 invisible
-    try
-      frm_main.ShowModal; // Shows the Form
-    finally
-      Visible := true;
-      // Makes Form1 visible again
-    end;
+    U := '';
+    P := '';
+    tabcontrol1.TabIndex := 0;
+    edit_user.text := '';
+    edit_pass.text := '';
+    text_err_msg.text := '';
   end;
 end;
 
@@ -171,6 +171,20 @@ procedure Tfrm_auth.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
   if (Button = TMouseButton.mbLeft) then StartWindowDrag;
+end;
+
+procedure Tfrm_auth.Timer1Timer(Sender: TObject);
+begin
+  FloatAnimation1.Enabled := false;
+  FloatAnimation2.Enabled := false;
+  timer1.Enabled := false;
+  Visible := False; // Makes Form1 invisible
+  try
+    frm_main.ShowModal; // Shows the Form
+  finally
+    application.Terminate;
+    // Makes Form1 visible again
+  end;
 end;
 
 procedure Tfrm_auth.btn_go_to_register_formClick(Sender: TObject);
@@ -254,7 +268,7 @@ begin
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
     text_err_msg2.Visible := true;
     text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
-    text_err_msg2.text := ('Completer tous les champs!');
+    text_err_msg2.text := ('Compléter tous les champs!');
   end else begin
     fullName := edit_fullName.Text;
     user := edit_user2.Text;
@@ -283,13 +297,19 @@ begin
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
         Datamodule1.FDQuery1.Execute;
-        showmessage('Success');
+        showmessage('Inscrit avec succès');
+
+        edit_user2.text := '';
+        edit_fullName.text :='';
+        edit_pass2.text :='';
+        edit_pass22.text :='';
+        tabcontrol1.TabIndex := 0;
       end;
 
     end else begin
       text_err_msg2.Visible := true;
       text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
-      text_err_msg2.Text := 'mot de passe non concordant !';
+      text_err_msg2.Text := 'Mot de passe non concordant !';
     end;
 
   end;
