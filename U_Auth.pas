@@ -254,7 +254,7 @@ begin
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
     text_err_msg2.Visible := true;
     text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
-    text_err_msg2.text := ('Compléter tous les champs!');
+    text_err_msg2.text := ('Completer tous les champs!');
   end else begin
     fullName := edit_fullName.Text;
     user := edit_user2.Text;
@@ -283,19 +283,13 @@ begin
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
         Datamodule1.FDQuery1.Execute;
-        showmessage('Inscrit avec succès');
-
-        edit_user2.text := '';
-        edit_fullName.text :='';
-        edit_pass2.text :='';
-        edit_pass22.text :='';
-        tabcontrol1.TabIndex := 0;
+        showmessage('Success');
       end;
 
     end else begin
       text_err_msg2.Visible := true;
       text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
-      text_err_msg2.Text := 'Mot de passe non concordant !';
+      text_err_msg2.Text := 'mot de passe non concordant !';
     end;
 
   end;

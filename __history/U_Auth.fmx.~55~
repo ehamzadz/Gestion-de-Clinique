@@ -1,10 +1,10 @@
 object frm_auth: Tfrm_auth
   Left = 0
   Top = 0
-  BorderStyle = SizeToolWin
-  ClientHeight = 532
+  ClientHeight = 505
   ClientWidth = 949
   StyleBook = StyleBook1
+  Transparency = True
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -118,33 +118,31 @@ object frm_auth: Tfrm_auth
   object TabControl1: TTabControl
     Align = Contents
     Size.Width = 949.000000000000000000
-    Size.Height = 532.000000000000000000
+    Size.Height = 505.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 3
     TabPosition = None
     Sizes = (
       949s
-      532s
+      505s
       949s
-      532s)
+      505s)
     object tab_login: TTabItem
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
-      ExplicitSize.cx = 8.000000000000000000
-      ExplicitSize.cy = 8.000000000000000000
       object Rectangle1: TRectangle
         Align = Client
         Fill.Color = claWhite
         Size.Width = 949.000000000000000000
-        Size.Height = 532.000000000000000000
+        Size.Height = 505.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
         XRadius = 20.000000000000000000
@@ -155,7 +153,7 @@ object frm_auth: Tfrm_auth
           Fill.Color = claWhite
           HitTest = False
           Size.Width = 369.000000000000000000
-          Size.Height = 532.000000000000000000
+          Size.Height = 505.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
           object Rectangle4: TRectangle
@@ -225,7 +223,7 @@ object frm_auth: Tfrm_auth
               Fill.Kind = None
               Margins.Top = 10.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 187.000000000000000000
+              Position.Y = 177.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 50.000000000000000000
               Size.PlatformDefault = False
@@ -289,7 +287,7 @@ object frm_auth: Tfrm_auth
               Opacity = 0.800000011920929000
               Margins.Top = 30.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 159.000000000000000000
+              Position.Y = 257.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 18.000000000000000000
               Size.PlatformDefault = False
@@ -305,7 +303,7 @@ object frm_auth: Tfrm_auth
               Opacity = 0.800000011920929000
               Margins.Top = 20.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 257.000000000000000000
+              Position.Y = 149.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 18.000000000000000000
               Size.PlatformDefault = False
@@ -354,7 +352,7 @@ object frm_auth: Tfrm_auth
           Fill.Gradient.StopPosition.Y = 0.500000000000000000
           HitTest = False
           Size.Width = 580.000000000000000000
-          Size.Height = 532.000000000000000000
+          Size.Height = 505.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
           object Rectangle8: TRectangle
@@ -443,7 +441,7 @@ object frm_auth: Tfrm_auth
             LineType = Bottom
             Margins.Right = 949.000000000000000000
             Margins.Bottom = 3.000000000000000000
-            Position.Y = 520.000000000000000000
+            Position.Y = 493.000000000000000000
             Size.Width = 0.000000000000000000
             Size.Height = 9.000000000000000000
             Size.PlatformDefault = False
@@ -465,20 +463,18 @@ object frm_auth: Tfrm_auth
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
       Text = 'tab_register'
-      ExplicitSize.cx = 8.000000000000000000
-      ExplicitSize.cy = 8.000000000000000000
       object Rectangle5: TRectangle
         Align = Client
         Fill.Color = claWhite
         Size.Width = 949.000000000000000000
-        Size.Height = 532.000000000000000000
+        Size.Height = 505.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
         XRadius = 20.000000000000000000
@@ -489,7 +485,7 @@ object frm_auth: Tfrm_auth
           Fill.Color = claWhite
           HitTest = False
           Size.Width = 369.000000000000000000
-          Size.Height = 532.000000000000000000
+          Size.Height = 505.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
           object Rectangle10: TRectangle
@@ -497,27 +493,27 @@ object frm_auth: Tfrm_auth
             Fill.Kind = None
             HitTest = False
             Padding.Left = 50.000000000000000000
-            Padding.Top = 10.000000000000000000
+            Padding.Top = 30.000000000000000000
             Padding.Right = 50.000000000000000000
             Padding.Bottom = 30.000000000000000000
             Size.Width = 369.000000000000000000
-            Size.Height = 532.000000000000000000
+            Size.Height = 505.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
-            object btn_register: TRectangle
+            object Rectangle11: TRectangle
               Align = Top
               Cursor = crHandPoint
               Fill.Color = xFFF7559A
-              Margins.Top = 15.000000000000000000
+              Margins.Top = 20.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 446.000000000000000000
+              Position.Y = 394.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 50.000000000000000000
               Size.PlatformDefault = False
               Stroke.Kind = None
               XRadius = 25.000000000000000000
               YRadius = 25.000000000000000000
-              OnClick = btn_registerClick
+              OnClick = btn_loginClick
               object Text9: TText
                 Align = Center
                 HitTest = False
@@ -539,19 +535,34 @@ object frm_auth: Tfrm_auth
                 TriggerInverse = 'IsMouseOver=false'
               end
             end
+            object CheckBox2: TCheckBox
+              Align = Top
+              StyledSettings = [Style]
+              Margins.Top = 20.000000000000000000
+              Position.X = 50.000000000000000000
+              Position.Y = 355.000000000000000000
+              Size.Width = 269.000000000000000000
+              Size.Height = 19.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 4
+              Text = 'Se souvenir de moi'
+              TextSettings.Font.Family = 'Tajawal'
+              TextSettings.Font.Size = 14.000000000000000000
+              TextSettings.FontColor = xFF5E5E5E
+            end
             object Rectangle12: TRectangle
               Align = Top
               Fill.Kind = None
               Margins.Top = 10.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 97.000000000000000000
+              Position.Y = 177.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 50.000000000000000000
               Size.PlatformDefault = False
               Stroke.Color = xFFD2D2D2
               XRadius = 7.000000000000000000
               YRadius = 7.000000000000000000
-              object edit_fullName: TEdit
+              object Edit1: TEdit
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
@@ -568,14 +579,14 @@ object frm_auth: Tfrm_auth
               Fill.Kind = None
               Margins.Top = 10.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 283.000000000000000000
+              Position.Y = 285.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 50.000000000000000000
               Size.PlatformDefault = False
               Stroke.Color = xFFD2D2D2
               XRadius = 7.000000000000000000
               YRadius = 7.000000000000000000
-              object edit_pass2: TEdit
+              object Edit2: TEdit
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
@@ -590,12 +601,13 @@ object frm_auth: Tfrm_auth
             object Text10: TText
               Align = Top
               HitTest = False
+              Margins.Top = 50.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 10.000000000000000000
+              Position.Y = 80.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 49.000000000000000000
               Size.PlatformDefault = False
-              Text = 'Inscription'
+              Text = 'Se Connecter'
               TextSettings.Font.Family = 'Tajawal'
               TextSettings.Font.Size = 28.000000000000000000
               TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -605,13 +617,13 @@ object frm_auth: Tfrm_auth
               Align = Top
               HitTest = False
               Opacity = 0.800000011920929000
-              Margins.Top = 10.000000000000000000
+              Margins.Top = 30.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 69.000000000000000000
+              Position.Y = 257.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 18.000000000000000000
               Size.PlatformDefault = False
-              Text = 'Nom et Pr'#233'nom'
+              Text = 'Nom d'#39'utilisateur'
               TextSettings.Font.Family = 'Tajawal'
               TextSettings.Font.Size = 16.000000000000000000
               TextSettings.FontColor = xFF303030
@@ -623,7 +635,7 @@ object frm_auth: Tfrm_auth
               Opacity = 0.800000011920929000
               Margins.Top = 20.000000000000000000
               Position.X = 50.000000000000000000
-              Position.Y = 255.000000000000000000
+              Position.Y = 149.000000000000000000
               Size.Width = 269.000000000000000000
               Size.Height = 18.000000000000000000
               Size.PlatformDefault = False
@@ -633,96 +645,16 @@ object frm_auth: Tfrm_auth
               TextSettings.FontColor = xFF303030
               TextSettings.HorzAlign = Leading
             end
-            object text_err_msg2: TText
+            object Text13: TText
               Align = Top
               Position.X = 50.000000000000000000
-              Position.Y = 496.000000000000000000
+              Position.Y = 444.000000000000000000
               Size.Width = 269.000000000000000000
-              Size.Height = 23.000000000000000000
+              Size.Height = 27.000000000000000000
               Size.PlatformDefault = False
               Text = 'Completer tous les champs'
               TextSettings.FontColor = claTomato
               Visible = False
-            end
-            object Text18: TText
-              Align = Top
-              HitTest = False
-              Opacity = 0.800000011920929000
-              Margins.Top = 10.000000000000000000
-              Position.X = 50.000000000000000000
-              Position.Y = 157.000000000000000000
-              Size.Width = 269.000000000000000000
-              Size.Height = 18.000000000000000000
-              Size.PlatformDefault = False
-              Text = 'Nom d'#39'utilisateur'
-              TextSettings.Font.Family = 'Tajawal'
-              TextSettings.Font.Size = 16.000000000000000000
-              TextSettings.FontColor = xFF303030
-              TextSettings.HorzAlign = Leading
-            end
-            object Rectangle16: TRectangle
-              Align = Top
-              Fill.Kind = None
-              Margins.Top = 10.000000000000000000
-              Position.X = 50.000000000000000000
-              Position.Y = 185.000000000000000000
-              Size.Width = 269.000000000000000000
-              Size.Height = 50.000000000000000000
-              Size.PlatformDefault = False
-              Stroke.Color = xFFD2D2D2
-              XRadius = 7.000000000000000000
-              YRadius = 7.000000000000000000
-              object edit_user2: TEdit
-                Touch.InteractiveGestures = [LongTap, DoubleTap]
-                Align = Client
-                TabOrder = 0
-                TextSettings.Font.Family = 'Tajawal'
-                TextSettings.Font.Size = 14.000000000000000000
-                Size.Width = 269.000000000000000000
-                Size.Height = 50.000000000000000000
-                Size.PlatformDefault = False
-                StyledSettings = [Style, FontColor]
-              end
-            end
-            object Text19: TText
-              Align = Top
-              HitTest = False
-              Opacity = 0.800000011920929000
-              Margins.Top = 20.000000000000000000
-              Position.X = 50.000000000000000000
-              Position.Y = 353.000000000000000000
-              Size.Width = 269.000000000000000000
-              Size.Height = 18.000000000000000000
-              Size.PlatformDefault = False
-              Text = 'Confirmer Mot de passe'
-              TextSettings.Font.Family = 'Tajawal'
-              TextSettings.Font.Size = 16.000000000000000000
-              TextSettings.FontColor = xFF303030
-              TextSettings.HorzAlign = Leading
-            end
-            object Rectangle17: TRectangle
-              Align = Top
-              Fill.Kind = None
-              Margins.Top = 10.000000000000000000
-              Position.X = 50.000000000000000000
-              Position.Y = 381.000000000000000000
-              Size.Width = 269.000000000000000000
-              Size.Height = 50.000000000000000000
-              Size.PlatformDefault = False
-              Stroke.Color = xFFD2D2D2
-              XRadius = 7.000000000000000000
-              YRadius = 7.000000000000000000
-              object edit_pass22: TEdit
-                Touch.InteractiveGestures = [LongTap, DoubleTap]
-                Align = Client
-                TabOrder = 0
-                TextSettings.Font.Family = 'Tajawal'
-                TextSettings.Font.Size = 14.000000000000000000
-                Size.Width = 269.000000000000000000
-                Size.Height = 50.000000000000000000
-                Size.PlatformDefault = False
-                StyledSettings = [Style, FontColor]
-              end
             end
           end
           object FloatAnimation3: TFloatAnimation
@@ -752,7 +684,7 @@ object frm_auth: Tfrm_auth
           Fill.Gradient.StopPosition.Y = 0.500000000000000000
           HitTest = False
           Size.Width = 580.000000000000000000
-          Size.Height = 532.000000000000000000
+          Size.Height = 505.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
           object Rectangle15: TRectangle
@@ -763,7 +695,7 @@ object frm_auth: Tfrm_auth
             Size.Height = 263.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
-            object btn_go_to_login_form: TRectangle
+            object Rectangle16: TRectangle
               Cursor = crHandPoint
               Fill.Color = xFF10A19D
               Position.Y = 152.000000000000000000
@@ -773,7 +705,7 @@ object frm_auth: Tfrm_auth
               Stroke.Kind = None
               XRadius = 25.000000000000000000
               YRadius = 25.000000000000000000
-              OnClick = btn_go_to_login_formClick
+              OnClick = Rectangle16Click
               object Text14: TText
                 Align = Center
                 HitTest = False
@@ -841,7 +773,7 @@ object frm_auth: Tfrm_auth
             LineType = Bottom
             Margins.Right = 949.000000000000000000
             Margins.Bottom = 3.000000000000000000
-            Position.Y = 520.000000000000000000
+            Position.Y = 493.000000000000000000
             Size.Width = 0.000000000000000000
             Size.Height = 9.000000000000000000
             Size.PlatformDefault = False
