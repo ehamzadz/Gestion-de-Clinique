@@ -223,10 +223,16 @@ begin
         // Close the file
         CloseFile(mfile);
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:__history/U_Auth.pas.~76~
 <<<<<<<< HEAD:__history/U_Auth.pas.~76~
 ========
         ShellExecute(0, nil, 'cmd.exe', 'atrrib +h+s +r USER_SESSIONS.txt', nil, SW_HIDE);
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~87~
+========
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;
@@ -281,12 +287,17 @@ begin
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~76~
+<<<<<<<< HEAD:__history/U_Auth.pas.~76~
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := pass2;
         Datamodule1.FDQuery1.Open;
 
+<<<<<<< HEAD
 ========
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
@@ -294,12 +305,29 @@ begin
         Datamodule1.FDQuery1.Execute;
         showmessage('Success');
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~87~
+========
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := pass2;
+        Datamodule1.FDQuery1.Open;
+
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
       end;
 
     end else begin
       text_err_msg.Visible := true;
       text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+<<<<<<< HEAD
+<<<<<<<< HEAD:__history/U_Auth.pas.~76~
       text_err_msg.Text := 'mot de passe non concordant';
+========
+      text_err_msg.Text := 'Mot de passe incompatible!';
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
+=======
+      text_err_msg.Text := 'mot de passe non concordant';
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     end;
 
   end;

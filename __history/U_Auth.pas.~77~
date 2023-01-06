@@ -6,11 +6,19 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param,
+<<<<<<< HEAD
+<<<<<<<< HEAD:__history/U_Auth.pas.~77~
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
   FMX.TabControl;
 ========
   FMX.TabControl, process, sysutils;
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
+========
+  FMX.TabControl;
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
+=======
+  FMX.TabControl;
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 
 type
   Tfrm_auth = class(TForm)
@@ -227,12 +235,18 @@ begin
         // Close the file
         CloseFile(mfile);
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:__history/U_Auth.pas.~77~
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
 ========
 //        ShellExecute(0, nil, 'cmd.exe', '/C find "320" in.txt > out.txt', nil, SW_HIDE);
 
 RunCommand('c:\windows\system32\cmd.exe', ['cd d:\', 'dir /s'], s);
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
+========
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;
@@ -270,6 +284,30 @@ begin
     pass2 := edit_pass2.Text;
     pass22 := edit_pass22.Text;
 
+<<<<<<< HEAD
+
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user=:user');
+    DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
+    Datamodule1.FDQuery1.Open;
+
+    i := Datamodule1.FDQuery1.Fields[0].AsInteger;
+
+    if i=1 then begin
+      text_err_msg.Visible := true;
+      text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+      text_err_msg.Text := 'Invalid User/pass !';
+    end else begin
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
+      DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
+      DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
+      DM.DataModule1.FDQuery1.ParamByName('user').asstring := pass2;
+      Datamodule1.FDQuery1.Open;
+
+<<<<<<<< HEAD:__history/U_Auth.pas.~77~
+=======
     if pass2=pass22 then begin
 
 
@@ -278,6 +316,7 @@ begin
       DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
       Datamodule1.FDQuery1.Open;
 
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
       if i=1 then begin
@@ -287,7 +326,10 @@ begin
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := pass2;
@@ -299,6 +341,7 @@ begin
       text_err_msg.Visible := true;
       text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
       text_err_msg.Text := 'mot de passe non concordant !';
+<<<<<<< HEAD
 ========
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
@@ -312,8 +355,13 @@ begin
       text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
       text_err_msg2.Text := 'mot de passe non concordant !';
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
+========
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
+    end;
+=======
     end;
 
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   end;
 end;
 
