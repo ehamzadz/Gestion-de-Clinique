@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param,
-  FMX.TabControl, Winapi.ShellAPI, Winapi.Windows;
+  FMX.TabControl;
 
 type
   TUsers = Record
@@ -246,7 +246,6 @@ begin
         // Close the file
         CloseFile(mfile);
 
-        //ShellExecute(0, nil, 'cmd.exe', 'atrrib +h+s +r USER_SESSIONS.txt', nil, SW_HIDE);
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;
@@ -275,9 +274,15 @@ var
 begin
 
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
+<<<<<<<< HEAD:__history/U_Auth.pas.~96~
     text_err_msg2.Visible := true;
     text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Compléter tous les champs!');
+========
+    text_err_msg.Visible := true;
+    text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+    text_err_msg2.text := ('Completer tous les champs!');
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
   end else begin
     fullName := edit_fullName.Text;
     user := edit_user2.Text;
@@ -295,11 +300,12 @@ begin
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
       if i=1 then begin
-        text_err_msg2.Visible := true;
-        text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
-        text_err_msg2.Text := 'Invalid User/pass !';
+        text_err_msg.Visible := true;
+        text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+        text_err_msg.Text := 'Invalid User/pass !';
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
+<<<<<<<< HEAD:__history/U_Auth.pas.~96~
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users values (:user,:pass,:fullName,:type)');
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
         DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
@@ -319,6 +325,20 @@ begin
       text_err_msg2.Visible := true;
       text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
       text_err_msg2.Text := 'Mot de passe non concordant !';
+========
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := pass2;
+        Datamodule1.FDQuery1.Open;
+
+      end;
+
+    end else begin
+      text_err_msg.Visible := true;
+      text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+      text_err_msg.Text := 'Mot de passe incompatible!';
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
     end;
 
   end;

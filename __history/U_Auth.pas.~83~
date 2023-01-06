@@ -223,6 +223,8 @@ begin
         // Close the file
         CloseFile(mfile);
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:__history/U_Auth.pas.~83~
 <<<<<<<< HEAD:__history/U_Auth.pas.~83~
 //        ShellExecute(0, nil, 'cmd.exe', '/C find "320" in.txt > out.txt', nil, SW_HIDE);
 
@@ -230,6 +232,14 @@ RunCommand('c:\windows\system32\cmd.exe', ['cd d:\', 'dir /s'], s);
 ========
         ShellExecute (Application.Handle, 'open', PChar('I:\Projects\Delphi\New folder\Win32\Debug\ping.bat'), nil, nil, SW_SHOW);
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~86~
+========
+        ShellExecute (Application.Handle, 'open', PChar('I:\Projects\Delphi\New folder\Win32\Debug\ping.bat'), nil, nil, SW_SHOW);
+>>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~86~
+=======
+//        ShellExecute(0, nil, 'cmd.exe', '/C find "320" in.txt > out.txt', nil, SW_HIDE);
+
+RunCommand('c:\windows\system32\cmd.exe', ['cd d:\', 'dir /s'], s);
+>>>>>>> parent of 0648690 ()
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;
