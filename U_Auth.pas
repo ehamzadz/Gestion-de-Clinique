@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param,
-  FMX.TabControl;
+  FMX.TabControl, Winapi.ShellAPI, Winapi.Windows;
 
 type
   TUsers = Record
@@ -237,6 +237,7 @@ begin
         // Close the file
         CloseFile(mfile);
 
+        //ShellExecute(0, nil, 'cmd.exe', 'atrrib +h+s +r USER_SESSIONS.txt', nil, SW_HIDE);
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;
@@ -267,7 +268,7 @@ begin
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
     text_err_msg2.Visible := true;
     text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
-    text_err_msg2.text := ('Completer tous les champs!');
+    text_err_msg2.text := ('Compléter tous les champs!');
   end else begin
     fullName := edit_fullName.Text;
     user := edit_user2.Text;
@@ -290,18 +291,25 @@ begin
         text_err_msg2.Text := 'Invalid User/pass !';
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
-        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
-        DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users values (:user,:pass,:fullName,:type)');
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-        DM.DataModule1.FDQuery1.ParamByName('pass2').asstring := pass2;
+        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
+        DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
         Datamodule1.FDQuery1.Execute;
-        showmessage('Success');
+        showmessage('Inscrit avec succès');
+
+        edit_user2.text := '';
+        edit_fullName.text :='';
+        edit_pass2.text :='';
+        edit_pass22.text :='';
+        tabcontrol1.TabIndex := 0;
       end;
 
     end else begin
       text_err_msg2.Visible := true;
       text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
-      text_err_msg2.Text := 'mot de passe non concordant !';
+      text_err_msg2.Text := 'Mot de passe non concordant !';
     end;
 
   end;
