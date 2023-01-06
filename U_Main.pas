@@ -15,7 +15,7 @@ type
     logo: TImage;
     Rect_Exit: TRectangle;
     btn_logout: TRectangle;
-    Image6: TImage;
+    img_logoff: TImage;
     Text4: TText;
     ColorAnimation5: TColorAnimation;
     Circle1: TCircle;
@@ -24,14 +24,14 @@ type
     Image3: TImage;
     ColorAnimation3: TColorAnimation;
     Rect_dashboard: TRectangle;
-    Image4: TImage;
+    img_dashboard: TImage;
     ColorAnimation4: TColorAnimation;
     current_tab: TRectangle;
     Rect_patients: TRectangle;
-    Image8: TImage;
+    img_patients: TImage;
     ColorAnimation6: TColorAnimation;
     Rect_users: TRectangle;
-    Image11: TImage;
+    img_users: TImage;
     ColorAnimation9: TColorAnimation;
     Gradient_Light_Blue: TBrushObject;
     Gradient_Dark_Blue: TBrushObject;
@@ -66,8 +66,8 @@ end;
 
 procedure Tfrm_main.FormShow(Sender: TObject);
 begin
-  Rect_patients.Opacity := 0.5;
-  Rect_users.Opacity := 0.5;
+  img_patients.Opacity := 0.5;
+  img_users.Opacity := 0.5;
 end;
 
 procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
@@ -82,9 +82,9 @@ var
 begin
   this := TButton(sender);
   current_tab.Parent := this;
-  this.Opacity := 1;
-  Rect_patients.Opacity := 0.5;
-  Rect_users.Opacity := 0.5;
+  img_dashboard.Opacity := 1;
+  img_patients.Opacity := 0.5;
+  img_users.Opacity := 0.5;
   //tabcontrol1.TabIndex := 3;
 end;
 
@@ -94,9 +94,9 @@ var
 begin
   this := TButton(sender);
   current_tab.Parent := this;
-  Rect_dashboard.Opacity := 0.5;
-  Rect_patients.Opacity := 1;
-  Rect_users.Opacity := 0.5;
+  img_dashboard.Opacity := 0.5;
+  img_patients.Opacity := 1;
+  img_users.Opacity := 0.5;
 end;
 
 procedure Tfrm_main.Rect_usersClick(Sender: TObject);
@@ -105,9 +105,9 @@ var
 begin
   this := TButton(sender);
   current_tab.Parent := this;
-  Rect_dashboard.Opacity := 0.5;
-  Rect_patients.Opacity := 0.5;
-  Rect_users.Opacity := 1;
+  img_dashboard.Opacity := 0.5;
+  img_patients.Opacity := 0.5;
+  img_users.Opacity := 1;
 end;
 
 end.

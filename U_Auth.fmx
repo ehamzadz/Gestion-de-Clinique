@@ -2,6 +2,7 @@ object frm_auth: Tfrm_auth
   Left = 0
   Top = 0
   BorderStyle = None
+  Caption = 'Liste des Patients'
   ClientHeight = 532
   ClientWidth = 949
   Position = DesktopCenter

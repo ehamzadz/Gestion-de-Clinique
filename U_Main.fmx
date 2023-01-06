@@ -3,7 +3,7 @@ object frm_main: Tfrm_main
   Top = 0
   BorderStyle = None
   ClientHeight = 753
-  ClientWidth = 1209
+  ClientWidth = 935
   Position = DesktopCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -3326,6 +3326,9 @@ object frm_main: Tfrm_main
         Align = Bottom
         Cursor = crHandPoint
         Fill.Color = x00D2BFBF
+        Hint = 'D'#233'connecter'
+        Padding.Left = 11.000000000000000000
+        Padding.Right = 11.000000000000000000
         Margins.Left = 3.000000000000000000
         Margins.Top = 3.000000000000000000
         Margins.Right = 3.000000000000000000
@@ -3337,34 +3340,46 @@ object frm_main: Tfrm_main
         Size.PlatformDefault = False
         Stroke.Kind = None
         OnClick = btn_logoutClick
-        object Image6: TImage
+        object img_logoff: TImage
           MultiResBitmap.Height = 512
           MultiResBitmap.Width = 512
+          MultiResBitmap.LoadSize = 1
           MultiResBitmap = <
             item
-              Width = 40
-              Height = 41
+              Width = 51
+              Height = 43
               PNG = {
-                89504E470D0A1A0A0000000D494844520000002800000029080600000047A26B
-                C8000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                011D494441545847ED98B10EC22010863907277D9C3AB9A8936FE3A856B7263E
-                92934E4E7D9E4E0E628E406C1AA4C05F231ABEA4E1A034F7058EA42D094DB328
-                B6624427DDFD2A528A6A7AAD8F1C2BC1663593DCA6C6E4521335CBA21444951E
-                4B8D3DA5BA7A86916E93250BA26441942C88F29F82E3F34D5DBE84CE6F132CD8
-                4EE49334747E17788B5D496384BA040BDED7731DBDB089D8C66CCFF611B5827D
-                9243C931D0DB8CEF16C6CA31500DFA2446E418F890B80450390616FC34B0A0AB
-                0E7D6BD40524E823804A460BDA1273CDD9EA0E918C127C276718523258B04FCE
-                3094247C486C2206D73D5F8205DB497D0442E777C91FEE285910250BA2644194
-                1F1094A2D4717A3C6897FC4F74B5C51C48491B359A02521ED849F75246882797
-                E2697B957D2F2F0000000049454E44AE426082}
-              FileName = 'C:\Users\eHamzaDZ\Desktop\remove (1).png'
+                89504E470D0A1A0A0000000D49484452000000330000002B0806000000D524B0
+                DC000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                029F494441546843CD98BF6ED44010C67D8EA2535048418144970651A0489152
+                52A5E10128D2F13A5479051E813E7434481454571125523A50A4A4217F90D0E1
+                F0ADF559B12FDED9D9D95D2BBF6666ECDD99FD76D7EB3BCFAAC2DC01BAD50CD0
+                2D42D1E47D211D2505D5B4D9699A668BEE00E8DBA59B9D6262C007DAC92829E6
+                35ED64941433BACD4A922406CF45E31E7298052FF5D9A40D82FE3F99A7E12513
+                2631A8F9CC15EF4E26981D17B737EF794A2BC23C2F9CEFF2B9183C696F46122D
+                06423EA3E625C352DCA0CE27FA6AA2C4A0C00F0879CB30C492D604EABC43BD33
+                862AD46290F810055E31D4F087D60CEA6DA3EE4786F9E05EF682A26FD8B405F1
+                316FAD327869A2DD4B5EF7C2A641542B134A88199CD575FD956114E877E2FA33
+                1C452B28280633271E97C240AE695584046118C1673028462A121A402C815A6B
+                74BD8862A4E5CD2DA443CA8BD5F9477714F56966E0376D36A0531CAFF72616C5
+                BBACA556A5C39A5F529AF4D22B85742059B659F0412437B456E6B403A4558B16
+                835C49BF6CB5A0CE5FBA6A2C2BF368F12E99EF5896967995B11CB8B485B7FE15
+                4391D8314CBE325A21168A8AE10CD698E05FB073DF8CE6A2E8364BE5D16FB392
+                448BC13BEB9C6E5150E796AE1AAF18ACF01EDD0158E1E7748B823A1B7407605C
+                B6EF716ECF8E81591BFCABCC0DF2EFB3D403D86414F161963AFB1EC21C58EB06
+                0734B5A0947A49A719EA7EA19B056CAFA84F4B26DC6C097C67B32420A4FD44EB
+                83CD4454DB44932C65CB85F2E3F6123F83D6197A516D33CD40DD8030BB470C55
+                A0FDB7901087464834AEB0160CF480DD06E0FA7B3651C16E2AA2B7466C811462
+                B7AE699F4F21285688C37434BB42D073C1302BC81BFC5CEBC3D4A94FCE55B28A
+                E84816D391222A554447D22F803E6E401DD075CACBA3E0FE824D5B783991AAFA
+                0F1BBD31AE775153060000000049454E44AE426082}
+              FileName = 'D:\Github\Desktop App\Gestion-de-Clinique\assets\power-512.png'
             end>
           Align = Client
           HitTest = False
-          Size.Width = 67.000000000000000000
+          Size.Width = 29.000000000000000000
           Size.Height = 43.000000000000000000
           Size.PlatformDefault = False
-          Visible = False
         end
         object Text4: TText
           Align = Client
@@ -3377,6 +3392,7 @@ object frm_main: Tfrm_main
           TextSettings.Font.Size = 20.000000000000000000
           TextSettings.Font.StyleExt = {00090000000000000004000000}
           TextSettings.FontColor = claWhite
+          Visible = False
         end
         object ColorAnimation5: TColorAnimation
           Duration = 0.200000002980232200
@@ -6822,6 +6838,7 @@ object frm_main: Tfrm_main
       Align = Top
       Cursor = crHandPoint
       Fill.Color = x002EB8C6
+      Hint = 'Tableau de bord'
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
       Position.Y = 52.000000000000000000
@@ -6830,7 +6847,7 @@ object frm_main: Tfrm_main
       Size.PlatformDefault = False
       Stroke.Kind = None
       OnClick = Rect_dashboardClick
-      object Image4: TImage
+      object img_dashboard: TImage
         MultiResBitmap.Height = 1170
         MultiResBitmap.Width = 1380
         MultiResBitmap = <
@@ -7851,7 +7868,6 @@ object frm_main: Tfrm_main
             FileName = 'F:\icons\white_dashboard.png'
           end>
         Align = Client
-        Hint = 'Tableau de bord'
         HitTest = False
         Margins.Left = 15.000000000000000000
         Margins.Top = 10.000000000000000000
@@ -7885,6 +7901,7 @@ object frm_main: Tfrm_main
       Align = Top
       Cursor = crHandPoint
       Fill.Color = x002EB8C6
+      Hint = 'Liste des Patients'
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
       Position.Y = 125.000000000000000000
@@ -7893,7 +7910,7 @@ object frm_main: Tfrm_main
       Size.PlatformDefault = False
       Stroke.Kind = None
       OnClick = Rect_patientsClick
-      object Image8: TImage
+      object img_patients: TImage
         MultiResBitmap.Height = 1170
         MultiResBitmap.Width = 1380
         MultiResBitmap.LoadSize = 1
@@ -7938,6 +7955,7 @@ object frm_main: Tfrm_main
       Align = Top
       Cursor = crHandPoint
       Fill.Color = x002EB8C6
+      Hint = 'Liste des Utilisateurs'
       Margins.Top = 11.000000000000000000
       Margins.Bottom = 7.000000000000000000
       Position.Y = 198.000000000000000000
@@ -7946,7 +7964,7 @@ object frm_main: Tfrm_main
       Size.PlatformDefault = False
       Stroke.Kind = None
       OnClick = Rect_usersClick
-      object Image11: TImage
+      object img_users: TImage
         MultiResBitmap.Height = 1170
         MultiResBitmap.Width = 1380
         MultiResBitmap.LoadSize = 1

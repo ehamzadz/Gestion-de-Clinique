@@ -194,7 +194,7 @@ begin
     // Close the file for the last time
     CloseFile(mFile);
     text_welcome.text := 'Bienvenue ' + U + ' ..';
-//    timer1.Enabled := true;
+    timer1.Enabled := true;
 
   end else begin
     U := '';
