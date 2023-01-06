@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param,
-  FMX.TabControl, Winapi.ShellAPI, Winapi.Windows;
+  FMX.TabControl, Winapi.ShellAPI, Winapi.Windows, FMX.Effects,
+  FMX.Filter.Effects;
 
 type
   TUsers = Record
@@ -85,6 +86,45 @@ type
     Image1: TImage;
     FloatAnimation5: TFloatAnimation;
     Timer1: TTimer;
+    PasswordEditButton1: TPasswordEditButton;
+    btn_logout: TRectangle;
+    Text13: TText;
+    ColorAnimation5: TColorAnimation;
+    Gradient_Dark_Blue: TBrushObject;
+    PasswordEditButton2: TPasswordEditButton;
+    PasswordEditButton3: TPasswordEditButton;
+    Rectangle19: TRectangle;
+    Text20: TText;
+    ColorAnimation6: TColorAnimation;
+    Rectangle20: TRectangle;
+    Rectangle21: TRectangle;
+    Rectangle22: TRectangle;
+    Rectangle23: TRectangle;
+    Text21: TText;
+    ColorAnimation7: TColorAnimation;
+    CheckBox2: TCheckBox;
+    Rectangle24: TRectangle;
+    Edit1: TEdit;
+    Rectangle25: TRectangle;
+    Edit2: TEdit;
+    PasswordEditButton4: TPasswordEditButton;
+    Text22: TText;
+    Text23: TText;
+    Text24: TText;
+    Text25: TText;
+    FloatAnimation6: TFloatAnimation;
+    Rectangle26: TRectangle;
+    Rectangle27: TRectangle;
+    Rectangle28: TRectangle;
+    Text26: TText;
+    ColorAnimation8: TColorAnimation;
+    Text27: TText;
+    Text28: TText;
+    Text29: TText;
+    Line3: TLine;
+    FloatAnimation7: TFloatAnimation;
+    GaussianBlurEffect1: TGaussianBlurEffect;
+    ShadowEffect1: TShadowEffect;
     procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure btn_loginClick(Sender: TObject);
@@ -95,6 +135,10 @@ type
     procedure btn_go_to_login_formClick(Sender: TObject);
     procedure btn_registerClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure PasswordEditButton1Click(Sender: TObject);
+    procedure btn_logoutClick(Sender: TObject);
+    procedure PasswordEditButton2Click(Sender: TObject);
+    procedure PasswordEditButton3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -150,7 +194,7 @@ begin
     // Close the file for the last time
     CloseFile(mFile);
     text_welcome.text := 'Bienvenue ' + U + ' ..';
-    timer1.Enabled := true;
+//    timer1.Enabled := true;
 
   end else begin
     U := '';
@@ -160,6 +204,21 @@ begin
     edit_pass.text := '';
     text_err_msg.text := '';
   end;
+end;
+
+procedure Tfrm_auth.PasswordEditButton1Click(Sender: TObject);
+begin
+  if (edit_pass.Password = false) then edit_pass.Password := true else edit_pass.Password := false;
+end;
+
+procedure Tfrm_auth.PasswordEditButton2Click(Sender: TObject);
+begin
+  if (edit_pass2.Password = false) then edit_pass2.Password := true else edit_pass2.Password := false;
+end;
+
+procedure Tfrm_auth.PasswordEditButton3Click(Sender: TObject);
+begin
+  if (edit_pass22.Password = false) then edit_pass22.Password := true else edit_pass22.Password := false;
 end;
 
 procedure Tfrm_auth.btn_go_to_login_formClick(Sender: TObject);
@@ -257,6 +316,11 @@ begin
 
 
 
+end;
+
+procedure Tfrm_auth.btn_logoutClick(Sender: TObject);
+begin
+  application.Terminate;
 end;
 
 procedure Tfrm_auth.btn_registerClick(Sender: TObject);

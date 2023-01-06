@@ -33,11 +33,15 @@ type
     Rect_users: TRectangle;
     Image11: TImage;
     ColorAnimation9: TColorAnimation;
+    Gradient_Light_Blue: TBrushObject;
+    Gradient_Dark_Blue: TBrushObject;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
     procedure btn_logoutClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure nav_barMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Single);
   private
     { Private declarations }
   public
@@ -64,6 +68,12 @@ procedure Tfrm_main.FormShow(Sender: TObject);
 begin
   Rect_patients.Opacity := 0.5;
   Rect_users.Opacity := 0.5;
+end;
+
+procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
 procedure Tfrm_main.Rect_dashboardClick(Sender: TObject);
