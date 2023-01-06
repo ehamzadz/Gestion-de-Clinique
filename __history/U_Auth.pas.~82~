@@ -305,7 +305,11 @@ begin
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
         DM.DataModule1.FDQuery1.ParamByName('pass2').asstring := pass2;
         Datamodule1.FDQuery1.Execute;
+<<<<<<< HEAD
 <<<<<<< HEAD:__history/U_Auth.pas.~94~
+=======
+<<<<<<<< HEAD:__history/U_Auth.pas.~94~
+>>>>>>> parent of 0648690 ()
         showmessage('Inscrit avec succès');
 
         edit_user2.text := '';
@@ -313,9 +317,15 @@ begin
         edit_pass2.text :='';
         edit_pass22.text :='';
         tabcontrol1.TabIndex := 0;
+<<<<<<< HEAD
 =======
         showmessage('Success');
 >>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
+=======
+========
+        showmessage('Success');
+>>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
+>>>>>>> parent of 0648690 ()
       end;
 
     end else begin
