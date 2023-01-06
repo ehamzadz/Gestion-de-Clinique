@@ -7,6 +7,9 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   FMX.TabControl;
 
 type
@@ -14,6 +17,7 @@ type
      usr : string[50];
      pswd  : string[50];
   end;
+<<<<<<< HEAD
 =======
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
@@ -26,6 +30,8 @@ type
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
 
 type
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   Tfrm_auth = class(TForm)
     Rectangle1: TRectangle;
@@ -93,6 +99,9 @@ type
     Rectangle17: TRectangle;
     edit_pass22: TEdit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     tab_load: TTabItem;
     Rectangle11: TRectangle;
     text_welcome: TText;
@@ -100,6 +109,9 @@ type
     Image1: TImage;
     FloatAnimation5: TFloatAnimation;
     Timer1: TTimer;
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 =======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -108,16 +120,23 @@ type
     procedure FloatAnimation2Finish(Sender: TObject);
     procedure FloatAnimation1Finish(Sender: TObject);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     procedure FormCreate(Sender: TObject);
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     procedure FormShow(Sender: TObject);
     procedure btn_go_to_register_formClick(Sender: TObject);
     procedure btn_go_to_login_formClick(Sender: TObject);
     procedure btn_registerClick(Sender: TObject);
 <<<<<<< HEAD
+<<<<<<< HEAD
     procedure Timer1Timer(Sender: TObject);
 =======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+    procedure Timer1Timer(Sender: TObject);
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   private
     { Private declarations }
@@ -125,8 +144,12 @@ type
     { Public declarations }
     user,pswd : string;
 <<<<<<< HEAD
+<<<<<<< HEAD
     U,P: string;
 =======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+    U,P: string;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   end;
 
@@ -138,9 +161,13 @@ implementation
 {$R *.fmx}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 uses U_Main, DM;
 =======
 uses U_Main, U_Load, DM;
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+uses U_Main, DM;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 
 
@@ -151,9 +178,13 @@ begin
     frm_main.ShowModal; // Shows the Form
   finally
 <<<<<<< HEAD
+<<<<<<< HEAD
     application.Terminate;
 =======
     close;
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+    application.Terminate;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   end;
 end;
@@ -163,6 +194,7 @@ begin
   floatanimation1.Enabled := true;
 end;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 procedure Tfrm_auth.FormShow(Sender: TObject);
 begin
@@ -215,6 +247,47 @@ begin
     end;
   end;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+procedure Tfrm_auth.FormShow(Sender: TObject);
+var
+  sCmd: string;
+  mfile   : File of TUsers;  // A file of customer records
+  User : TUsers;          // A customer record variable
+begin
+
+  //sCmd := Pwidechar('ping 8.8.8.8');
+  //ShellExecute (Application.Handle, 'open', PChar('I:\Projects\Delphi\New folder\Win32\Debug\ping.bat'), nil, nil, SW_SHOW);
+
+  if FileExists('USER_SESSIONS.txt') then begin
+    AssignFile(mFile, 'USER_SESSIONS.txt');
+
+    // Reopen the file in read only mode
+    FileMode := fmOpenRead;
+    Reset(mFile);
+
+    // Display the file contents
+
+    while not Eof(mFile) do begin
+      Read(mFile, User);
+      U := User.usr;
+      P := User.pswd;
+    end;
+    // Close the file for the last time
+    CloseFile(mFile);
+
+    text_welcome.text := 'Bienvenue ' + U + ' ..';
+
+    timer1.Enabled := true;
+
+  end else begin
+    U := '';
+    P := '';
+    tabcontrol1.TabIndex := 0;
+  end;
+  edit_user.text := '';
+  edit_pass.text := '';
+  text_err_msg.text := '';
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 end;
 
 procedure Tfrm_auth.btn_go_to_login_formClick(Sender: TObject);
@@ -228,6 +301,7 @@ begin
   if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 procedure Tfrm_auth.Timer1Timer(Sender: TObject);
 begin
@@ -253,6 +327,22 @@ begin
 end;
 
 =======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+procedure Tfrm_auth.Timer1Timer(Sender: TObject);
+begin
+  FloatAnimation1.Enabled := false;
+  FloatAnimation2.Enabled := false;
+  timer1.Enabled := false;
+  Visible := False; // Makes Form1 invisible
+  try
+    frm_main.ShowModal; // Shows the Form
+  finally
+    application.Terminate;
+    // Makes Form1 visible again
+  end;
+end;
+
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 procedure Tfrm_auth.btn_go_to_register_formClick(Sender: TObject);
 begin
@@ -305,6 +395,7 @@ begin
         CloseFile(mfile);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
@@ -315,6 +406,8 @@ RunCommand('c:\windows\system32\cmd.exe', ['cd d:\', 'dir /s'], s);
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
 ========
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
@@ -345,7 +438,11 @@ begin
 
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~97~
+=======
+<<<<<<<< HEAD:__history/U_Auth.pas.~99~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     text_err_msg2.Visible := true;
     text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Compléter tous les champs!');
@@ -354,10 +451,13 @@ begin
     text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Completer tous les champs!');
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
+<<<<<<< HEAD
 =======
     text_err_msg.Visible := true;
     text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Completer tous les champs!');
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   end else begin
     fullName := edit_fullName.Text;
@@ -387,7 +487,11 @@ begin
       Datamodule1.FDQuery1.Open;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~97~
+=======
+<<<<<<<< HEAD:__history/U_Auth.pas.~99~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
       if i=1 then begin
@@ -409,6 +513,7 @@ begin
         edit_pass2.text :='';
         edit_pass22.text :='';
         tabcontrol1.TabIndex := 0;
+<<<<<<< HEAD
 =======
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
@@ -439,16 +544,22 @@ begin
         Datamodule1.FDQuery1.Execute;
         showmessage('Success');
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
       end;
 
     end else begin
       text_err_msg2.Visible := true;
       text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
 <<<<<<< HEAD
+<<<<<<< HEAD
       text_err_msg2.Text := 'Mot de passe non concordant !';
 =======
       text_err_msg2.Text := 'mot de passe non concordant !';
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+      text_err_msg2.Text := 'Mot de passe non concordant !';
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 ========
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~

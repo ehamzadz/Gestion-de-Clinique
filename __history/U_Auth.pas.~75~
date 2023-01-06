@@ -10,10 +10,16 @@ uses
 
 type
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   TUsers = Record
      usr : string[50];
      pswd  : string[50];
   end;
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 =======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   Tfrm_auth = class(TForm)
@@ -82,6 +88,9 @@ type
     Rectangle17: TRectangle;
     edit_pass22: TEdit;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     tab_load: TTabItem;
     Rectangle11: TRectangle;
     text_welcome: TText;
@@ -89,6 +98,9 @@ type
     Image1: TImage;
     FloatAnimation5: TFloatAnimation;
     Timer1: TTimer;
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 =======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -97,16 +109,23 @@ type
     procedure FloatAnimation2Finish(Sender: TObject);
     procedure FloatAnimation1Finish(Sender: TObject);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     procedure FormCreate(Sender: TObject);
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     procedure FormShow(Sender: TObject);
     procedure btn_go_to_register_formClick(Sender: TObject);
     procedure btn_go_to_login_formClick(Sender: TObject);
     procedure btn_registerClick(Sender: TObject);
 <<<<<<< HEAD
+<<<<<<< HEAD
     procedure Timer1Timer(Sender: TObject);
 =======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+    procedure Timer1Timer(Sender: TObject);
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   private
     { Private declarations }
@@ -114,8 +133,12 @@ type
     { Public declarations }
     user,pswd : string;
 <<<<<<< HEAD
+<<<<<<< HEAD
     U,P: string;
 =======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+    U,P: string;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   end;
 
@@ -127,9 +150,13 @@ implementation
 {$R *.fmx}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 uses U_Main, DM;
 =======
 uses U_Main, U_Load, DM;
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+uses U_Main, DM;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 
 
@@ -140,9 +167,13 @@ begin
     frm_main.ShowModal; // Shows the Form
   finally
 <<<<<<< HEAD
+<<<<<<< HEAD
     application.Terminate;
 =======
     close;
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+    application.Terminate;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   end;
 end;
@@ -152,6 +183,7 @@ begin
   floatanimation1.Enabled := true;
 end;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 procedure Tfrm_auth.FormShow(Sender: TObject);
 begin
@@ -204,6 +236,41 @@ begin
     end;
   end;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+procedure Tfrm_auth.FormShow(Sender: TObject);
+var
+  sCmd: string;
+  mfile   : File of TUsers;  // A file of customer records
+  User : TUsers;          // A customer record variable
+begin
+  //sCmd := Pwidechar('ping 8.8.8.8');
+  //ShellExecute (Application.Handle, 'open', PChar('I:\Projects\Delphi\New folder\Win32\Debug\ping.bat'), nil, nil, SW_SHOW);
+  if FileExists('USER_SESSIONS.txt') then begin
+    AssignFile(mFile, 'USER_SESSIONS.txt');
+    // Reopen the file in read only mode
+    FileMode := fmOpenRead;
+    Reset(mFile);
+    // Display the file contents
+    while not Eof(mFile) do begin
+      Read(mFile, User);
+      U := User.usr;
+      P := User.pswd;
+    end;
+    // Close the file for the last time
+    CloseFile(mFile);
+    text_welcome.text := 'Bienvenue ' + U + ' ..';
+    timer1.Enabled := true;
+
+  end else begin
+    U := '';
+    P := '';
+    sleep(2000);
+    tabcontrol1.TabIndex := 0;
+  edit_user.text := '';
+  edit_pass.text := '';
+  text_err_msg.text := '';
+  end;
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 end;
 
 procedure Tfrm_auth.btn_go_to_login_formClick(Sender: TObject);
@@ -217,6 +284,7 @@ begin
   if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 procedure Tfrm_auth.Timer1Timer(Sender: TObject);
 var
@@ -270,6 +338,22 @@ end;
 
 =======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+procedure Tfrm_auth.Timer1Timer(Sender: TObject);
+begin
+  FloatAnimation1.Enabled := false;
+  FloatAnimation2.Enabled := false;
+  timer1.Enabled := false;
+  Visible := False; // Makes Form1 invisible
+  try
+    frm_main.ShowModal; // Shows the Form
+  finally
+    application.Terminate;
+    // Makes Form1 visible again
+  end;
+end;
+
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 procedure Tfrm_auth.btn_go_to_register_formClick(Sender: TObject);
 begin
   tabcontrol1.TabIndex := 1;
@@ -321,6 +405,7 @@ begin
         CloseFile(mfile);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<<< HEAD:__history/U_Auth.pas.~76~
 <<<<<<<< HEAD:__history/U_Auth.pas.~76~
@@ -329,6 +414,8 @@ begin
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~87~
 ========
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
@@ -359,7 +446,11 @@ begin
 
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~96~
+=======
+<<<<<<<< HEAD:__history/U_Auth.pas.~100~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     text_err_msg2.Visible := true;
     text_err_msg2.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Compléter tous les champs!');
@@ -368,10 +459,13 @@ begin
     text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Completer tous les champs!');
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
+<<<<<<< HEAD
 =======
     text_err_msg.Visible := true;
     text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
     text_err_msg2.text := ('Completer tous les champs!');
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
   end else begin
     fullName := edit_fullName.Text;
@@ -396,7 +490,11 @@ begin
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~96~
+=======
+<<<<<<<< HEAD:__history/U_Auth.pas.~100~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users values (:user,:pass,:fullName,:type)');
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
         DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
@@ -418,16 +516,20 @@ begin
       text_err_msg2.Text := 'Mot de passe non concordant !';
 ========
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
+<<<<<<< HEAD
 =======
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
 <<<<<<<< HEAD:__history/U_Auth.pas.~76~
 <<<<<<<< HEAD:__history/U_Auth.pas.~76~
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := pass2;
         Datamodule1.FDQuery1.Open;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 ========
@@ -445,16 +547,21 @@ begin
 
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
       end;
 
     end else begin
       text_err_msg.Visible := true;
       text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<<< HEAD:__history/U_Auth.pas.~76~
       text_err_msg.Text := 'mot de passe non concordant';
 ========
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
       text_err_msg.Text := 'Mot de passe incompatible!';
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~75~

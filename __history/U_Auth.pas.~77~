@@ -7,6 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Ani, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FireDAC.Stan.Param,
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
   FMX.TabControl;
@@ -16,6 +17,9 @@ uses
 ========
   FMX.TabControl;
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
+=======
+  FMX.TabControl;
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 =======
   FMX.TabControl;
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
@@ -236,6 +240,7 @@ begin
         CloseFile(mfile);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
 ========
@@ -245,6 +250,8 @@ RunCommand('c:\windows\system32\cmd.exe', ['cd d:\', 'dir /s'], s);
 >>>>>>>> parent of 0648690 ():__history/U_Auth.pas.~82~
 ========
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 =======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         text_err_msg.Visible := false;
@@ -285,6 +292,7 @@ begin
     pass22 := edit_pass22.Text;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
     DM.DataModule1.FDQuery1.SQL.Clear;
@@ -308,6 +316,8 @@ begin
 
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
 =======
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
     if pass2=pass22 then begin
 
 
@@ -316,6 +326,9 @@ begin
       DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
       Datamodule1.FDQuery1.Open;
 
+<<<<<<< HEAD
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
+=======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
@@ -327,7 +340,10 @@ begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:__history/U_Auth.pas.~77~
+=======
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 =======
 >>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := fullName;
@@ -341,6 +357,7 @@ begin
       text_err_msg.Visible := true;
       text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
       text_err_msg.Text := 'mot de passe non concordant !';
+<<<<<<< HEAD
 <<<<<<< HEAD
 ========
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
@@ -358,6 +375,10 @@ begin
 ========
 >>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~73~
     end;
+=======
+    end;
+
+>>>>>>> parent of 1a58bc1 (Login + Register: DONE.)
 =======
     end;
 

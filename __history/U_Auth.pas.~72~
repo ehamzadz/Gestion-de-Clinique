@@ -275,6 +275,29 @@ begin
       DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
       Datamodule1.FDQuery1.Open;
 
+<<<<<<<< HEAD:__history/U_Auth.pas.~72~
+========
+      i := Datamodule1.FDQuery1.Fields[0].AsInteger;
+
+      if i=1 then begin
+        text_err_msg.Visible := true;
+        text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+        text_err_msg.Text := 'Invalid User/pass !';
+      end else begin
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users (fullName,user,pass) values (:fullName,:user,:pass)');
+        DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
+        DM.DataModule1.FDQuery1.ParamByName('pass2').asstring := pass2;
+        Datamodule1.FDQuery1.Execute;
+
+      end;
+
+    end else begin
+      text_err_msg.Visible := true;
+      text_err_msg.TextSettings.FontColor := TAlphacolorRec.red;
+      text_err_msg.Text := 'mot de passe non concordant !';
+>>>>>>>> parent of 1a58bc1 (Login + Register: DONE.):__history/U_Auth.pas.~79~
     end;
   end;
 end;
