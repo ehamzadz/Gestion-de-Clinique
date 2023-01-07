@@ -65,7 +65,6 @@ type
     Image5: TImage;
     Text7: TText;
     ColorAnimation10: TColorAnimation;
-    Expander1: TExpander;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);

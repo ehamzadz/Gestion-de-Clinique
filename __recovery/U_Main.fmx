@@ -8606,17 +8606,6 @@ object frm_main: Tfrm_main
           Size.Height = 696.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
-          object Expander1: TExpander
-            Position.X = 392.000000000000000000
-            Position.Y = 224.000000000000000000
-            ShowCheck = False
-            Size.Width = 200.000000000000000000
-            Size.Height = 25.000000000000000000
-            Size.PlatformDefault = False
-            Text = 'Expander1'
-            TabOrder = 0
-            ContentSize = '0'
-          end
         end
       end
     end
