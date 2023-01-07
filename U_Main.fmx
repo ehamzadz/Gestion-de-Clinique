@@ -50533,6 +50533,7 @@ object frm_main: Tfrm_main
           Size.Height = 160.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
+          Visible = False
           object Rectangle4: TRectangle
             Align = Client
             Fill.Color = claWhite
