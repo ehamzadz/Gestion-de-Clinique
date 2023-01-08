@@ -178,6 +178,7 @@ var
   mfile   : File of TUsers;  // A file of customer records
   User : TUsers;          // A customer record variable
 begin
+
   //sCmd := Pwidechar('ping 8.8.8.8');
   //ShellExecute (Application.Handle, 'open', PChar('I:\Projects\Delphi\New folder\Win32\Debug\ping.bat'), nil, nil, SW_SHOW);
   if FileExists('USER_SESSIONS.txt') then begin
@@ -190,11 +191,14 @@ begin
       Read(mFile, User);
       U := User.usr;
       P := User.pswd;
+      //Send username to main form
+      frm_main.USER_username := U;
     end;
     // Close the file for the last time
     CloseFile(mFile);
     text_welcome.text := 'Bienvenue ' + U + ' ..';
     timer1.Enabled := true;
+
 
   end else begin
     U := '';
@@ -293,6 +297,9 @@ begin
         US.pswd  := pswd;
         Write(mFile, US);
 
+        //Send username to main form
+        frm_main.USER_username := user;
+
         // Close the file
         CloseFile(mfile);
 
@@ -302,6 +309,9 @@ begin
         floatanimation2.Enabled := true;
 
       end else begin
+        //Send username to main form
+        frm_main.USER_username := user;
+
         text_err_msg.Visible := false;
         Rectangle4.Visible := false;
         floatanimation2.Enabled := true;

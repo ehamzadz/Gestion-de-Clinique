@@ -13,7 +13,7 @@ uses
   System.JSON, Data.DBXCommon, Datasnap.DSCommonServer, Datasnap.DSHTTP,
   FMX.WebBrowser, FMX.Gestures, FireDAC.UI.Intf, FireDAC.FMXUI.Wait, FMX.Header,
   FireDAC.Stan.Intf, FireDAC.Comp.UI, FMX.MultiView, FMX.ListBox, FMX.Colors,
-  FMX.ImgList, FMX.Maps;
+  FMX.ImgList, FMX.Maps, Vcl.Dialogs, FMX.DialogService, FMX.Menus;
 
 type
   Tfrm_main = class(TForm)
@@ -49,8 +49,8 @@ type
     Rectangle2: TRectangle;
     Circle2: TCircle;
     rect_profile_bar: TRectangle;
-    Text1: TText;
-    Text2: TText;
+    text_USER_fullName: TText;
+    text_USER_type: TText;
     ColorAnimation1: TColorAnimation;
     Rectangle3: TRectangle;
     BG: TBrushObject;
@@ -65,7 +65,7 @@ type
     Image2: TImage;
     Text5: TText;
     ColorAnimation7: TColorAnimation;
-    Rectangle8: TRectangle;
+    btn_logout_from_profile_menu: TRectangle;
     Image4: TImage;
     Text6: TText;
     ColorAnimation8: TColorAnimation;
@@ -73,6 +73,8 @@ type
     Image5: TImage;
     Text7: TText;
     ColorAnimation10: TColorAnimation;
+    PopupMenu1: TPopupMenu;
+    MenuItem1: TMenuItem;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -81,11 +83,15 @@ type
     procedure nav_barMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure rect_profile_barClick(Sender: TObject);
+    procedure rec(type_rc :string);
+    procedure btn_logout_from_profile_menuClick(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     U,P :string;
+    USER_username, USER_password, USER_fullName, USER_type :string;
   end;
 
 var
@@ -95,24 +101,78 @@ implementation
 
 {$R *.fmx}
 
-uses U_Auth;
+uses U_Auth, DM;
 
 procedure Tfrm_main.btn_logoutClick(Sender: TObject);
 begin
-  DeleteFile('USER_SESSIONS.txt');
-  close;
+  rec('Application Closed');
+  application.Terminate;
+end;
+
+procedure Tfrm_main.btn_logout_from_profile_menuClick(Sender: TObject);
+begin
+  if MessageDlg('Confirm ?',
+    mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+  begin
+    rec('Logout');
+    DeleteFile('USER_SESSIONS.txt');
+    application.Terminate;
+  end;
 end;
 
 procedure Tfrm_main.FormShow(Sender: TObject);
 begin
   img_patients.Opacity := 0.5;
   img_users.Opacity := 0.5;
+
+  // Fetch USER data
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('select * from users where user = :user');
+  DM.DataModule1.FDQuery1.ParamByName('user').asstring := USER_username;
+  Datamodule1.FDQuery1.Open;
+  USER_fullName := DM.DataModule1.FDQuery1.FieldByName('fullName').AsString;
+  USER_type := DM.DataModule1.FDQuery1.FieldByName('type').AsString;
+  text_USER_fullName.Text := USER_fullName;
+  text_USER_type.Text := USER_type;
+
+  rec('Login');
+
+end;
+
+procedure Tfrm_main.MenuItem1Click(Sender: TObject);
+begin
+  if MessageDlg('Voulez-vous vraiment fermer logiciel?',
+    mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+  begin
+    rec('Closed');
+    application.Terminate;
+  end;
 end;
 
 procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
   if (Button = TMouseButton.mbLeft) then StartWindowDrag;
+end;
+
+procedure Tfrm_main.rec(type_rc: string);
+var
+  id_rc :integer;
+begin
+
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from records order by id_rc desc');
+  DM.DataModule1.FDQuery1.open;
+
+  id_rc := DM.DataModule1.FDQuery1.FieldByName('id_rc').AsInteger + 1;
+
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('insert into records values(:id_rc, :type, :date, :usr)');
+  DM.DataModule1.FDQuery1.ParamByName('id_rc').AsInteger := id_rc;
+  DM.DataModule1.FDQuery1.ParamByName('type').AsString := type_rc;
+  DM.DataModule1.FDQuery1.ParamByName('date').AsDateTime := now;
+  DM.DataModule1.FDQuery1.ParamByName('usr').AsString := USER_username;
+  DM.DataModule1.FDQuery1.Execute;
 end;
 
 procedure Tfrm_main.Rect_dashboardClick(Sender: TObject);

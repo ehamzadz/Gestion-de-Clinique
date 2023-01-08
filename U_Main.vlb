@@ -58,9 +58,6 @@ Coordinates=124,146,49,51
 [Gradient_Light_Blue]
 Coordinates=578,269,115,33
 
-[Text2]
-Coordinates=67,146,41,51
-
 [ColorAnimation5]
 Coordinates=597,324,97,33
 
@@ -78,9 +75,6 @@ Coordinates=216,78,49,51
 
 [Rect_users]
 Coordinates=275,306,69,33
-
-[Text1]
-Coordinates=10,146,41,51
 
 [Text5]
 Coordinates=191,146,41,51
@@ -134,9 +128,6 @@ Coordinates=132,78,66,51
 [Text6]
 Coordinates=557,10,41,51
 
-[Rectangle8]
-Coordinates=100,260,69,33
-
 [Rectangle5]
 Coordinates=10,260,69,33
 
@@ -169,4 +160,13 @@ Coordinates=10,214,125,33
 
 []
 Coordinates=73,1,113,33
+
+[btn_logout_from_profile_menu]
+Coordinates=100,260,69,33
+
+[text_USER_fullName]
+Coordinates=10,146,41,51
+
+[text_USER_type]
+Coordinates=67,146,41,51
 
