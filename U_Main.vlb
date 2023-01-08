@@ -159,14 +159,37 @@ Coordinates=163,214,92,33
 Coordinates=10,214,125,33
 
 []
-Coordinates=73,1,113,33
+Coordinates=87,1,79,33
 
 [btn_logout_from_profile_menu]
-Coordinates=100,260,69,33
+Coordinates=100,260,166,33
 
 [text_USER_fullName]
-Coordinates=10,146,41,51
+Coordinates=10,146,116,51
 
 [text_USER_type]
-Coordinates=67,146,41,51
+Coordinates=67,146,93,51
+
+[MenuItem1]
+Coordinates=0,0,68,33
+
+[PopupMenu1]
+Coordinates=98,1,79,33
+
+[StringGrid1]
+Coordinates=610,120,70,123
+Visible=True
+
+[DataModule1.FDQuery1]
+Coordinates=720,20,130,51
+
+[DataModule1.FDTable1]
+Coordinates=770,110,127,33
+Visible=False
+
+[BindSourceDB1]
+Coordinates=770,110,115,141
+
+[BindingsList1]
+Coordinates=87,1,82,33
 

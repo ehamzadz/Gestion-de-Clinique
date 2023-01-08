@@ -1,7 +1,6 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
-  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
@@ -11,15 +10,17 @@ object DataModule1: TDataModule1
     Params.Strings = (
       'Database=D:\db.mdb'
       'DriverID=MSAcc')
+    Connected = True
     LoginPrompt = False
     Left = 80
     Top = 48
   end
   object FDTable1: TFDTable
-    IndexFieldNames = 'id'
+    Active = True
+    IndexFieldNames = 'id_rc'
     Connection = FDConnection1
-    TableName = 'users'
-    Left = 80
-    Top = 128
+    TableName = 'records'
+    Left = 320
+    Top = 216
   end
 end
