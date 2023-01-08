@@ -144,7 +144,7 @@ begin
   if MessageDlg('Voulez-vous vraiment fermer logiciel?',
     mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
   begin
-    rec('Closed');
+    rec('Application Closed');
     application.Terminate;
   end;
 end;
