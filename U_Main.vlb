@@ -1,9 +1,6 @@
 ﻿[Gradient_Dark_Blue]
 Coordinates=428,78,131,36
 
-[img_dashboard]
-Coordinates=407,78,103,58
-
 [btn_logout]
 Coordinates=203,352,75,36
 
@@ -36,9 +33,6 @@ Coordinates=597,111,101,36
 
 [Text7]
 Coordinates=402,10,47,58
-
-[Rectangle2]
-Coordinates=364,306,80,36
 
 [Text3]
 Coordinates=350,78,47,58
@@ -98,12 +92,6 @@ Coordinates=752,221,110,36
 [ColorAnimation8]
 Coordinates=752,276,110,36
 
-[Rect_dashboard]
-Coordinates=190,260,109,36
-
-[ColorAnimation4]
-Coordinates=752,386,110,36
-
 [img_patients]
 Coordinates=459,10,88,58
 
@@ -141,7 +129,7 @@ Coordinates=163,214,104,36
 Coordinates=10,214,143,36
 
 []
-Coordinates=593,214,80,36
+Coordinates=190,260,109,36
 Visible=True
 
 [btn_logout_from_profile_menu]
@@ -171,4 +159,52 @@ Coordinates=770,110,138,168
 
 [BindingsList1]
 Coordinates=87,1,91,36
+
+[rect_top_bar]
+Coordinates=364,306,87,36
+
+[Text2]
+Coordinates=156,1,47,58
+
+[VertScrollBox1]
+Coordinates=368,155,100,36
+
+[Text11]
+Coordinates=0,0,54,58
+
+[rect_logo]
+Coordinates=597,166,68,36
+
+[logo]
+Coordinates=73,1,45,58
+
+[Text12]
+Coordinates=276,1,54,58
+
+[Label1]
+Coordinates=54,77,53,58
+
+[StyleBook1]
+Coordinates=506,155,80,36
+
+[Image3]
+Coordinates=440,380,57,58
+
+[rect123]
+Coordinates=515,343,57,36
+
+[Brush1]
+Coordinates=456,343,55,36
+
+[btn_switch]
+Coordinates=499,380,75,58
+
+[btn_maximize_minimize]
+Coordinates=959,1,152,36
+
+[sky_blue]
+Coordinates=308,343,65,36
+
+[SubMenu_Animation]
+Coordinates=911,56,134,36
 

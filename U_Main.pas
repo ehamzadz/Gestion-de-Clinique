@@ -28,9 +28,6 @@ type
     ColorAnimation5: TColorAnimation;
     Circle1: TCircle;
     N_of_Users_Invts: TText;
-    Rect_dashboard: TRectangle;
-    img_dashboard: TImage;
-    ColorAnimation4: TColorAnimation;
     current_tab: TRectangle;
     Rect_patients: TRectangle;
     img_patients: TImage;
@@ -43,7 +40,7 @@ type
     content_area: TRectangle;
     TabControl1: TTabControl;
     tab_dashboard: TTabItem;
-    Rectangle2: TRectangle;
+    rect_top_bar: TRectangle;
     Circle2: TCircle;
     rect_profile_bar: TRectangle;
     text_USER_fullName: TText;
@@ -82,13 +79,18 @@ type
     Label1: TLabel;
     Text12: TText;
     Text2: TText;
-    Text13: TText;
     sky_blue: TBrushObject;
     rect123: TRectangle;
     btn_switch: TImage;
     Brush1: TBrushObject;
-    ImageList1: TImageList;
     SubMenu_Animation: TFloatAnimation;
+    btn_maximize_minimize: TRectangle;
+    Image3: TImage;
+    ColorAnimation3: TColorAnimation;
+    Rectangle1: TRectangle;
+    img_dashboard: TImage;
+    ColorAnimation11: TColorAnimation;
+    Text1: TText;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -102,6 +104,9 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure btn_switchClick(Sender: TObject);
     procedure SubMenu_AnimationFinish(Sender: TObject);
+    procedure rect_top_barMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Single);
+    procedure btn_maximize_minimizeClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -135,6 +140,12 @@ begin
     DeleteFile('USER_SESSIONS.txt');
     application.Terminate;
   end;
+end;
+
+procedure Tfrm_main.btn_maximize_minimizeClick(Sender: TObject);
+begin
+  if frm_main.WindowState = TWindowState.wsNormal then frm_main.WindowState := TWindowState.wsMaximized
+  else frm_main.WindowState := TWindowState.wsNormal;
 end;
 
 procedure Tfrm_main.btn_switchClick(Sender: TObject);
@@ -238,6 +249,12 @@ procedure Tfrm_main.rect_profile_barClick(Sender: TObject);
 begin
   if rect_profile_bar_menu.Visible = false then rect_profile_bar_menu.Visible := true
   else rect_profile_bar_menu.Visible := false;
+end;
+
+procedure Tfrm_main.rect_top_barMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
 procedure Tfrm_main.Rect_usersClick(Sender: TObject);
