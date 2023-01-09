@@ -16,14 +16,11 @@ uses
   FMX.ImgList, FMX.Maps, Vcl.Dialogs, FMX.DialogService, FMX.Menus, System.Rtti,
   FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
-  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope;
+  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList;
 
 type
   Tfrm_main = class(TForm)
     nav_bar: TRectangle;
-    Rect_Logo: TRectangle;
-    Rectangle1: TRectangle;
-    logo: TImage;
     Rect_Exit: TRectangle;
     btn_logout: TRectangle;
     img_logoff: TImage;
@@ -31,9 +28,6 @@ type
     ColorAnimation5: TColorAnimation;
     Circle1: TCircle;
     N_of_Users_Invts: TText;
-    Rectangle7: TRectangle;
-    Image3: TImage;
-    ColorAnimation3: TColorAnimation;
     Rect_dashboard: TRectangle;
     img_dashboard: TImage;
     ColorAnimation4: TColorAnimation;
@@ -78,10 +72,23 @@ type
     ColorAnimation10: TColorAnimation;
     PopupMenu1: TPopupMenu;
     MenuItem1: TMenuItem;
-    StringGrid1: TStringGrid;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
-    LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource;
+    rect_logo: TRectangle;
+    logo: TImage;
+    VertScrollBox1: TVertScrollBox;
+    StyleBook1: TStyleBook;
+    Text11: TText;
+    Label1: TLabel;
+    Text12: TText;
+    Text2: TText;
+    Text13: TText;
+    sky_blue: TBrushObject;
+    rect123: TRectangle;
+    btn_switch: TImage;
+    Brush1: TBrushObject;
+    ImageList1: TImageList;
+    SubMenu_Animation: TFloatAnimation;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -93,6 +100,8 @@ type
     procedure rec(type_rc :string);
     procedure btn_logout_from_profile_menuClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
+    procedure btn_switchClick(Sender: TObject);
+    procedure SubMenu_AnimationFinish(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,6 +112,7 @@ type
 
 var
   frm_main: Tfrm_main;
+  i: integer;
 
 implementation
 
@@ -124,6 +134,25 @@ begin
     rec('Logout');
     DeleteFile('USER_SESSIONS.txt');
     application.Terminate;
+  end;
+end;
+
+procedure Tfrm_main.btn_switchClick(Sender: TObject);
+begin
+
+  if i=0 then begin
+    i := 1;
+    SubMenu_Animation.StartValue := 257;
+    SubMenu_Animation.StopValue := 57;
+    SubMenu_Animation.Enabled := true;
+//    rectangle14.Visible := false;
+  end else begin
+    if i=1 then begin
+      i := 0;
+      SubMenu_Animation.StartValue := 57;
+      SubMenu_Animation.StopValue := 257;
+      SubMenu_Animation.Enabled := true;
+    end;
   end;
 end;
 
@@ -159,7 +188,7 @@ end;
 procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
-  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
+//  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
 procedure Tfrm_main.rec(type_rc: string);
@@ -220,6 +249,12 @@ begin
   img_dashboard.Opacity := 0.5;
   img_patients.Opacity := 0.5;
   img_users.Opacity := 0.8;
+end;
+
+procedure Tfrm_main.SubMenu_AnimationFinish(Sender: TObject);
+begin
+  SubMenu_Animation.Enabled := false;
+//  if i=1 then rectangle14.Visible := true;
 end;
 
 end.

@@ -7,9 +7,6 @@ Coordinates=407,78,103,58
 [btn_logout]
 Coordinates=203,352,75,36
 
-[Image3]
-Coordinates=283,78,57,58
-
 [Rectangle9]
 Coordinates=113,352,80,36
 
@@ -43,9 +40,6 @@ Coordinates=402,10,47,58
 [Rectangle2]
 Coordinates=364,306,80,36
 
-[logo]
-Coordinates=10,78,45,58
-
 [Text3]
 Coordinates=350,78,47,58
 
@@ -67,9 +61,6 @@ Coordinates=248,146,74,58
 [ColorAnimation2]
 Coordinates=578,365,110,36
 
-[ColorAnimation3]
-Coordinates=459,365,110,36
-
 [Image5]
 Coordinates=216,78,57,58
 
@@ -90,12 +81,6 @@ Coordinates=75,306,100,36
 
 [Circle2]
 Coordinates=10,306,55,36
-
-[Rectangle1]
-Coordinates=580,260,80,36
-
-[Rect_Logo]
-Coordinates=494,260,76,36
 
 [TabControl1]
 Coordinates=399,260,85,36
@@ -134,9 +119,6 @@ Coordinates=10,260,80,36
 [ColorAnimation1]
 Coordinates=525,439,110,36
 
-[Rectangle7]
-Coordinates=593,214,80,36
-
 [Circle1]
 Coordinates=528,214,55,36
 
@@ -159,7 +141,8 @@ Coordinates=163,214,104,36
 Coordinates=10,214,143,36
 
 []
-Coordinates=87,1,79,33
+Coordinates=593,214,80,36
+Visible=True
 
 [btn_logout_from_profile_menu]
 Coordinates=100,260,189,36
@@ -175,10 +158,6 @@ Coordinates=0,0,79,36
 
 [PopupMenu1]
 Coordinates=98,1,90,36
-
-[StringGrid1]
-Coordinates=610,120,80,146
-Visible=True
 
 [DataModule1.FDQuery1]
 Coordinates=720,20,153,58
