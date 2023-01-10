@@ -80,10 +80,90 @@ object frm_main: Tfrm_main
         object rec_BG: TRectangle
           Align = Client
           Fill.Color = xFFF0F3FB
+          Padding.Left = 30.000000000000000000
+          Padding.Top = 30.000000000000000000
+          Padding.Right = 30.000000000000000000
+          Padding.Bottom = 30.000000000000000000
           Size.Width = 973.000000000000000000
           Size.Height = 696.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
+          object Rectangle1: TRectangle
+            Align = Top
+            Fill.Kind = None
+            Position.X = 30.000000000000000000
+            Position.Y = 30.000000000000000000
+            Size.Width = 913.000000000000000000
+            Size.Height = 47.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object Rectangle2: TRectangle
+              Align = Right
+              Cursor = crHandPoint
+              Fill.Kind = Gradient
+              Fill.Gradient.Points = <
+                item
+                  Color = xFF2B4093
+                  Offset = 0.000000000000000000
+                end
+                item
+                  Color = xFF2D5195
+                  Offset = 0.490683227777481100
+                end
+                item
+                  Color = xFF316398
+                  Offset = 1.000000000000000000
+                end>
+              Fill.Gradient.StartPosition.Y = 0.500000000000000000
+              Fill.Gradient.StopPosition.X = 1.000000000000000000
+              Fill.Gradient.StopPosition.Y = 0.500000000000000000
+              Position.X = 744.000000000000000000
+              Size.Width = 169.000000000000000000
+              Size.Height = 47.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Kind = None
+              XRadius = 7.000000000000000000
+              YRadius = 7.000000000000000000
+              object GradientAnimation1: TGradientAnimation
+                Duration = 0.200000002980232200
+                PropertyName = 'Fill.Gradient'
+                StartValue.Points = <
+                  item
+                    Color = xFF2E5295
+                    Offset = -0.077639751136302950
+                  end
+                  item
+                    Color = xFF2B4093
+                    Offset = 0.000000000000000000
+                  end
+                  item
+                    Color = xFF2D5195
+                    Offset = 0.462732911109924300
+                  end
+                  item
+                    Color = xFF316398
+                    Offset = 1.000000000000000000
+                  end>
+                StartValue.StartPosition.Y = 0.500000000000000000
+                StartValue.StopPosition.X = 1.000000000000000000
+                StartValue.StopPosition.Y = 0.500000000000000000
+                StopValue.Points = <
+                  item
+                    Color = xFF316398
+                    Offset = 0.000000000000000000
+                  end
+                  item
+                    Color = xFF316398
+                    Offset = 0.990683257579803500
+                  end>
+                StopValue.StartPosition.Y = 0.500000000000000000
+                StopValue.StopPosition.X = 1.000000000000000000
+                StopValue.StopPosition.Y = 0.500000000000000000
+                Trigger = 'IsMouseOver=true'
+                TriggerInverse = 'IsMouseOver=false'
+              end
+            end
+          end
         end
       end
     end
@@ -106,7 +186,7 @@ object frm_main: Tfrm_main
         Size.Width = 57.000000000000000000
         Size.Height = 57.000000000000000000
         Size.PlatformDefault = False
-        Stroke.Color = xFF818181
+        Stroke.Color = claNull
         Stroke.Thickness = 0.300000011920929000
         OnClick = rect_profile_barClick
         object Circle2: TCircle
@@ -41967,7 +42047,7 @@ object frm_main: Tfrm_main
           Duration = 0.200000002980232200
           PropertyName = 'Fill.Color'
           StartValue = claWhite
-          StopValue = xB4F0F0F0
+          StopValue = xFFF0F3FB
           Trigger = 'IsMouseOver=true'
           TriggerInverse = 'IsMouseOver=false'
         end
@@ -46964,7 +47044,7 @@ object frm_main: Tfrm_main
           Duration = 0.200000002980232200
           PropertyName = 'Fill.Color'
           StartValue = x00FFFFFF
-          StopValue = x64E6E6E6
+          StopValue = xFFF0F3FB
           Trigger = 'IsMouseOver=true'
           TriggerInverse = 'IsMouseOver=false'
         end
@@ -52863,6 +52943,10 @@ object frm_main: Tfrm_main
       Opacity = 0.300000011920929000
       ShadowColor = claBlack
     end
+  end
+  object blue: TBrushObject
+    StyleName = 'blue'
+    Brush.Color = xFF3F6AB3
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = DataModule1.FDTable1

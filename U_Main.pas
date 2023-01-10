@@ -95,7 +95,8 @@ type
     Rectangle1: TRectangle;
     Rectangle2: TRectangle;
     blue: TBrushObject;
-    GradientAnimation1: TGradientAnimation;
+    blueee: TBrushObject;
+    ColorAnimation4: TColorAnimation;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);

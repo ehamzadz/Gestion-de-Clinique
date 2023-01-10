@@ -94,75 +94,25 @@ object frm_main: Tfrm_main
             Position.X = 30.000000000000000000
             Position.Y = 30.000000000000000000
             Size.Width = 913.000000000000000000
-            Size.Height = 55.000000000000000000
+            Size.Height = 47.000000000000000000
             Size.PlatformDefault = False
             Stroke.Kind = None
             object Rectangle2: TRectangle
               Align = Right
               Cursor = crHandPoint
-              Fill.Kind = Gradient
-              Fill.Gradient.Points = <
-                item
-                  Color = xFF2B4093
-                  Offset = 0.000000000000000000
-                end
-                item
-                  Color = xFF2D5195
-                  Offset = 0.490683227777481100
-                end
-                item
-                  Color = xFF316398
-                  Offset = 1.000000000000000000
-                end>
-              Fill.Gradient.StartPosition.Y = 0.500000000000000000
-              Fill.Gradient.StopPosition.X = 1.000000000000000000
-              Fill.Gradient.StopPosition.Y = 0.500000000000000000
-              Position.X = 728.000000000000000000
-              Size.Width = 185.000000000000000000
-              Size.Height = 55.000000000000000000
+              Fill.Color = xFF3F6AB3
+              Position.X = 744.000000000000000000
+              Size.Width = 169.000000000000000000
+              Size.Height = 47.000000000000000000
               Size.PlatformDefault = False
               Stroke.Kind = None
               XRadius = 7.000000000000000000
               YRadius = 7.000000000000000000
-              object GradientAnimation1: TGradientAnimation
+              object ColorAnimation4: TColorAnimation
                 Duration = 0.200000002980232200
-                PropertyName = 'Fill.Gradient'
-                StartValue.Points = <
-                  item
-                    Color = xFF2E5295
-                    Offset = -0.077639751136302950
-                  end
-                  item
-                    Color = xFF2E5395
-                    Offset = 0.000000000000000000
-                  end
-                  item
-                    Color = xFF2D5195
-                    Offset = 0.493788808584213300
-                  end
-                  item
-                    Color = xFF316398
-                    Offset = 1.000000000000000000
-                  end>
-                StartValue.StartPosition.Y = 0.500000000000000000
-                StartValue.StopPosition.X = 1.000000000000000000
-                StartValue.StopPosition.Y = 0.500000000000000000
-                StopValue.Points = <
-                  item
-                    Color = xFF316398
-                    Offset = 0.000000000000000000
-                  end
-                  item
-                    Color = xFF2D5195
-                    Offset = 0.493788808584213300
-                  end
-                  item
-                    Color = xFF2B4093
-                    Offset = 1.000000000000000000
-                  end>
-                StopValue.StartPosition.Y = 0.500000000000000000
-                StopValue.StopPosition.X = 1.000000000000000000
-                StopValue.StopPosition.Y = 0.500000000000000000
+                PropertyName = 'Fill.Color'
+                StartValue = xFF3F6AB3
+                StopValue = xFF294193
                 Trigger = 'IsMouseOver=true'
                 TriggerInverse = 'IsMouseOver=false'
               end
@@ -52951,6 +52901,10 @@ object frm_main: Tfrm_main
   object blue: TBrushObject
     StyleName = 'blue'
     Brush.Color = xFF3F6AB3
+  end
+  object blueee: TBrushObject
+    StyleName = 'blueee'
+    Brush.Color = xFF294193
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = DataModule1.FDTable1
