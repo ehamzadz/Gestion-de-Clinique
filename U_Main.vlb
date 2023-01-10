@@ -82,10 +82,6 @@ Coordinates=399,260,85,36
 [Image1]
 Coordinates=65,78,57,58
 
-[Rectangle3]
-Coordinates=309,260,80,36
-Visible=True
-
 [ColorAnimation9]
 Coordinates=752,221,110,36
 
@@ -106,9 +102,6 @@ Coordinates=10,260,80,36
 
 [ColorAnimation1]
 Coordinates=525,439,110,36
-
-[Circle1]
-Coordinates=528,214,55,36
 
 [N_of_Users_Invts]
 Coordinates=520,78,117,58
@@ -207,4 +200,11 @@ Coordinates=308,343,65,36
 
 [SubMenu_Animation]
 Coordinates=911,56,134,36
+
+[rec_BG]
+Coordinates=309,260,80,36
+Visible=True
+
+[Circle_new_users_counter]
+Coordinates=528,214,55,36
 

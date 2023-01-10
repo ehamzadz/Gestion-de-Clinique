@@ -26,7 +26,7 @@ type
     img_logoff: TImage;
     Text4: TText;
     ColorAnimation5: TColorAnimation;
-    Circle1: TCircle;
+    Circle_new_users_counter: TCircle;
     N_of_Users_Invts: TText;
     current_tab: TRectangle;
     Rect_patients: TRectangle;
@@ -46,7 +46,7 @@ type
     text_USER_fullName: TText;
     text_USER_type: TText;
     ColorAnimation1: TColorAnimation;
-    Rectangle3: TRectangle;
+    rec_BG: TRectangle;
     BG: TBrushObject;
     rect_profile_bar_menu: TRectangle;
     Rectangle4: TRectangle;
@@ -87,10 +87,15 @@ type
     btn_maximize_minimize: TRectangle;
     Image3: TImage;
     ColorAnimation3: TColorAnimation;
-    Rectangle1: TRectangle;
+    rect_dashboard: TRectangle;
     img_dashboard: TImage;
     ColorAnimation11: TColorAnimation;
     Text1: TText;
+    ShadowEffect2: TShadowEffect;
+    Rectangle1: TRectangle;
+    Rectangle2: TRectangle;
+    blue: TBrushObject;
+    GradientAnimation1: TGradientAnimation;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -151,18 +156,22 @@ end;
 procedure Tfrm_main.btn_switchClick(Sender: TObject);
 begin
 
-  if i=0 then begin
-    i := 1;
+  if i=1 then begin
+    i := 0;
     SubMenu_Animation.StartValue := 257;
     SubMenu_Animation.StopValue := 57;
     SubMenu_Animation.Enabled := true;
+    label1.Visible := false;
+    Text12.Visible := false;
 //    rectangle14.Visible := false;
   end else begin
-    if i=1 then begin
-      i := 0;
+    if i=0 then begin
+      i := 1;
       SubMenu_Animation.StartValue := 57;
       SubMenu_Animation.StopValue := 257;
       SubMenu_Animation.Enabled := true;
+      label1.Visible := true;
+      Text12.Visible := true;
     end;
   end;
 end;
