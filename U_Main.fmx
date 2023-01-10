@@ -53932,6 +53932,7 @@ object frm_main: Tfrm_main
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.xlsx'
+    FileName = 'Users'
     Filter = 'Excel|.xls|Excel|.xlsx'
     Options = [ofHideReadOnly, ofExtensionDifferent, ofPathMustExist, ofNoTestFileCreate, ofEnableSizing]
     Left = 464

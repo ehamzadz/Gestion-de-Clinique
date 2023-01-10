@@ -6,7 +6,6 @@ object frm_main: Tfrm_main
   ClientWidth = 960
   Position = DesktopCenter
   StyleBook = StyleBook1
-  WindowState = wsMaximized
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -53589,8 +53588,8 @@ object frm_main: Tfrm_main
     Top = 24
   end
   object PopupMenu_grid_users: TPopupMenu
-    Left = 472
-    Top = 368
+    Left = 464
+    Top = 512
     object btn_export_to_excel: TMenuItem
       Bitmap.PNG = {
         89504E470D0A1A0A0000000D4948445200000200000002000806000000F478D4
@@ -53930,8 +53929,12 @@ object frm_main: Tfrm_main
       Text = 'Exporter vers Excel'
       OnClick = btn_export_to_excelClick
     end
-    object MenuItem2: TMenuItem
-      Text = 'MenuItem2'
-    end
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.xlsx'
+    Filter = 'Excel|.xls|Excel|.xlsx'
+    Options = [ofHideReadOnly, ofExtensionDifferent, ofPathMustExist, ofNoTestFileCreate, ofEnableSizing]
+    Left = 464
+    Top = 360
   end
 end
