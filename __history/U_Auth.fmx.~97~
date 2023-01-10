@@ -2,6 +2,7 @@ object frm_auth: Tfrm_auth
   Left = 0
   Top = 0
   BorderStyle = None
+  Caption = 'Liste des Patients'
   ClientHeight = 532
   ClientWidth = 949
   Position = DesktopCenter
@@ -1316,65 +1317,75 @@ object frm_auth: Tfrm_auth
       end
       object Rectangle11: TRectangle
         Align = Client
-        Fill.Color = x645C5C5C
+        Fill.Kind = None
         HitTest = False
         Size.Width = 949.000000000000000000
         Size.Height = 532.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = claSlategray
-        object text_welcome: TText
-          Align = Center
-          Margins.Top = -50.000000000000000000
-          Size.Width = 705.000000000000000000
-          Size.Height = 63.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 18.000000000000000000
-          TextSettings.FontColor = claWhite
-          TextSettings.VertAlign = Leading
-        end
         object Rectangle18: TRectangle
           Align = Center
-          Fill.Kind = None
-          Opacity = 0.800000011920929000
+          Fill.Color = claWhite
           Margins.Bottom = 10.000000000000000000
-          Size.Width = 705.000000000000000000
-          Size.Height = 35.000000000000000000
+          Size.Width = 318.000000000000000000
+          Size.Height = 249.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
-          object Image1: TImage
-            MultiResBitmap.Height = 900
-            MultiResBitmap.Width = 900
-            MultiResBitmap.LoadSize = 1
-            MultiResBitmap = <
-              item
-                Width = 73
-                Height = 21
-                PNG = {
-                  89504E470D0A1A0A0000000D49484452000000490000001508060000000A3FC3
-                  50000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-                  00C7494441545847EDD6510E82301084E1C2C93C1A37878E6C13486A29156776
-                  13BF1740B1C13F0B2179B09EBDEC633766DB4A5894D50EDD92458A10A790448A
-                  140826DBD2B4024D99EDBA42BDA84F81BCC629A40F6EF01E086817589BA20881
-                  403E4911C82245992290DD6E2391F2128BEDBEE5254EC7BF122DD2D76B8C08F3
-                  C67DF7FC27FD1FDC1D68B71BD4A6A1E79619FDDD53E493540B7074F53D037592
-                  A0F5A78FD3D17B1E033D12B4025C61070249241809A50804B2487027942A1048
-                  2315AD58CA38BB9436F3C26B3752ED2A330000000049454E44AE426082}
-                FileName = 
-                  'D:\Github\Desktop App\Gestion-de-Clinique\assets\loading_logo_wh' +
-                  'ite.png'
-              end>
+          XRadius = 11.000000000000000000
+          YRadius = 11.000000000000000000
+          object text_welcome: TText
             Align = Center
-            Size.Width = 73.000000000000000000
-            Size.Height = 21.000000000000000000
+            Margins.Top = -50.000000000000000000
+            Size.Width = 234.000000000000000000
+            Size.Height = 93.000000000000000000
             Size.PlatformDefault = False
-            object FloatAnimation5: TFloatAnimation
-              Enabled = True
-              Duration = 0.300000011920929000
-              Loop = True
-              PropertyName = 'RotationAngle'
-              StartValue = 0.000000000000000000
-              StopValue = 360.000000000000000000
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.FontColor = xFF6B6B6B
+            object Image1: TImage
+              MultiResBitmap.Height = 900
+              MultiResBitmap.Width = 900
+              MultiResBitmap.LoadSize = 1
+              MultiResBitmap = <
+                item
+                  Width = 234
+                  Height = 21
+                  PNG = {
+                    89504E470D0A1A0A0000000D49484452000000EA000000150806000000485072
+                    82000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    00E549444154785EEDD9410E82301400D1EACD3C1067D03B34DCC793A148BA40
+                    822875C3FCCE4B8C90209B9FB1259C92F0BAAE7B94C3340CC3A5EFFB7B395510
+                    E7F22DA057A0F3481597A14219685B0C15C848DBE3332ACC56A43967E7199483
+                    05F914A981C6E7D617CE48DBE09021D65653236D872BAA0460A850AEA66D71D8
+                    10CBAD6F4DA8E33D6EE57032DEE3ED5CC7E58ADA96EBE223084385DA7A9FBA66
+                    EFF53A164395007C4605A97D4553FB3B1D872B2ADCB72DAD5BDE18FC5785D90A
+                    6FBE4AFE7A9D181C18D03FABA491323934A89A588D94CBC181ED89D548D91C5E
+                    003E8F4697D2134FD653C002093DDD0000000049454E44AE426082}
+                  FileName = 
+                    'D:\Github\Desktop App\Gestion-de-Clinique\assets\loading_logo_gr' +
+                    'ey.png'
+                end>
+              Align = Bottom
+              Margins.Bottom = -30.000000000000000000
+              Position.Y = 102.000000000000000000
+              Size.Width = 234.000000000000000000
+              Size.Height = 21.000000000000000000
+              Size.PlatformDefault = False
+              object FloatAnimation5: TFloatAnimation
+                Enabled = True
+                Duration = 0.300000011920929000
+                Loop = True
+                PropertyName = 'RotationAngle'
+                StartValue = 0.000000000000000000
+                StopValue = 360.000000000000000000
+              end
             end
+          end
+          object ShadowEffect1: TShadowEffect
+            Distance = 3.000000000000000000
+            Direction = 45.000000000000000000
+            Softness = 0.500000000000000000
+            Opacity = 0.600000023841857900
+            ShadowColor = claBlack
           end
         end
       end
