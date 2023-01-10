@@ -16,6 +16,7 @@ type
     FDConnection1: TFDConnection;
     table_records: TFDTable;
     table_users: TFDTable;
+    table_counter: TFDTable;
   private
     { Private declarations }
   public

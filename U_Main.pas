@@ -16,7 +16,8 @@ uses
   FMX.ImgList, FMX.Maps, Vcl.Dialogs, FMX.DialogService, FMX.Menus, System.Rtti,
   FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
-  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList, ComObj;
+  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList, ComObj,
+  FMX.frxClass, FMX.frxDBSet, FMX.frxDesgn;
 
 type
   Tfrm_main = class(TForm)
@@ -39,7 +40,7 @@ type
     Gradient_Dark_Blue: TBrushObject;
     content_area: TRectangle;
     TabControl1: TTabControl;
-    tab_dashboard: TTabItem;
+    tab_users: TTabItem;
     rect_top_bar: TRectangle;
     Circle2: TCircle;
     rect_profile_bar: TRectangle;
@@ -109,6 +110,21 @@ type
     PopupMenu_grid_users: TPopupMenu;
     btn_export_to_excel: TMenuItem;
     SaveDialog1: TSaveDialog;
+    TabItem1: TTabItem;
+    Rectangle1: TRectangle;
+    Rectangle3: TRectangle;
+    Rectangle7: TRectangle;
+    Edit2: TEdit;
+    SearchEditButton2: TSearchEditButton;
+    Text13: TText;
+    Text14: TText;
+    Rectangle8: TRectangle;
+    ColorAnimation4: TColorAnimation;
+    Text15: TText;
+    Rectangle10: TRectangle;
+    StringGrid1: TStringGrid;
+    frxReport_ticket: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -127,6 +143,7 @@ type
     procedure btn_maximize_minimizeClick(Sender: TObject);
     procedure btn_export_to_excelClick(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
+    procedure Rectangle8Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -317,6 +334,33 @@ begin
   DM.DataModule1.FDQuery1.Execute;
 end;
 
+procedure Tfrm_main.Rectangle8Click(Sender: TObject);
+var
+  num :integer;
+begin
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from [counter] order by num DESC');
+  DM.Datamodule1.FDQuery1.Open;
+
+  num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
+
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO [counter] values (:counter,:date_ticket)');
+  DM.DataModule1.FDQuery1.ParamByName('counter').asinteger := num;
+  DM.DataModule1.FDQuery1.ParamByName('date_ticket').asdatetime := now;
+  DM.Datamodule1.FDQuery1.Execute;
+
+  DM.Datamodule1.table_counter.Filtered := false;
+  DM.Datamodule1.table_counter.Filter := 'num like '+inttostr(num);
+  DM.Datamodule1.table_counter.Filtered := true;
+
+//  FrxReport_ticket.ShowReport();
+  FrxReport_ticket.PrepareReport;
+  FrxReport_ticket.PrintOptions.ShowDialog := False;
+  FrxReport_ticket.Print;
+
+end;
+
 procedure Tfrm_main.Rect_dashboardClick(Sender: TObject);
 var
   this :TButton;
@@ -361,6 +405,8 @@ begin
   img_dashboard.Opacity := 0.5;
   img_patients.Opacity := 0.5;
   img_users.Opacity := 0.8;
+
+  tabcontrol1.TabIndex := 0;
 end;
 
 procedure Tfrm_main.SubMenu_AnimationFinish(Sender: TObject);

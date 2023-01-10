@@ -355,7 +355,7 @@ begin
       DM.DataModule1.FDQuery1.SQL.Clear;
       DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user=:user');
       DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-      Datamodule1.FDQuery1.Open;
+      DM.Datamodule1.FDQuery1.Open;
 
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
@@ -370,7 +370,7 @@ begin
         DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
-        Datamodule1.FDQuery1.Execute;
+        DM.Datamodule1.FDQuery1.Execute;
         showmessage('Inscrit avec succès');
 
         edit_user2.text := '';

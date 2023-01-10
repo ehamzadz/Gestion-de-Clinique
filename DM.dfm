@@ -31,4 +31,12 @@ object DataModule1: TDataModule1
     Left = 320
     Top = 288
   end
+  object table_counter: TFDTable
+    Active = True
+    IndexFieldNames = 'num'
+    Connection = FDConnection1
+    TableName = '[counter]'
+    Left = 320
+    Top = 360
+  end
 end
