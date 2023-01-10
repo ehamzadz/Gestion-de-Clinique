@@ -14,7 +14,8 @@ type
   TDataModule1 = class(TDataModule)
     FDQuery1: TFDQuery;
     FDConnection1: TFDConnection;
-    FDTable1: TFDTable;
+    table_records: TFDTable;
+    table_users: TFDTable;
   private
     { Private declarations }
   public

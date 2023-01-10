@@ -16,7 +16,7 @@ uses
   FMX.ImgList, FMX.Maps, Vcl.Dialogs, FMX.DialogService, FMX.Menus, System.Rtti,
   FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
-  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList;
+  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList, ComObj;
 
 type
   Tfrm_main = class(TForm)
@@ -67,7 +67,7 @@ type
     Image5: TImage;
     Text7: TText;
     ColorAnimation10: TColorAnimation;
-    PopupMenu1: TPopupMenu;
+    PopupMenu_esc: TPopupMenu;
     MenuItem1: TMenuItem;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
@@ -92,7 +92,7 @@ type
     ColorAnimation11: TColorAnimation;
     Text1: TText;
     ShadowEffect2: TShadowEffect;
-    Rectangle1: TRectangle;
+    rect_title_bar: TRectangle;
     btn_accept_user: TRectangle;
     blue: TBrushObject;
     blueee: TBrushObject;
@@ -103,11 +103,12 @@ type
     Text8: TText;
     Edit1: TEdit;
     SearchEditButton1: TSearchEditButton;
-    Header1: THeader;
-    HeaderItem1: THeaderItem;
-    HeaderItem2: THeaderItem;
-    HeaderItem3: THeaderItem;
-    HeaderItem4: THeaderItem;
+    grid_users: TStringGrid;
+    LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource;
+    Rectangle2: TRectangle;
+    PopupMenu_grid_users: TPopupMenu;
+    btn_export_to_excel: TMenuItem;
+    SaveDialog1: TSaveDialog;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -124,6 +125,8 @@ type
     procedure rect_top_barMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
     procedure btn_maximize_minimizeClick(Sender: TObject);
+    procedure btn_export_to_excelClick(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,6 +144,86 @@ implementation
 {$R *.fmx}
 
 uses U_Auth, DM;
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+
+function RefToCell(ARow, ACol: Integer): string;
+begin
+  Result := Chr(Ord('A') + ACol - 1) + IntToStr(ARow);
+end;
+
+function SaveAsExcelFile(AGrid: TStringGrid; ASheetName, AFileName: string;ColCount:integer): Boolean;
+const
+  xlWBATWorksheet = -4167;
+var
+  Row, Col: Integer;
+  GridPrevFile: string;
+  XLApp, Sheet, Data: OLEVariant;
+  i, j: Integer;
+begin
+  // Prepare Data
+  Data := VarArrayCreate([1, AGrid.RowCount, 1, ColCount], varVariant);
+  for i := 0 to ColCount - 1 do
+    for j := 0 to AGrid.RowCount - 1 do
+      Data[j + 1, i + 1] := AGrid.Cells[i, j];
+  // Create Excel-OLE Object
+  Result := False;
+  XLApp := CreateOleObject('Excel.Application');
+  try
+    // Hide Excel
+    XLApp.Visible := False;
+    // Add new Workbook
+    XLApp.Workbooks.Add(xlWBatWorkSheet);
+    Sheet := XLApp.Workbooks[1].WorkSheets[1];
+    Sheet.Name := ASheetName;
+    // Fill up the sheet
+    Sheet.Range[RefToCell(1, 1), RefToCell(AGrid.RowCount, ColCount)].Value := Data;
+    // Save Excel Worksheet
+    try
+      XLApp.Workbooks[1].SaveAs(AFileName);
+      Result := True;
+    except
+      // Error ?
+    end;
+  finally
+    // Quit Excel
+    if not VarIsEmpty(XLApp) then
+    begin
+      XLApp.DisplayAlerts := False;
+      XLApp.Quit;
+      XLAPP := Unassigned;
+      Sheet := Unassigned;
+    end;
+  end;
+end;
+
+procedure Tfrm_main.btn_export_to_excelClick(Sender: TObject);
+begin
+
+  if SaveDialog1.Execute then begin
+    if SaveAsExcelFile(grid_users, 'Liste des utilisateurs', SaveDialog1.Filename, 3) then
+    ShowMessage('Data saved!');
+  end;
+end;
+
+procedure Tfrm_main.MenuItem2Click(Sender: TObject);
+begin
+end;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+procedure Tfrm_main.MenuItem1Click(Sender: TObject);
+begin
+  if MessageDlg('Voulez-vous vraiment fermer logiciel?',
+    mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+  begin
+    rec('Application Closed');
+    application.Terminate;
+  end;
+end;
 
 procedure Tfrm_main.btn_logoutClick(Sender: TObject);
 begin
@@ -207,15 +290,6 @@ begin
 
 end;
 
-procedure Tfrm_main.MenuItem1Click(Sender: TObject);
-begin
-  if MessageDlg('Voulez-vous vraiment fermer logiciel?',
-    mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
-  begin
-    rec('Application Closed');
-    application.Terminate;
-  end;
-end;
 
 procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);

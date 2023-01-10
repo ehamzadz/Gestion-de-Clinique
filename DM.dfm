@@ -15,12 +15,20 @@ object DataModule1: TDataModule1
     Left = 80
     Top = 48
   end
-  object FDTable1: TFDTable
+  object table_records: TFDTable
     Active = True
     IndexFieldNames = 'id_rc'
     Connection = FDConnection1
     TableName = 'records'
     Left = 320
     Top = 216
+  end
+  object table_users: TFDTable
+    Active = True
+    IndexFieldNames = 'user'
+    Connection = FDConnection1
+    TableName = 'users'
+    Left = 320
+    Top = 288
   end
 end
