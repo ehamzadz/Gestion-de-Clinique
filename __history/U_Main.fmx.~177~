@@ -80,10 +80,44 @@ object frm_main: Tfrm_main
         object rec_BG: TRectangle
           Align = Client
           Fill.Color = xFFF0F3FB
+          Padding.Left = 30.000000000000000000
+          Padding.Top = 30.000000000000000000
+          Padding.Right = 30.000000000000000000
+          Padding.Bottom = 30.000000000000000000
           Size.Width = 973.000000000000000000
           Size.Height = 696.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
+          object Rectangle1: TRectangle
+            Align = Top
+            Fill.Kind = None
+            Position.X = 30.000000000000000000
+            Position.Y = 30.000000000000000000
+            Size.Width = 913.000000000000000000
+            Size.Height = 47.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object Rectangle2: TRectangle
+              Align = Right
+              Cursor = crHandPoint
+              Fill.Color = xFF3F6AB3
+              Position.X = 744.000000000000000000
+              Size.Width = 169.000000000000000000
+              Size.Height = 47.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Kind = None
+              XRadius = 7.000000000000000000
+              YRadius = 7.000000000000000000
+              object ColorAnimation4: TColorAnimation
+                Duration = 0.200000002980232200
+                PropertyName = 'Fill.Color'
+                StartValue = xFF3F6AB3
+                StopValue = xFF294193
+                Trigger = 'IsMouseOver=true'
+                TriggerInverse = 'IsMouseOver=false'
+              end
+            end
+          end
         end
       end
     end
@@ -41967,7 +42001,7 @@ object frm_main: Tfrm_main
           Duration = 0.200000002980232200
           PropertyName = 'Fill.Color'
           StartValue = claWhite
-          StopValue = xB4F0F0F0
+          StopValue = xFFF0F3FB
           Trigger = 'IsMouseOver=true'
           TriggerInverse = 'IsMouseOver=false'
         end
@@ -46964,7 +46998,7 @@ object frm_main: Tfrm_main
           Duration = 0.200000002980232200
           PropertyName = 'Fill.Color'
           StartValue = x00FFFFFF
-          StopValue = x64E6E6E6
+          StopValue = xFFF0F3FB
           Trigger = 'IsMouseOver=true'
           TriggerInverse = 'IsMouseOver=false'
         end
@@ -52863,6 +52897,14 @@ object frm_main: Tfrm_main
       Opacity = 0.300000011920929000
       ShadowColor = claBlack
     end
+  end
+  object blue: TBrushObject
+    StyleName = 'blue'
+    Brush.Color = xFF3F6AB3
+  end
+  object blueee: TBrushObject
+    StyleName = 'blueee'
+    Brush.Color = xFF294193
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = DataModule1.FDTable1

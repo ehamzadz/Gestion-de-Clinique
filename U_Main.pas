@@ -93,10 +93,11 @@ type
     Text1: TText;
     ShadowEffect2: TShadowEffect;
     Rectangle1: TRectangle;
-    Rectangle2: TRectangle;
+    btn_accept_user: TRectangle;
     blue: TBrushObject;
     blueee: TBrushObject;
     ColorAnimation4: TColorAnimation;
+    Text8: TText;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
