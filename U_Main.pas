@@ -125,6 +125,8 @@ type
     StringGrid1: TStringGrid;
     frxReport_ticket: TfrxReport;
     frxDBDataset1: TfrxDBDataset;
+    MenuItem2: TMenuItem;
+    Edit_num_recent_ticket: TEdit;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -226,6 +228,7 @@ end;
 
 procedure Tfrm_main.MenuItem2Click(Sender: TObject);
 begin
+  Rectangle8Click(nil);
 end;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -358,6 +361,11 @@ begin
   FrxReport_ticket.PrepareReport;
   FrxReport_ticket.PrintOptions.ShowDialog := False;
   FrxReport_ticket.Print;
+
+
+  Edit_num_recent_ticket.Text := 'N°: ' + inttostr(num);
+
+  rec('Impression Ticket');
 
 end;
 
