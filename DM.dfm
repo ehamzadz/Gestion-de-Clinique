@@ -40,4 +40,11 @@ object DataModule1: TDataModule1
     Left = 80
     Top = 272
   end
+  object table_patients: TFDTable
+    Active = True
+    Connection = FDConnection1
+    TableName = 'patients'
+    Left = 80
+    Top = 328
+  end
 end

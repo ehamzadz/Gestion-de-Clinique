@@ -17,6 +17,7 @@ type
     table_records: TFDTable;
     table_users: TFDTable;
     table_counter: TFDTable;
+    table_patients: TFDTable;
   private
     { Private declarations }
   public

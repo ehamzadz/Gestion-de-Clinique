@@ -122,11 +122,14 @@ type
     ColorAnimation4: TColorAnimation;
     Text15: TText;
     Rectangle10: TRectangle;
-    StringGrid1: TStringGrid;
     frxReport_ticket: TfrxReport;
     frxDBDataset1: TfrxDBDataset;
     MenuItem2: TMenuItem;
     Edit_num_recent_ticket: TEdit;
+    Rectangle11: TRectangle;
+    grid_patients: TStringGrid;
+    BindSourceDB3: TBindSourceDB;
+    LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
