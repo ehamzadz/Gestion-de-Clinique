@@ -153,6 +153,7 @@ type
     procedure btn_export_to_excelClick(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure Rectangle8Click(Sender: TObject);
+    procedure print_patient_idClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -322,6 +323,14 @@ procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
 //  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
+end;
+
+procedure Tfrm_main.print_patient_idClick(Sender: TObject);
+begin
+//  FrxReport_ticket.ShowReport();
+  FrxReport_patient_id.PrepareReport;
+  FrxReport_patient_id.PrintOptions.ShowDialog := False;
+  FrxReport_patient_id.Print;
 end;
 
 procedure Tfrm_main.rec(type_rc: string);
