@@ -312,9 +312,6 @@ Coordinates=1114,427,110,36
 [Rectangle8]
 Coordinates=815,944,80,36
 
-[TabItem1]
-Coordinates=1608,860,69,36
-
 [Text14]
 Coordinates=486,776,54,58
 
@@ -346,4 +343,7 @@ Visible=False
 
 [BindSourceDB3]
 Coordinates=10,10,161,762
+
+[tab_patients]
+Coordinates=1608,860,69,36
 

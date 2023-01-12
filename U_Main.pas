@@ -110,7 +110,7 @@ type
     PopupMenu_grid_users: TPopupMenu;
     btn_export_to_excel: TMenuItem;
     SaveDialog1: TSaveDialog;
-    TabItem1: TTabItem;
+    tab_patients: TTabItem;
     Rectangle1: TRectangle;
     Rectangle3: TRectangle;
     Rectangle7: TRectangle;
@@ -130,6 +130,10 @@ type
     grid_patients: TStringGrid;
     BindSourceDB3: TBindSourceDB;
     LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource;
+    PopupMenu_grid_patients: TPopupMenu;
+    print_patient_id: TMenuItem;
+    frxReport_patient_id: TfrxReport;
+    frxDBDataset2: TfrxDBDataset;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -393,6 +397,8 @@ begin
   img_dashboard.Opacity := 0.5;
   img_patients.Opacity := 0.8;
   img_users.Opacity := 0.5;
+  //Switch to Patients TAB
+  tabcontrol1.TabIndex := 0;
 end;
 
 procedure Tfrm_main.rect_profile_barClick(Sender: TObject);
@@ -416,7 +422,7 @@ begin
   img_dashboard.Opacity := 0.5;
   img_patients.Opacity := 0.5;
   img_users.Opacity := 0.8;
-
+  //Switch to Users TAB
   tabcontrol1.TabIndex := 0;
 end;
 
