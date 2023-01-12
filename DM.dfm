@@ -1,10 +1,11 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
+  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
-    Top = 216
+    Top = 104
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -20,23 +21,23 @@ object DataModule1: TDataModule1
     IndexFieldNames = 'id_rc'
     Connection = FDConnection1
     TableName = 'records'
-    Left = 320
-    Top = 216
+    Left = 80
+    Top = 160
   end
   object table_users: TFDTable
     Active = True
     IndexFieldNames = 'user'
     Connection = FDConnection1
     TableName = 'users'
-    Left = 320
-    Top = 288
+    Left = 80
+    Top = 216
   end
   object table_counter: TFDTable
     Active = True
     IndexFieldNames = 'num'
     Connection = FDConnection1
     TableName = '[counter]'
-    Left = 320
-    Top = 360
+    Left = 80
+    Top = 272
   end
 end
