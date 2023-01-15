@@ -114,7 +114,7 @@ type
     Rectangle1: TRectangle;
     Rectangle3: TRectangle;
     Rectangle7: TRectangle;
-    Edit2: TEdit;
+    edit_search_patients: TEdit;
     SearchEditButton2: TSearchEditButton;
     Text13: TText;
     Text14: TText;
@@ -154,6 +154,7 @@ type
     procedure MenuItem2Click(Sender: TObject);
     procedure Rectangle8Click(Sender: TObject);
     procedure print_patient_idClick(Sender: TObject);
+    procedure edit_search_patientsTyping(Sender: TObject);
   private
     { Private declarations }
   public
@@ -299,6 +300,17 @@ begin
   end;
 end;
 
+procedure Tfrm_main.edit_search_patientsTyping(Sender: TObject);
+begin
+  if edit_search_patients.Text ='' then begin
+    DM.Datamodule1.table_patients.Filtered := false;
+  end else begin
+    DM.Datamodule1.table_patients.Filtered := false;
+    DM.Datamodule1.table_patients.Filter := 'CODE_B like '+ quotedstr('%'+edit_search_patients.Text+'%') ;
+    DM.Datamodule1.table_patients.Filtered := true;
+  end;
+end;
+
 procedure Tfrm_main.FormShow(Sender: TObject);
 begin
   img_patients.Opacity := 0.5;
@@ -353,36 +365,50 @@ begin
   DM.DataModule1.FDQuery1.Execute;
 end;
 
+// Impression Ticket
 procedure Tfrm_main.Rectangle8Click(Sender: TObject);
 var
   num :integer;
+  record_msg :string;
 begin
-  DM.DataModule1.FDQuery1.SQL.Clear;
-  DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from [counter] order by num DESC');
-  DM.Datamodule1.FDQuery1.Open;
+  if MessageDlg('Confirm ?',
+      mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+    begin
+      DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from [counter] order by num DESC');
+    DM.Datamodule1.FDQuery1.Open;
 
-  num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
+    num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
 
-  DM.DataModule1.FDQuery1.SQL.Clear;
-  DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO [counter] values (:counter,:date_ticket)');
-  DM.DataModule1.FDQuery1.ParamByName('counter').asinteger := num;
-  DM.DataModule1.FDQuery1.ParamByName('date_ticket').asdatetime := now;
-  DM.Datamodule1.FDQuery1.Execute;
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO [counter] values (:counter,:date_ticket)');
+    DM.DataModule1.FDQuery1.ParamByName('counter').asinteger := num;
+    DM.DataModule1.FDQuery1.ParamByName('date_ticket').asdatetime := now;
+    DM.Datamodule1.FDQuery1.Execute;
 
-  DM.Datamodule1.table_counter.Filtered := false;
-  DM.Datamodule1.table_counter.Filter := 'num like '+inttostr(num);
-  DM.Datamodule1.table_counter.Filtered := true;
-
-//  FrxReport_ticket.ShowReport();
-  FrxReport_ticket.PrepareReport;
-  FrxReport_ticket.PrintOptions.ShowDialog := False;
-  FrxReport_ticket.Print;
+    DM.Datamodule1.table_counter.Filtered := false;
+    DM.Datamodule1.table_counter.Filter := 'num like '+inttostr(num);
+    DM.Datamodule1.table_counter.Filtered := true;
 
 
-  Edit_num_recent_ticket.Text := 'N°: ' + inttostr(num);
+    DM.Datamodule1.table_patients.Filtered := false;
+    DM.Datamodule1.table_patients.Filter := 'CDEP like '+ grid_patients.Cells[0,grid_patients.Selected];
+    DM.Datamodule1.table_patients.Filtered := true;
 
-  rec('Impression Ticket');
+  //  FrxReport_ticket.ShowReport();
+    FrxReport_ticket.PrepareReport;
+    FrxReport_ticket.PrintOptions.ShowDialog := False;
+    FrxReport_ticket.Print;
 
+
+    Edit_num_recent_ticket.Text := 'N°: ' + inttostr(num);
+
+    record_msg := 'Impression Ticket pour "' + grid_patients.Cells[2,grid_patients.Selected] + ' ' + grid_patients.Cells[3,grid_patients.Selected] +'" Code:'+ grid_patients.Cells[0,grid_patients.Selected];
+    rec(record_msg);
+
+    DM.Datamodule1.table_patients.Filtered := false;
+    DM.Datamodule1.table_counter.Filtered := false;
+    end;
 end;
 
 procedure Tfrm_main.Rect_dashboardClick(Sender: TObject);
