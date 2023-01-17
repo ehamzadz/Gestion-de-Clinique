@@ -17,7 +17,7 @@ uses
   FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList, ComObj,
-  FMX.frxClass, FMX.frxDBSet, FMX.frxDesgn;
+  FMX.frxClass, FMX.frxDBSet, FMX.frxDesgn, FMX.frxBarcode, FMX.frxBarcode2DView;
 
 type
   Tfrm_main = class(TForm)
@@ -134,6 +134,8 @@ type
     print_patient_id: TMenuItem;
     frxReport_patient_id: TfrxReport;
     frxDBDataset2: TfrxDBDataset;
+    frx2DBarCodeObject1: Tfrx2DBarCodeObject;
+    frxBarCodeObject1: TfrxBarCodeObject;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
