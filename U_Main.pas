@@ -142,6 +142,7 @@ type
     yellow: TBrushObject;
     SpeedButton1: TSpeedButton;
     SizeGrip1: TSizeGrip;
+    ColorAnimation14: TColorAnimation;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -491,7 +492,7 @@ begin
   img_patients.Opacity := 0.8;
   img_users.Opacity := 0.5;
   //Switch to Patients TAB
-  tabcontrol1.TabIndex := 0;
+  tabcontrol1.TabIndex := 1;
 end;
 
 procedure Tfrm_main.rect_profile_barClick(Sender: TObject);
