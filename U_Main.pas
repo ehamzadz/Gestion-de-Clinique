@@ -115,9 +115,6 @@ type
     Rectangle3: TRectangle;
     Rectangle7: TRectangle;
     edit_search_patients: TEdit;
-    SearchEditButton2: TSearchEditButton;
-    Text13: TText;
-    Text14: TText;
     Rectangle8: TRectangle;
     ColorAnimation4: TColorAnimation;
     Text15: TText;
@@ -136,6 +133,15 @@ type
     frxDBDataset2: TfrxDBDataset;
     frx2DBarCodeObject1: Tfrx2DBarCodeObject;
     frxBarCodeObject1: TfrxBarCodeObject;
+    Rectangle12: TRectangle;
+    Rectangle14: TRectangle;
+    ColorAnimation13: TColorAnimation;
+    Text18: TText;
+    green: TBrushObject;
+    Rectangle13: TRectangle;
+    yellow: TBrushObject;
+    SpeedButton1: TSpeedButton;
+    SizeGrip1: TSizeGrip;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -157,6 +163,10 @@ type
     procedure Rectangle8Click(Sender: TObject);
     procedure print_patient_idClick(Sender: TObject);
     procedure edit_search_patientsTyping(Sender: TObject);
+    procedure Rectangle13Click(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Single);
   private
     { Private declarations }
   public
@@ -313,6 +323,41 @@ begin
   end;
 end;
 
+procedure Tfrm_main.FormResize(Sender: TObject);
+var
+  form_width, grid_patients_list_width, rest_width: real;
+begin
+  form_width := frm_main.Width;
+  grid_patients_list_width := form_width - 57 - 60;
+  rest_width := grid_patients_list_width;
+
+  LinkGridToDataSourceBindSourceDB3.Columns[0].Width := round((5.93) * grid_patients_list_width / 100);
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;
+  LinkGridToDataSourceBindSourceDB3.Columns[1].Width := round((8.30) * grid_patients_list_width / 100);
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;
+  LinkGridToDataSourceBindSourceDB3.Columns[2].Width := round((17.79) * grid_patients_list_width / 100);
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;
+  LinkGridToDataSourceBindSourceDB3.Columns[3].Width := round((23.72) * grid_patients_list_width / 100);
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[3].Width;
+  LinkGridToDataSourceBindSourceDB3.Columns[4].Width := round((8.30) * grid_patients_list_width / 100);
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[4].Width;
+  LinkGridToDataSourceBindSourceDB3.Columns[5].Width := round((11.86) * grid_patients_list_width / 100);
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[5].Width;
+  LinkGridToDataSourceBindSourceDB3.Columns[6].Width := round(rest_width)-45;
+
+//  843 - 100%
+//  50 - 5.93%
+//  70 - 8.30%
+//  150 - 17.79%
+//  200 - 23.72%
+//  70 - 8.30%
+//  100 - 11.86%
+//  175 - 20.76%
+
+
+
+end;
+
 procedure Tfrm_main.FormShow(Sender: TObject);
 begin
   img_patients.Opacity := 0.5;
@@ -368,6 +413,17 @@ begin
 end;
 
 // Impression Ticket
+procedure Tfrm_main.Rectangle13Click(Sender: TObject);
+begin
+  edit_search_patientsTyping(nil);
+end;
+
+procedure Tfrm_main.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Single);
+begin
+  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
+end;
+
 procedure Tfrm_main.Rectangle8Click(Sender: TObject);
 var
   num :integer;

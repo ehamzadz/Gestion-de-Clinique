@@ -9,7 +9,7 @@ object DataModule1: TDataModule1
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=D:\db.mdb'
+      'Database=\\DESKTOP-IULFAPA\Dossier Partager\db.mdb'
       'DriverID=MSAcc')
     Connected = True
     LoginPrompt = False
@@ -46,5 +46,14 @@ object DataModule1: TDataModule1
     TableName = 'patients'
     Left = 80
     Top = 328
+  end
+  object FDConnection2: TFDConnection
+    Params.Strings = (
+      'Database=D:\db.mdb'
+      'DriverID=MSAcc')
+    Connected = True
+    LoginPrompt = False
+    Left = 264
+    Top = 80
   end
 end

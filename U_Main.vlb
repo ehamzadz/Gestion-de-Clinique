@@ -119,7 +119,7 @@ Coordinates=1268,944,92,33
 Coordinates=921,944,125,33
 
 []
-Coordinates=425,204,80,58
+Coordinates=162,776,46,51
 Visible=True
 
 [btn_logout_from_profile_menu]
@@ -279,12 +279,6 @@ Coordinates=10,944,114,33
 [tab_users]
 Coordinates=1206,860,62,33
 
-[SearchEditButton2]
-Coordinates=1219,1006,107,33
-
-[Text13]
-Coordinates=162,776,46,51
-
 [Text15]
 Coordinates=266,860,46,51
 
@@ -308,9 +302,6 @@ Coordinates=1114,427,97,33
 
 [Rectangle8]
 Coordinates=815,944,69,33
-
-[Text14]
-Coordinates=486,776,46,51
 
 [frxReport_ticket]
 Coordinates=1417,56,93,33

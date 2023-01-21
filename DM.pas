@@ -8,7 +8,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.FMXUI.Wait,
   Data.DB, FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Phys.MSAcc,
-  FireDAC.Phys.MSAccDef, Data.Win.ADODB;
+  FireDAC.Phys.MSAccDef, Data.Win.ADODB, FireDAC.Phys.ODBCDef,
+  FireDAC.Phys.ODBCBase, FireDAC.Phys.ODBC;
 
 type
   TDataModule1 = class(TDataModule)
@@ -18,6 +19,7 @@ type
     table_users: TFDTable;
     table_counter: TFDTable;
     table_patients: TFDTable;
+    FDConnection2: TFDConnection;
   private
     { Private declarations }
   public
