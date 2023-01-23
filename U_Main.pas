@@ -162,6 +162,7 @@ type
     ColorAnimation12: TColorAnimation;
     ColorAnimation18: TColorAnimation;
     SpeedButton3: TSpeedButton;
+    Rectangle2: TRectangle;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
