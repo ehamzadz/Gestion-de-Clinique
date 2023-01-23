@@ -93,20 +93,10 @@ type
     ColorAnimation11: TColorAnimation;
     Text1: TText;
     ShadowEffect2: TShadowEffect;
-    rect_title_bar: TRectangle;
-    btn_accept_user: TRectangle;
     blue: TBrushObject;
     blueee: TBrushObject;
-    Text9: TText;
-    rect_search_bar: TRectangle;
-    ColorAnimation12: TColorAnimation;
-    Text10: TText;
-    Text8: TText;
-    Edit1: TEdit;
-    SearchEditButton1: TSearchEditButton;
     grid_users: TStringGrid;
     LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource;
-    Rectangle2: TRectangle;
     PopupMenu_grid_users: TPopupMenu;
     btn_export_to_excel: TMenuItem;
     SaveDialog1: TSaveDialog;
@@ -143,6 +133,35 @@ type
     SpeedButton1: TSpeedButton;
     SizeGrip1: TSizeGrip;
     ColorAnimation14: TColorAnimation;
+    Rectangle15: TRectangle;
+    Rectangle16: TRectangle;
+    ColorAnimation15: TColorAnimation;
+    Text13: TText;
+    Rectangle17: TRectangle;
+    Rectangle18: TRectangle;
+    Edit2: TEdit;
+    Rectangle19: TRectangle;
+    SpeedButton2: TSpeedButton;
+    ColorAnimation16: TColorAnimation;
+    Rectangle20: TRectangle;
+    ColorAnimation17: TColorAnimation;
+    Text14: TText;
+    rect_popup_accept_users: TRectangle;
+    Rectangle21: TRectangle;
+    Rectangle22: TRectangle;
+    Rectangle23: TRectangle;
+    Text8: TText;
+    Rectangle24: TRectangle;
+    Rectangle25: TRectangle;
+    Rectangle26: TRectangle;
+    Text9: TText;
+    Rectangle27: TRectangle;
+    Rectangle28: TRectangle;
+    ComboBox2: TComboBox;
+    Text10: TText;
+    ColorAnimation12: TColorAnimation;
+    ColorAnimation18: TColorAnimation;
+    SpeedButton3: TSpeedButton;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -168,6 +187,11 @@ type
     procedure FormResize(Sender: TObject);
     procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure Rectangle20Click(Sender: TObject);
+    procedure Rectangle25Click(Sender: TObject);
+    procedure fetch_n_users_invts;
+    procedure Rectangle26Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -292,7 +316,6 @@ end;
 
 procedure Tfrm_main.btn_switchClick(Sender: TObject);
 begin
-
   if i=1 then begin
     i := 0;
     SubMenu_Animation.StartValue := 257;
@@ -322,6 +345,17 @@ begin
     DM.Datamodule1.table_patients.Filter := 'CODE_B like '+ quotedstr('%'+edit_search_patients.Text+'%') ;
     DM.Datamodule1.table_patients.Filtered := true;
   end;
+end;
+
+procedure Tfrm_main.fetch_n_users_invts;
+begin
+  // Fetch N_of_Users_Invts /////////////////////////////////////////////////////////
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where type <> :user');
+  DM.DataModule1.FDQuery1.ParamByName('user').asstring := 'Administrateur';
+  Datamodule1.FDQuery1.Open;
+  N_of_Users_Invts.Text := DM.DataModule1.FDQuery1.Fields[0].AsString + '+';
+  ///////////////////////////////////////////////////////////////////////////////////
 end;
 
 procedure Tfrm_main.FormResize(Sender: TObject);
@@ -376,6 +410,11 @@ begin
 
   rec('Login');
 
+  // Fetch_n_users_invts
+  fetch_n_users_invts;
+
+
+
 end;
 
 
@@ -425,6 +464,43 @@ begin
   if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
+procedure Tfrm_main.Rectangle20Click(Sender: TObject);
+begin
+  rect_popup_accept_users.Visible := true;
+  text8.Text := 'Choisissez le type d''utilisateur que vous souhaitez attribuer à ' + grid_users.Cells[1,grid_users.Selected];
+end;
+
+procedure Tfrm_main.Rectangle25Click(Sender: TObject);
+begin
+  if MessageDlg('Confirm ?',
+    mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+    begin
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('DELETE FROM users WHERE user = :user ');
+      DM.DataModule1.FDQuery1.ParamByName('user').asstring := grid_users.Cells[0,grid_users.Selected];
+      DM.Datamodule1.FDQuery1.ExecSQL;
+      SpeedButton3Click(nil);
+      DM.Datamodule1.table_users.Refresh;
+      // Fetch_n_users_invts
+      fetch_n_users_invts;
+    end;
+end;
+
+procedure Tfrm_main.Rectangle26Click(Sender: TObject);
+begin
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('UPDATE users SET type=:type WHERE user = :user ');
+    DM.DataModule1.FDQuery1.ParamByName('user').asstring := grid_users.Cells[0,grid_users.Selected];
+    DM.DataModule1.FDQuery1.ParamByName('type').asstring := combobox2.items[combobox2.ItemIndex];
+    DM.Datamodule1.FDQuery1.Execute;
+    SpeedButton3Click(nil);
+    DM.Datamodule1.table_users.Refresh;
+    // Fetch_n_users_invts
+    fetch_n_users_invts;
+
+end;
+
 procedure Tfrm_main.Rectangle8Click(Sender: TObject);
 var
   num :integer;
@@ -434,39 +510,39 @@ begin
       mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
     begin
       DM.DataModule1.FDQuery1.SQL.Clear;
-    DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from [counter] order by num DESC');
-    DM.Datamodule1.FDQuery1.Open;
+      DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from [counter] order by num DESC');
+      DM.Datamodule1.FDQuery1.Open;
 
-    num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
+      num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
 
-    DM.DataModule1.FDQuery1.SQL.Clear;
-    DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO [counter] values (:counter,:date_ticket)');
-    DM.DataModule1.FDQuery1.ParamByName('counter').asinteger := num;
-    DM.DataModule1.FDQuery1.ParamByName('date_ticket').asdatetime := now;
-    DM.Datamodule1.FDQuery1.Execute;
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO [counter] values (:counter,:date_ticket)');
+      DM.DataModule1.FDQuery1.ParamByName('counter').asinteger := num;
+      DM.DataModule1.FDQuery1.ParamByName('date_ticket').asdatetime := now;
+      DM.Datamodule1.FDQuery1.Execute;
 
-    DM.Datamodule1.table_counter.Filtered := false;
-    DM.Datamodule1.table_counter.Filter := 'num like '+inttostr(num);
-    DM.Datamodule1.table_counter.Filtered := true;
-
-
-    DM.Datamodule1.table_patients.Filtered := false;
-    DM.Datamodule1.table_patients.Filter := 'CDEP like '+ grid_patients.Cells[0,grid_patients.Selected];
-    DM.Datamodule1.table_patients.Filtered := true;
-
-  //  FrxReport_ticket.ShowReport();
-    FrxReport_ticket.PrepareReport;
-    FrxReport_ticket.PrintOptions.ShowDialog := False;
-    FrxReport_ticket.Print;
+      DM.Datamodule1.table_counter.Filtered := false;
+      DM.Datamodule1.table_counter.Filter := 'num like '+inttostr(num);
+      DM.Datamodule1.table_counter.Filtered := true;
 
 
-    Edit_num_recent_ticket.Text := 'N°: ' + inttostr(num);
+      DM.Datamodule1.table_patients.Filtered := false;
+      DM.Datamodule1.table_patients.Filter := 'CDEP like '+ grid_patients.Cells[0,grid_patients.Selected];
+      DM.Datamodule1.table_patients.Filtered := true;
 
-    record_msg := 'Impression Ticket pour "' + grid_patients.Cells[2,grid_patients.Selected] + ' ' + grid_patients.Cells[3,grid_patients.Selected] +'" Code:'+ grid_patients.Cells[0,grid_patients.Selected];
-    rec(record_msg);
+    //  FrxReport_ticket.ShowReport();
+      FrxReport_ticket.PrepareReport;
+      FrxReport_ticket.PrintOptions.ShowDialog := False;
+      FrxReport_ticket.Print;
 
-    DM.Datamodule1.table_patients.Filtered := false;
-    DM.Datamodule1.table_counter.Filtered := false;
+
+      Edit_num_recent_ticket.Text := 'N°: ' + inttostr(num);
+
+      record_msg := 'Impression Ticket pour "' + grid_patients.Cells[2,grid_patients.Selected] + ' ' + grid_patients.Cells[3,grid_patients.Selected] +'" Code:'+ grid_patients.Cells[0,grid_patients.Selected];
+      rec(record_msg);
+
+      DM.Datamodule1.table_patients.Filtered := false;
+      DM.Datamodule1.table_counter.Filtered := false;
     end;
 end;
 
@@ -518,6 +594,11 @@ begin
   img_users.Opacity := 0.8;
   //Switch to Users TAB
   tabcontrol1.TabIndex := 0;
+end;
+
+procedure Tfrm_main.SpeedButton3Click(Sender: TObject);
+begin
+  rect_popup_accept_users.Visible := false;
 end;
 
 procedure Tfrm_main.SubMenu_AnimationFinish(Sender: TObject);
