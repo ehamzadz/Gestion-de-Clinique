@@ -17,7 +17,8 @@ uses
   FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList, ComObj,
-  FMX.frxClass, FMX.frxDBSet, FMX.frxDesgn, FMX.frxBarcode, FMX.frxBarcode2DView;
+  FMX.frxClass, FMX.frxDBSet, FMX.frxDesgn, FMX.frxBarcode, FMX.frxBarcode2DView, Winapi.ShellAPI, Winapi.Windows,
+  FMX.Memo.Types, FMX.Memo;
 
 type
   Tfrm_main = class(TForm)
@@ -139,7 +140,7 @@ type
     Text13: TText;
     Rectangle17: TRectangle;
     Rectangle18: TRectangle;
-    Edit2: TEdit;
+    edit_search_users: TEdit;
     Rectangle19: TRectangle;
     SpeedButton2: TSpeedButton;
     ColorAnimation16: TColorAnimation;
@@ -162,7 +163,9 @@ type
     ColorAnimation12: TColorAnimation;
     ColorAnimation18: TColorAnimation;
     SpeedButton3: TSpeedButton;
-    Rectangle2: TRectangle;
+    Memo1: TMemo;
+    Button1: TButton;
+    Timer1: TTimer;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -193,12 +196,17 @@ type
     procedure Rectangle25Click(Sender: TObject);
     procedure fetch_n_users_invts;
     procedure Rectangle26Click(Sender: TObject);
+    procedure roles(U_type: string);
+    procedure edit_search_usersTyping(Sender: TObject);
+    procedure RunDosInMemo(DosApp: string; AMemo:TMemo);
+    procedure Button1Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     U,P :string;
-    USER_username, USER_password, USER_fullName, USER_type :string;
+    USER_username, USER_password, USER_fullName, USER_type, filter_by_role :string;
   end;
 
 var
@@ -210,6 +218,61 @@ implementation
 {$R *.fmx}
 
 uses U_Auth, DM;
+
+function GetDosOutput(CommandLine: string; Work: string = 'C:\'): string;
+var
+  SA: TSecurityAttributes;
+  SI: TStartupInfo;
+  PI: TProcessInformation;
+  StdOutPipeRead, StdOutPipeWrite: THandle;
+  WasOK: Boolean;
+  Buffer: array[0..255] of AnsiChar;
+  BytesRead: Cardinal;
+  WorkDir: string;
+  Handle: Boolean;
+begin
+  Result := '';
+  with SA do begin
+    nLength := SizeOf(SA);
+    bInheritHandle := True;
+    lpSecurityDescriptor := nil;
+  end;
+  CreatePipe(StdOutPipeRead, StdOutPipeWrite, @SA, 0);
+  try
+    with SI do
+    begin
+      FillChar(SI, SizeOf(SI), 0);
+      cb := SizeOf(SI);
+      dwFlags := STARTF_USESHOWWINDOW or STARTF_USESTDHANDLES;
+      wShowWindow := SW_HIDE;
+      hStdInput := GetStdHandle(STD_INPUT_HANDLE); // don't redirect stdin
+      hStdOutput := StdOutPipeWrite;
+      hStdError := StdOutPipeWrite;
+    end;
+    WorkDir := Work;
+    Handle := CreateProcess(nil, PChar('cmd.exe /C ' + CommandLine),
+                            nil, nil, True, 0, nil,
+                            PChar(WorkDir), SI, PI);
+    CloseHandle(StdOutPipeWrite);
+    if Handle then
+      try
+        repeat
+          WasOK := ReadFile(StdOutPipeRead, Buffer, 255, BytesRead, nil);
+          if BytesRead > 0 then
+          begin
+            Buffer[BytesRead] := #0;
+            Result := Result + Buffer;
+          end;
+        until not WasOK or (BytesRead = 0);
+        WaitForSingleObject(PI.hProcess, INFINITE);
+      finally
+        CloseHandle(PI.hThread);
+        CloseHandle(PI.hProcess);
+      end;
+  finally
+    CloseHandle(StdOutPipeRead);
+  end;
+end;
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -337,6 +400,13 @@ begin
   end;
 end;
 
+procedure Tfrm_main.Button1Click(Sender: TObject);
+var text :string;
+begin
+//  RunDosInMemo('ping 8.8.8.8 -c 1',Memo1);
+  timer1.Enabled := true;
+end;
+
 procedure Tfrm_main.edit_search_patientsTyping(Sender: TObject);
 begin
   if edit_search_patients.Text ='' then begin
@@ -348,49 +418,66 @@ begin
   end;
 end;
 
+procedure Tfrm_main.edit_search_usersTyping(Sender: TObject);
+begin
+  if edit_search_users.Text ='' then begin
+    DM.Datamodule1.table_users.Filtered := false;
+    DM.Datamodule1.table_users.Filter := filter_by_role ;
+    DM.Datamodule1.table_users.Filtered := true;
+  end else begin
+    DM.Datamodule1.table_users.Filtered := false;
+    DM.Datamodule1.table_users.Filter := 'user like '+ quotedstr(edit_search_users.Text+'%') + ' and ' +  filter_by_role ;
+    DM.Datamodule1.table_users.Filtered := true;
+  end;
+end;
+
 procedure Tfrm_main.fetch_n_users_invts;
 begin
-  // Fetch N_of_Users_Invts /////////////////////////////////////////////////////////
+  // Fetch N_of_Users_Invts /////////////////////////////////////////////////////////////////////////////////////
   DM.DataModule1.FDQuery1.SQL.Clear;
-  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where type <> :user');
-  DM.DataModule1.FDQuery1.ParamByName('user').asstring := 'Administrateur';
+  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where type = :user');
+  DM.DataModule1.FDQuery1.ParamByName('user').asstring := 'Guest';
   Datamodule1.FDQuery1.Open;
   N_of_Users_Invts.Text := DM.DataModule1.FDQuery1.Fields[0].AsString + '+';
-  ///////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 end;
 
 procedure Tfrm_main.FormResize(Sender: TObject);
 var
-  form_width, grid_patients_list_width, rest_width: real;
+  form_width, grid_patients_list_width, grid_users_list_width, rest_width: real;
 begin
-  form_width := frm_main.Width;
-  grid_patients_list_width := form_width - 57 - 60;
-  rest_width := grid_patients_list_width;
 
-  LinkGridToDataSourceBindSourceDB3.Columns[0].Width := round((5.93) * grid_patients_list_width / 100);
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;
-  LinkGridToDataSourceBindSourceDB3.Columns[1].Width := round((8.30) * grid_patients_list_width / 100);
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;
-  LinkGridToDataSourceBindSourceDB3.Columns[2].Width := round((17.79) * grid_patients_list_width / 100);
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;
-  LinkGridToDataSourceBindSourceDB3.Columns[3].Width := round((23.72) * grid_patients_list_width / 100);
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[3].Width;
-  LinkGridToDataSourceBindSourceDB3.Columns[4].Width := round((8.30) * grid_patients_list_width / 100);
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[4].Width;
-  LinkGridToDataSourceBindSourceDB3.Columns[5].Width := round((11.86) * grid_patients_list_width / 100);
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[5].Width;
-  LinkGridToDataSourceBindSourceDB3.Columns[6].Width := round(rest_width)-45;
-
-//  843 - 100%
-//  50 - 5.93%
-//  70 - 8.30%
-//  150 - 17.79%
-//  200 - 23.72%
-//  70 - 8.30%
-//  100 - 11.86%
-//  175 - 20.76%
+  // Auto Adjust Columns width for ***PATIENT*** StringGrid//////////////////////////////////////////////////////
+  form_width := frm_main.Width;                                                                               ///
+  grid_patients_list_width := form_width - 57 - 60;                                                           ///
+  rest_width := grid_patients_list_width;                                                                     ///
+  LinkGridToDataSourceBindSourceDB3.Columns[0].Width := round((5.93) * grid_patients_list_width / 100);       ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;                              ///
+  LinkGridToDataSourceBindSourceDB3.Columns[1].Width := round((8.30) * grid_patients_list_width / 100);       ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;                              ///
+  LinkGridToDataSourceBindSourceDB3.Columns[2].Width := round((17.79) * grid_patients_list_width / 100);      ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;                              ///
+  LinkGridToDataSourceBindSourceDB3.Columns[3].Width := round((23.72) * grid_patients_list_width / 100);      ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[3].Width;                              ///
+  LinkGridToDataSourceBindSourceDB3.Columns[4].Width := round((8.30) * grid_patients_list_width / 100);       ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[4].Width;                              ///
+  LinkGridToDataSourceBindSourceDB3.Columns[5].Width := round((11.86) * grid_patients_list_width / 100);      ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[5].Width;                              ///
+  LinkGridToDataSourceBindSourceDB3.Columns[6].Width := round(rest_width)-45;                                 ///
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+  // Auto Adjust Columns width for ***USERS*** StringGrid////////////////////////////////////////////////////////
+  form_width := frm_main.Width;                                                                               ///
+  grid_users_list_width := form_width - 57 - 60;                                                              ///
+  rest_width := grid_users_list_width;                                                                        ///
+  LinkGridToDataSourceBindSourceDB2.Columns[0].Width := round((20) * grid_users_list_width / 100);            ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;                              ///
+  LinkGridToDataSourceBindSourceDB2.Columns[1].Width := round((40) * grid_users_list_width / 100);            ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;                              ///
+  LinkGridToDataSourceBindSourceDB2.Columns[2].Width := round((38) * grid_users_list_width / 100);            ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;                              ///
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 end;
 
@@ -413,6 +500,10 @@ begin
 
   // Fetch_n_users_invts
   fetch_n_users_invts;
+
+
+  // User Roles
+  roles(USER_type);
 
 
 
@@ -597,6 +688,104 @@ begin
   tabcontrol1.TabIndex := 0;
 end;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ROLE
+procedure Tfrm_main.roles(U_type: string);
+begin
+
+  if U_type='Admin' then begin
+    DM.DataModule1.table_users.Filtered := false;
+  end else begin
+    if U_type='Administrateur' then begin
+      DM.DataModule1.table_users.Filtered := false;
+      DM.DataModule1.table_users.Filter := 'type <>'+ quotedstr('Admin');
+      filter_by_role := 'type <> ''Admin'' ';
+      DM.DataModule1.table_users.Filtered := true;
+      // Delete Administrateur role
+      combobox2.Items.Delete(0);
+    end else begin
+      if U_type='Medecin' then begin
+        //
+      end;
+      Rect_users.Visible := false;
+      tab_users.Visible := false;
+    end;
+  end;
+
+end;
+
+procedure Tfrm_main.RunDosInMemo(DosApp: string; AMemo: TMemo);
+const
+    READ_BUFFER_SIZE = 2400;
+var
+    Security: TSecurityAttributes;
+    readableEndOfPipe, writeableEndOfPipe: THandle;
+    start: TStartUpInfo;
+    ProcessInfo: TProcessInformation;
+    Buffer: PAnsiChar;
+    BytesRead: DWORD;
+    AppRunning: DWORD;
+begin
+    Security.nLength := SizeOf(TSecurityAttributes);
+    Security.bInheritHandle := True;
+    Security.lpSecurityDescriptor := nil;
+
+    if CreatePipe({var}readableEndOfPipe, {var}writeableEndOfPipe, @Security, 0) then
+    begin
+        Buffer := AllocMem(READ_BUFFER_SIZE+1);
+        FillChar(Start, Sizeof(Start), #0);
+        start.cb := SizeOf(start);
+
+        // Set up members of the STARTUPINFO structure.
+        // This structure specifies the STDIN and STDOUT handles for redirection.
+        // - Redirect the output and error to the writeable end of our pipe.
+        // - We must still supply a valid StdInput handle (because we used STARTF_USESTDHANDLES to swear that all three handles will be valid)
+        start.dwFlags := start.dwFlags or STARTF_USESTDHANDLES;
+        start.hStdInput := GetStdHandle(STD_INPUT_HANDLE); //we're not redirecting stdInput; but we still have to give it a valid handle
+        start.hStdOutput := writeableEndOfPipe; //we give the writeable end of the pipe to the child process; we read from the readable end
+        start.hStdError := writeableEndOfPipe;
+
+        //We can also choose to say that the wShowWindow member contains a value.
+        //In our case we want to force the console window to be hidden.
+        start.dwFlags := start.dwFlags + STARTF_USESHOWWINDOW;
+        start.wShowWindow := SW_HIDE;
+
+        // Don't forget to set up members of the PROCESS_INFORMATION structure.
+        ProcessInfo := Default(TProcessInformation);
+
+        //WARNING: The unicode version of CreateProcess (CreateProcessW) can modify the command-line "DosApp" string.
+        //Therefore "DosApp" cannot be a pointer to read-only memory, or an ACCESS_VIOLATION will occur.
+        //We can ensure it's not read-only with the RTL function: UniqueString
+        UniqueString({var}DosApp);
+
+        if CreateProcess(nil, PChar(DosApp), nil, nil, True, NORMAL_PRIORITY_CLASS, nil, nil, start, {var}ProcessInfo) then
+        begin
+            //Wait for the application to terminate, as it writes it's output to the pipe.
+            //WARNING: If the console app outputs more than 2400 bytes (ReadBuffer),
+            //it will block on writing to the pipe and *never* close.
+            repeat
+                Apprunning := WaitForSingleObject(ProcessInfo.hProcess, 100);
+                Application.ProcessMessages;
+            until (Apprunning <> WAIT_TIMEOUT);
+
+            //Read the contents of the pipe out of the readable end
+            //WARNING: if the console app never writes anything to the StdOutput, then ReadFile will block and never return
+            repeat
+                BytesRead := 0;
+                ReadFile(readableEndOfPipe, Buffer[0], READ_BUFFER_SIZE, {var}BytesRead, nil);
+                Buffer[BytesRead]:= #0;
+                OemToAnsi(Buffer,Buffer);
+                AMemo.Text := AMemo.text + String(Buffer);
+            until (BytesRead < READ_BUFFER_SIZE);
+        end;
+        FreeMem(Buffer);
+        CloseHandle(ProcessInfo.hProcess);
+        CloseHandle(ProcessInfo.hThread);
+        CloseHandle(readableEndOfPipe);
+        CloseHandle(writeableEndOfPipe);
+    end;
+
+end;
+
 procedure Tfrm_main.SpeedButton3Click(Sender: TObject);
 begin
   rect_popup_accept_users.Visible := false;
@@ -606,6 +795,21 @@ procedure Tfrm_main.SubMenu_AnimationFinish(Sender: TObject);
 begin
   SubMenu_Animation.Enabled := false;
 //  if i=1 then rectangle14.Visible := true;
+end;
+
+procedure Tfrm_main.Timer1Timer(Sender: TObject);
+var text :string;
+begin
+  rect_popup_accept_users.Visible := true;
+  text := GetDosOutput('ping -n 1 8.8.8.8 ');
+  Memo1.Lines.Add(text);
+  timer1.Enabled := false;
+//  Button1Click(nil);
+
+  text := memo1.Lines[2];
+  rect_popup_accept_users.Visible := false;
+//  showmessage(text);
+
 end;
 
 end.

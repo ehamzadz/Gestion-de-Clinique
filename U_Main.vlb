@@ -119,7 +119,7 @@ Coordinates=1268,944,92,33
 Coordinates=921,944,125,33
 
 []
-Coordinates=1398,944,69,33
+Coordinates=1049,592,69,33
 Visible=True
 
 [btn_logout_from_profile_menu]
@@ -421,9 +421,6 @@ Coordinates=1049,87,75,33
 [ColorAnimation17]
 Coordinates=981,331,103,33
 
-[Edit2]
-Coordinates=367,872,40,51
-
 [Rectangle26]
 Coordinates=1049,386,75,33
 
@@ -444,4 +441,7 @@ Coordinates=615,494,41,51
 
 [SpeedButton2]
 Coordinates=673,497,84,51
+
+[edit_search_users]
+Coordinates=367,872,40,51
 
