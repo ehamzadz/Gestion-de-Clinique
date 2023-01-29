@@ -166,6 +166,7 @@ type
     Memo1: TMemo;
     Button1: TButton;
     Timer1: TTimer;
+    add_new_patient: TMenuItem;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -201,6 +202,7 @@ type
     procedure RunDosInMemo(DosApp: string; AMemo:TMemo);
     procedure Button1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure add_new_patientClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -208,6 +210,9 @@ type
     U,P :string;
     USER_username, USER_password, USER_fullName, USER_type, filter_by_role :string;
   end;
+
+const
+  ALPHANUMERIC_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 var
   frm_main: Tfrm_main;
@@ -218,6 +223,24 @@ implementation
 {$R *.fmx}
 
 uses U_Auth, DM;
+
+function GenerateRandomString: string;
+var
+  i: Integer;
+begin
+  Result := '';
+  for i := 1 to 8 do
+    Result := Result + ALPHANUMERIC_CHARS[Random(Length(ALPHANUMERIC_CHARS)) + 1];
+end;
+
+function IsInDatabase(const S: string): Boolean;
+begin
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from patients where CODE_B = :code_b');
+  DM.DataModule1.FDQuery1.ParamByName('code_b').asstring := S;
+  DM.DataModule1.FDQuery1.Open;
+  Result := DM.DataModule1.FDQuery1.Fields[0].AsInteger > 0;
+end;
 
 function GetDosOutput(CommandLine: string; Work: string = 'C:\'): string;
 var
@@ -325,6 +348,16 @@ begin
       Sheet := Unassigned;
     end;
   end;
+end;
+
+procedure Tfrm_main.add_new_patientClick(Sender: TObject);
+var
+  RandomString: string;
+begin
+  RandomString := GenerateRandomString;
+  while IsInDatabase(RandomString) do
+    RandomString := GenerateRandomString;
+  showmessage(RandomString);
 end;
 
 procedure Tfrm_main.btn_export_to_excelClick(Sender: TObject);

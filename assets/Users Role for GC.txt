@@ -1,0 +1,15 @@
+Admin: responsible for managing the overall system, including user accounts, patient records, appointment schedules, and billing information.
+
+Doctor: responsible for entering patient medical history, diagnosing conditions, prescribing treatments, and updating patient records.
+
+Nurse: responsible for assisting the doctor with patient exams, taking vital signs, and updating patient records.
+
+Receptionist: responsible for scheduling appointments, managing patient check-ins and check-outs, and updating patient information.
+
+Pharmacist: responsible for dispensing medications, updating patient records with medication information, and ensuring that all medications are stored safely and securely.
+
+Billing Specialist: responsible for generating invoices, processing payments, and managing billing information for patients.
+
+Lab Technician: responsible for performing lab tests, updating patient records with test results, and communicating test results to the doctor.
+
+Patient: responsible for accessing their own medical records, scheduling appointments, and updating personal information.
