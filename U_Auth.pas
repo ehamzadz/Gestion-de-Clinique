@@ -139,12 +139,15 @@ type
     procedure btn_logoutClick(Sender: TObject);
     procedure PasswordEditButton2Click(Sender: TObject);
     procedure PasswordEditButton3Click(Sender: TObject);
+    function EncryptThisPassword(password:string):string;
+    function DecryptThisPassword(password:string):string;
   private
     { Private declarations }
   public
     { Public declarations }
     user,pswd : string;
     U,P: string;
+    EncryptedPassword, Password: string;
   end;
 
 var
@@ -262,6 +265,7 @@ var
   US : TUsers;          // A customer record variable
 begin
 
+//  showmessage(DecryptThisPassword(pswd));
 
   // Login
 
@@ -280,9 +284,9 @@ begin
     DM.DataModule1.FDQuery1.SQL.Clear;
     DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user = :user and pass = :pswd');
     DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-    DM.DataModule1.FDQuery1.ParamByName('pswd').asstring := pswd;
+    EncryptedPassword := pswd;
+    DM.DataModule1.FDQuery1.ParamByName('pswd').asstring := DecryptThisPassword(EncryptedPassword);
     Datamodule1.FDQuery1.Open;
-
     j := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
     if j=1 then begin
@@ -336,8 +340,10 @@ end;
 procedure Tfrm_auth.btn_registerClick(Sender: TObject);
 var
   i,j:integer;
-  fullName,user,pass2,pass22 :string;
+  fullName,user,pass2,pass22, encryptedPassword :string;
 begin
+
+//  showmessage(EncryptThisPassword('123'));
 
   if (edit_fullName.Text='') OR (edit_user2.Text='') OR (edit_pass2.Text='') OR (edit_pass22.Text='') then begin
     text_err_msg2.Visible := true;
@@ -367,7 +373,8 @@ begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users values (:user,:pass,:fullName,:type)');
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
+//        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
+        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := EncryptThisPassword(pass2);
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
         DM.Datamodule1.FDQuery1.Execute;
@@ -387,6 +394,32 @@ begin
     end;
 
   end;
+end;
+
+function Tfrm_auth.DecryptThisPassword(password: string): string;
+var
+    Key: Char;
+    i: integer;
+begin
+  Key := 'H';
+  Password := '';
+  for i := 1 to Length(EncryptedPassword) do
+    Password := Password + Char(Ord(EncryptedPassword[i]) xor Ord(Key));
+
+  DecryptThisPassword := Password;
+end;
+
+function Tfrm_auth.EncryptThisPassword(password: string): string;
+var
+    Key: Char;
+    i: integer;
+begin
+
+  Key := 'H';
+  for i := 1 to Length(Password) do
+    EncryptedPassword := EncryptedPassword + Char(Ord(Password[i]) xor Ord(Key));
+
+  EncryptThisPassword := EncryptedPassword;
 end;
 
 end.
