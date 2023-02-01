@@ -121,7 +121,7 @@ object frm_auth: Tfrm_auth
     Size.Width = 949.000000000000000000
     Size.Height = 532.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 3
     TabPosition = None
     Sizes = (
@@ -135,7 +135,7 @@ object frm_auth: Tfrm_auth
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -966,7 +966,7 @@ object frm_auth: Tfrm_auth
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False

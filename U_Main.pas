@@ -203,6 +203,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure add_new_patientClick(Sender: TObject);
+    procedure frxReport_patient_idProgressStop(Sender: TfrxReport;
+      ProgressType: TfrxProgressType; Progress: Integer);
   private
     { Private declarations }
   public
@@ -233,7 +235,8 @@ begin
     Result := Result + ALPHANUMERIC_CHARS[Random(Length(ALPHANUMERIC_CHARS)) + 1];
 end;
 
-function IsInDatabase(const S: string): Boolean;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function IsInDatabase(const S: string): Boolean;                                    // check if Generated Barcode is available
 begin
   DM.DataModule1.FDQuery1.SQL.Clear;
   DM.DataModule1.FDQuery1.SQL.Add('select count(*) from patients where CODE_B = :code_b');
@@ -241,6 +244,7 @@ begin
   DM.DataModule1.FDQuery1.Open;
   Result := DM.DataModule1.FDQuery1.Fields[0].AsInteger > 0;
 end;
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function GetDosOutput(CommandLine: string; Work: string = 'C:\'): string;
 var
@@ -350,15 +354,22 @@ begin
   end;
 end;
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 procedure Tfrm_main.add_new_patientClick(Sender: TObject);
 var
   RandomString: string;
 begin
-  RandomString := GenerateRandomString;
+  RandomString := GenerateRandomString;                                                            // Add New Patient
   while IsInDatabase(RandomString) do
     RandomString := GenerateRandomString;
   showmessage(RandomString);
 end;
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 procedure Tfrm_main.btn_export_to_excelClick(Sender: TObject);
 begin
@@ -543,19 +554,34 @@ begin
 end;
 
 
+procedure Tfrm_main.frxReport_patient_idProgressStop(Sender: TfrxReport;
+  ProgressType: TfrxProgressType; Progress: Integer);
+begin
+  DM.Datamodule1.table_patients.Filtered := false;
+end;
+
 procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
 //  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
 end;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 procedure Tfrm_main.print_patient_idClick(Sender: TObject);
 begin
 //  FrxReport_ticket.ShowReport();
+
+//  showmessage(grid_patients.Cells[1,grid_patients.Selected]);
+
+  DM.Datamodule1.table_patients.Filtered := false;
+  DM.Datamodule1.table_patients.Filter := 'CODE_B = '''+grid_patients.Cells[1,grid_patients.Selected]+'''';
+  DM.Datamodule1.table_patients.Filtered := true;
+
   FrxReport_patient_id.PrepareReport;
   FrxReport_patient_id.PrintOptions.ShowDialog := False;
   FrxReport_patient_id.Print;
 end;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 procedure Tfrm_main.rec(type_rc: string);
 var
