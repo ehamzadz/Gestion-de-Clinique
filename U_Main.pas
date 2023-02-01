@@ -665,7 +665,7 @@ begin
       DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
       DM.Datamodule1.FDQuery1.Open;
       date_ticket := DM.Datamodule1.FDQuery1.FieldByName('created_at').AsDateTime;
-      showmessage(datetostr(date_ticket));
+//      showmessage(datetostr(date_ticket));
       if (MonthOf(date_ticket)<>MonthOf(now)) OR (YearOf(date_ticket)<>YearOf(now)) OR (DayOf(date_ticket)<>DayOf(now)) then begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
