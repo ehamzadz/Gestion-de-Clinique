@@ -276,9 +276,6 @@ Coordinates=815,944,80,36
 [frxReport_ticket]
 Coordinates=1417,56,105,36
 
-[DataModule1.table_counter]
-Coordinates=723,10,173,102
-
 [frxDBDataset1]
 Coordinates=1114,1,98,36
 
@@ -456,4 +453,7 @@ Coordinates=0,0,57,58
 
 [add_new_patient]
 Coordinates=981,592,112,36
+
+[DataModule1.table_tickets]
+Coordinates=723,10,173,102
 

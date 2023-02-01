@@ -31,11 +31,11 @@ object DataModule1: TDataModule1
     Left = 80
     Top = 216
   end
-  object table_counter: TFDTable
+  object table_tickets: TFDTable
     Active = True
     IndexFieldNames = 'num'
     Connection = FDConnection1
-    TableName = '[counter]'
+    TableName = 'tickets'
     Left = 80
     Top = 272
   end

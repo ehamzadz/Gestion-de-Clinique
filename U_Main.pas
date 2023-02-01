@@ -1,4 +1,4 @@
-unit U_Main;
+﻿unit U_Main;
 
 interface
 
@@ -18,7 +18,7 @@ uses
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList, ComObj,
   FMX.frxClass, FMX.frxDBSet, FMX.frxDesgn, FMX.frxBarcode, FMX.frxBarcode2DView, Winapi.ShellAPI, Winapi.Windows,
-  FMX.Memo.Types, FMX.Memo;
+  FMX.Memo.Types, FMX.Memo, DateUtils;
 
 type
   Tfrm_main = class(TForm)
@@ -618,7 +618,7 @@ end;
 procedure Tfrm_main.Rectangle20Click(Sender: TObject);
 begin
   rect_popup_accept_users.Visible := true;
-  text8.Text := 'Choisissez le type d''utilisateur que vous souhaitez attribuer � ' + grid_users.Cells[1,grid_users.Selected];
+  text8.Text := 'Choisissez le type d''utilisateur que vous souhaitez attribuer à ' + grid_users.Cells[1,grid_users.Selected];
 end;
 
 procedure Tfrm_main.Rectangle25Click(Sender: TObject);
@@ -654,28 +654,54 @@ end;
 
 procedure Tfrm_main.Rectangle8Click(Sender: TObject);
 var
-  num :integer;
+  num, ticket_number, day, month, year :integer;
+  date_ticket :TDateTime;
   record_msg :string;
 begin
   if MessageDlg('Confirm ?',
       mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
     begin
       DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from [counter] order by num DESC');
+      DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
       DM.Datamodule1.FDQuery1.Open;
+      date_ticket := DM.Datamodule1.FDQuery1.FieldByName('created_at').AsDateTime;
+      showmessage(datetostr(date_ticket));
+      if (MonthOf(date_ticket)<>MonthOf(now)) OR (YearOf(date_ticket)<>YearOf(now)) OR (DayOf(date_ticket)<>DayOf(now)) then begin
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
+        DM.Datamodule1.FDQuery1.Open;
+        num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
+        ticket_number := 1;
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO tickets values (:num,:ticket_number,:status,:created_at,:updated_at)');
+        DM.DataModule1.FDQuery1.ParamByName('num').asinteger := num;
+        DM.DataModule1.FDQuery1.ParamByName('ticket_number').asinteger := ticket_number;
+        DM.DataModule1.FDQuery1.ParamByName('status').asstring := 'أمراض القلب والأوعية';
+        DM.DataModule1.FDQuery1.ParamByName('created_at').asdatetime := now;
+        DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
+        DM.Datamodule1.FDQuery1.Execute;
+      end else begin
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
+        DM.Datamodule1.FDQuery1.Open;
+        num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
+        DM.Datamodule1.FDQuery1.Open;
+        ticket_number := DM.Datamodule1.FDQuery1.FieldByName('ticket_number').AsInteger+1;
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO tickets values (:num,:ticket_number,:status,:created_at,:updated_at)');
+        DM.DataModule1.FDQuery1.ParamByName('num').asinteger := num;
+        DM.DataModule1.FDQuery1.ParamByName('ticket_number').asinteger := ticket_number;
+        DM.DataModule1.FDQuery1.ParamByName('status').asstring := 'Cariologue';
+        DM.DataModule1.FDQuery1.ParamByName('created_at').asdatetime := now;
+        DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
+        DM.Datamodule1.FDQuery1.Execute;
+      end;
 
-      num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
-
-      DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO [counter] values (:counter,:date_ticket)');
-      DM.DataModule1.FDQuery1.ParamByName('counter').asinteger := num;
-      DM.DataModule1.FDQuery1.ParamByName('date_ticket').asdatetime := now;
-      DM.Datamodule1.FDQuery1.Execute;
-
-      DM.Datamodule1.table_counter.Filtered := false;
-      DM.Datamodule1.table_counter.Filter := 'num like '+inttostr(num);
-      DM.Datamodule1.table_counter.Filtered := true;
-
+      DM.Datamodule1.table_tickets.Filtered := false;
+      DM.Datamodule1.table_tickets.Filter := 'num like '+inttostr(num);
+      DM.Datamodule1.table_tickets.Filtered := true;
 
       DM.Datamodule1.table_patients.Filtered := false;
       DM.Datamodule1.table_patients.Filter := 'CDEP like '+ grid_patients.Cells[0,grid_patients.Selected];
@@ -686,14 +712,13 @@ begin
       FrxReport_ticket.PrintOptions.ShowDialog := False;
       FrxReport_ticket.Print;
 
-
-      Edit_num_recent_ticket.Text := 'N�: ' + inttostr(num);
+      Edit_num_recent_ticket.Text := 'N°: ' + inttostr(num);
 
       record_msg := 'Impression Ticket pour "' + grid_patients.Cells[2,grid_patients.Selected] + ' ' + grid_patients.Cells[3,grid_patients.Selected] +'" Code:'+ grid_patients.Cells[0,grid_patients.Selected];
       rec(record_msg);
 
       DM.Datamodule1.table_patients.Filtered := false;
-      DM.Datamodule1.table_counter.Filtered := false;
+      DM.Datamodule1.table_tickets.Filtered := false;
     end;
 end;
 

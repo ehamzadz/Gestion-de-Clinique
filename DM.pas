@@ -17,7 +17,7 @@ type
     FDConnection1: TFDConnection;
     table_records: TFDTable;
     table_users: TFDTable;
-    table_counter: TFDTable;
+    table_tickets: TFDTable;
     table_patients: TFDTable;
     FDConnection2: TFDConnection;
   private
