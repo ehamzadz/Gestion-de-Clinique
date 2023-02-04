@@ -360,7 +360,7 @@ begin
 
       DM.DataModule1.FDQuery1.SQL.Clear;
       DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user=:user');
-      DM.DataModule1.FDQuery1.ParamByName('user').AsWideString := user;
+      DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
       DM.Datamodule1.FDQuery1.Open;
 
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
@@ -372,11 +372,11 @@ begin
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users values (:user,:pass,:fullName,:type)');
-        DM.DataModule1.FDQuery1.ParamByName('user').AsWideString := user;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
 //        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
-        DM.DataModule1.FDQuery1.ParamByName('pass').AsWideString := EncryptThisPassword(pass2);
-        DM.DataModule1.FDQuery1.ParamByName('fullName').AsWideString := fullName;
-        DM.DataModule1.FDQuery1.ParamByName('type').AsWideString := 'Guest';
+        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := EncryptThisPassword(pass2);
+        DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
         DM.Datamodule1.FDQuery1.Execute;
         showmessage('Inscrit avec succès');
 

@@ -676,7 +676,7 @@ begin
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO tickets values (:num,:ticket_number,:status,:created_at,:updated_at)');
         DM.DataModule1.FDQuery1.ParamByName('num').asinteger := num;
         DM.DataModule1.FDQuery1.ParamByName('ticket_number').asinteger := ticket_number;
-        DM.DataModule1.FDQuery1.ParamByName('status').AsWideString := 'أمراض القلب والأوعية';
+        DM.DataModule1.FDQuery1.ParamByName('status').asstring := 'أمراض القلب والأوعية';
         DM.DataModule1.FDQuery1.ParamByName('created_at').asdatetime := now;
         DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
         DM.Datamodule1.FDQuery1.Execute;
