@@ -167,6 +167,72 @@ type
     Button1: TButton;
     Timer1: TTimer;
     add_new_patient: TMenuItem;
+    TabItem1: TTabItem;
+    Rectangle2: TRectangle;
+    Rectangle29: TRectangle;
+    Rectangle30: TRectangle;
+    Edit1: TEdit;
+    Rectangle31: TRectangle;
+    SpeedButton4: TSpeedButton;
+    ColorAnimation19: TColorAnimation;
+    Rectangle32: TRectangle;
+    ColorAnimation20: TColorAnimation;
+    Text16: TText;
+    StringGrid1: TStringGrid;
+    Rectangle35: TRectangle;
+    Rectangle36: TRectangle;
+    ColorAnimation21: TColorAnimation;
+    Text17: TText;
+    Rectangle143: TRectangle;
+    Rectangle149: TRectangle;
+    Text89: TText;
+    Image9: TImage;
+    FlowLayout1: TFlowLayout;
+    Rectangle144: TRectangle;
+    Rectangle145: TRectangle;
+    Image6: TImage;
+    Rectangle146: TRectangle;
+    Text90: TText;
+    Text88: TText;
+    Text91: TText;
+    FloatAnimation1: TFloatAnimation;
+    ColorAnimation27: TColorAnimation;
+    Text19: TText;
+    Text20: TText;
+    Rectangle33: TRectangle;
+    Rectangle34: TRectangle;
+    Image7: TImage;
+    Text21: TText;
+    Rectangle37: TRectangle;
+    Text22: TText;
+    Text23: TText;
+    Text24: TText;
+    Text25: TText;
+    FloatAnimation2: TFloatAnimation;
+    ColorAnimation22: TColorAnimation;
+    Rectangle38: TRectangle;
+    Rectangle39: TRectangle;
+    Image8: TImage;
+    Text26: TText;
+    Rectangle40: TRectangle;
+    Text27: TText;
+    Text28: TText;
+    Text29: TText;
+    Text30: TText;
+    FloatAnimation3: TFloatAnimation;
+    ColorAnimation23: TColorAnimation;
+    Rectangle41: TRectangle;
+    Rectangle42: TRectangle;
+    Image10: TImage;
+    Text31: TText;
+    Rectangle43: TRectangle;
+    Text32: TText;
+    Text33: TText;
+    Text34: TText;
+    Text35: TText;
+    FloatAnimation4: TFloatAnimation;
+    ColorAnimation24: TColorAnimation;
+    VertScrollBox2: TVertScrollBox;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -375,8 +441,10 @@ procedure Tfrm_main.btn_export_to_excelClick(Sender: TObject);
 begin
 
   if SaveDialog1.Execute then begin
-    if SaveAsExcelFile(grid_users, 'Liste des utilisateurs', SaveDialog1.Filename, 3) then
-    ShowMessage('Data saved!');
+    if SaveAsExcelFile(grid_users, 'Liste des utilisateurs', SaveDialog1.Filename, 3) then begin
+      ShowMessage('Data saved!');
+      rec('Users Data saved');
+    end;
   end;
 end;
 
@@ -470,7 +538,10 @@ begin
     DM.Datamodule1.table_users.Filtered := true;
   end else begin
     DM.Datamodule1.table_users.Filtered := false;
-    DM.Datamodule1.table_users.Filter := 'user like '+ quotedstr(edit_search_users.Text+'%') + ' and ' +  filter_by_role ;
+    if filter_by_role='' then
+      DM.Datamodule1.table_users.Filter := 'user like '+ quotedstr(edit_search_users.Text+'%')
+    else
+      DM.Datamodule1.table_users.Filter := 'user like '+ quotedstr(edit_search_users.Text+'%') + ' and ' +  filter_by_role ;
     DM.Datamodule1.table_users.Filtered := true;
   end;
 end;
@@ -790,6 +861,7 @@ begin
       if U_type='Medecin' then begin
         //
       end;
+      filter_by_role := '';
       Rect_users.Visible := false;
       tab_users.Visible := false;
     end;
