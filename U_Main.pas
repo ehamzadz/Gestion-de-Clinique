@@ -487,15 +487,21 @@ begin
       DM.DataModule1.FDQuery1.SQL.Clear;
       DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
       DM.Datamodule1.FDQuery1.Open;
-      date_ticket := DM.Datamodule1.FDQuery1.FieldByName('created_at').AsDateTime;
       num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets WHERE status=:status order by num DESC');
+      DM.DataModule1.FDQuery1.ParamByName('status').AsWideString := room;
+      DM.Datamodule1.FDQuery1.Open;
+      date_ticket := DM.Datamodule1.FDQuery1.FieldByName('created_at').AsDateTime;
 
 //      showmessage(datetostr(date_ticket));
       if (MonthOf(date_ticket)<>MonthOf(now)) OR (YearOf(date_ticket)<>YearOf(now)) OR (DayOf(date_ticket)<>DayOf(now)) then begin
         ticket_number := 1;
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
-        DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
+        DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets WHERE status=:status order by num DESC');
+      DM.DataModule1.FDQuery1.ParamByName('status').AsWideString := room;
         DM.Datamodule1.FDQuery1.Open;
         ticket_number := DM.Datamodule1.FDQuery1.FieldByName('ticket_number').AsInteger+1;
       end;
