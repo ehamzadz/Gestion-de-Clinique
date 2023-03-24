@@ -167,7 +167,7 @@ type
     Button1: TButton;
     Timer1: TTimer;
     add_new_patient: TMenuItem;
-    TabItem1: TTabItem;
+    tab_dashboard: TTabItem;
     Rectangle2: TRectangle;
     Rectangle29: TRectangle;
     Rectangle30: TRectangle;
@@ -233,7 +233,7 @@ type
     FloatAnimation4: TFloatAnimation;
     ColorAnimation24: TColorAnimation;
     VertScrollBox2: TVertScrollBox;
-    S: TFlowLayout;
+    FlowLayout_AR: TFlowLayout;
     Rectangle44: TRectangle;
     Rectangle45: TRectangle;
     Image11: TImage;
@@ -245,7 +245,7 @@ type
     Text40: TText;
     FloatAnimation5: TFloatAnimation;
     ColorAnimation25: TColorAnimation;
-    Rectangle47: TRectangle;
+    btn_add_cardio: TRectangle;
     Rectangle48: TRectangle;
     Image12: TImage;
     Text41: TText;
@@ -316,6 +316,11 @@ type
     procedure add_new_patientClick(Sender: TObject);
     procedure frxReport_patient_idProgressStop(Sender: TfrxReport;
       ProgressType: TfrxProgressType; Progress: Integer);
+    procedure btn_add_cardioClick(Sender: TObject);
+    procedure add_ticket(room: string);
+    procedure Rectangle44Click(Sender: TObject);
+    procedure Rectangle53Click(Sender: TObject);
+    procedure Rectangle50Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -346,7 +351,6 @@ begin
     Result := Result + ALPHANUMERIC_CHARS[Random(Length(ALPHANUMERIC_CHARS)) + 1];
 end;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function IsInDatabase(const S: string): Boolean;                                    // check if Generated Barcode is available
 begin
   DM.DataModule1.FDQuery1.SQL.Clear;
@@ -355,7 +359,6 @@ begin
   DM.DataModule1.FDQuery1.Open;
   Result := DM.DataModule1.FDQuery1.Fields[0].AsInteger > 0;
 end;
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function GetDosOutput(CommandLine: string; Work: string = 'C:\'): string;
 var
@@ -412,9 +415,6 @@ begin
   end;
 end;
 
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-
 function RefToCell(ARow, ACol: Integer): string;
 begin
   Result := Chr(Ord('A') + ACol - 1) + IntToStr(ARow);
@@ -465,9 +465,6 @@ begin
   end;
 end;
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
 procedure Tfrm_main.add_new_patientClick(Sender: TObject);
 var
   RandomString: string;
@@ -477,10 +474,63 @@ begin
     RandomString := GenerateRandomString;
   showmessage(RandomString);
 end;
-////////////////////////////////////////////////////////////////////////////////////////////////////
+
+procedure Tfrm_main.add_ticket(room: string);
+var
+  num, ticket_number, day, month, year :integer;
+  date_ticket :TDateTime;
+  record_msg :string;
+begin
+  if MessageDlg('Confirm ?',
+      mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+    begin
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
+      DM.Datamodule1.FDQuery1.Open;
+      date_ticket := DM.Datamodule1.FDQuery1.FieldByName('created_at').AsDateTime;
+      num := DM.Datamodule1.FDQuery1.FieldByName('num').AsInteger+1;
+
+//      showmessage(datetostr(date_ticket));
+      if (MonthOf(date_ticket)<>MonthOf(now)) OR (YearOf(date_ticket)<>YearOf(now)) OR (DayOf(date_ticket)<>DayOf(now)) then begin
+        ticket_number := 1;
+      end else begin
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets order by num DESC');
+        DM.Datamodule1.FDQuery1.Open;
+        ticket_number := DM.Datamodule1.FDQuery1.FieldByName('ticket_number').AsInteger+1;
+      end;
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO tickets values (:num,:ticket_number,:status,:created_at,:updated_at)');
+      DM.DataModule1.FDQuery1.ParamByName('num').asinteger := num;
+      DM.DataModule1.FDQuery1.ParamByName('ticket_number').asinteger := ticket_number;
+      DM.DataModule1.FDQuery1.ParamByName('status').AsWideString := room;
+      DM.DataModule1.FDQuery1.ParamByName('created_at').asdatetime := now;
+      DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
+      DM.Datamodule1.FDQuery1.Execute;
+
+      DM.Datamodule1.table_tickets.Filtered := false;
+      DM.Datamodule1.table_tickets.Filter := 'num like '+inttostr(num);
+      DM.Datamodule1.table_tickets.Filtered := true;
 
 
+    //  FrxReport_ticket.ShowReport();
+      FrxReport_ticket.PrepareReport;
+      FrxReport_ticket.PrintOptions.ShowDialog := False;
+      FrxReport_ticket.Print;
 
+      record_msg := 'Impression de Ticket "' + room + ' Num:'+ inttostr(ticket_number)+'"';
+      rec(record_msg);
+
+      DM.Datamodule1.table_tickets.Filtered := false;
+    end;
+
+end;
+
+procedure Tfrm_main.btn_add_cardioClick(Sender: TObject);
+begin
+  add_ticket('أمراض القلب والشرايين');
+end;
 
 procedure Tfrm_main.btn_export_to_excelClick(Sender: TObject);
 begin
@@ -497,10 +547,6 @@ procedure Tfrm_main.MenuItem2Click(Sender: TObject);
 begin
   Rectangle8Click(nil);
 end;
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 procedure Tfrm_main.MenuItem1Click(Sender: TObject);
 begin
@@ -766,6 +812,21 @@ begin
     // Fetch_n_users_invts
     fetch_n_users_invts;
 
+end;
+
+procedure Tfrm_main.Rectangle44Click(Sender: TObject);
+begin
+  add_ticket('أخصائي التخدير والإنعاش');
+end;
+
+procedure Tfrm_main.Rectangle50Click(Sender: TObject);
+begin
+  add_ticket('طبيب عام');
+end;
+
+procedure Tfrm_main.Rectangle53Click(Sender: TObject);
+begin
+  add_ticket('أمراض السكري والغدة الدرقية');
 end;
 
 procedure Tfrm_main.Rectangle8Click(Sender: TObject);
