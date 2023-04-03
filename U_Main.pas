@@ -1106,14 +1106,14 @@ begin
     DM.DataModule1.FDQuery1.ParamByName('dt').AsDate := now;
     DM.DataModule1.FDQuery1.ParamByName('status').aswidestring := 'طبيب عام';
     DM.Datamodule1.FDQuery1.Open;
-    text42.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
+    text47.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
 
     DM.DataModule1.FDQuery1.SQL.Clear;
     DM.DataModule1.FDQuery1.SQL.Add('select count(num) as cnt FROM tickets WHERE status=:status and created_at>=:dt');
     DM.DataModule1.FDQuery1.ParamByName('dt').AsDate := now;
     DM.DataModule1.FDQuery1.ParamByName('status').aswidestring := 'أخصائي التخدير والإنعاش';
     DM.Datamodule1.FDQuery1.Open;
-    text42.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
+    text37.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
 
 
 
