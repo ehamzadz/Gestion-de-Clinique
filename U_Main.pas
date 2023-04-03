@@ -278,6 +278,8 @@ type
     Text55: TText;
     FloatAnimation8: TFloatAnimation;
     ColorAnimation29: TColorAnimation;
+    Timer2: TTimer;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -321,6 +323,7 @@ type
     procedure Rectangle44Click(Sender: TObject);
     procedure Rectangle53Click(Sender: TObject);
     procedure Rectangle50Click(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1077,6 +1080,42 @@ begin
   text := memo1.Lines[2];
   rect_popup_accept_users.Visible := false;
 //  showmessage(text);
+
+end;
+
+procedure Tfrm_main.Timer2Timer(Sender: TObject);
+begin
+
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select count(num) as cnt FROM tickets WHERE status=:status and created_at>=:dt');
+    DM.DataModule1.FDQuery1.ParamByName('dt').AsDate := now;
+    DM.DataModule1.FDQuery1.ParamByName('status').aswidestring := 'أمراض القلب والشرايين';
+    DM.Datamodule1.FDQuery1.Open;
+    text42.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select count(num) as cnt FROM tickets WHERE status=:status and created_at>=:dt');
+    DM.DataModule1.FDQuery1.ParamByName('dt').AsDate := now;
+    DM.DataModule1.FDQuery1.ParamByName('status').aswidestring := 'أمراض السكري والغدة الدرقية';
+    DM.Datamodule1.FDQuery1.Open;
+    text52.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select count(num) as cnt FROM tickets WHERE status=:status and created_at>=:dt');
+    DM.DataModule1.FDQuery1.ParamByName('dt').AsDate := now;
+    DM.DataModule1.FDQuery1.ParamByName('status').aswidestring := 'طبيب عام';
+    DM.Datamodule1.FDQuery1.Open;
+    text42.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select count(num) as cnt FROM tickets WHERE status=:status and created_at>=:dt');
+    DM.DataModule1.FDQuery1.ParamByName('dt').AsDate := now;
+    DM.DataModule1.FDQuery1.ParamByName('status').aswidestring := 'أخصائي التخدير والإنعاش';
+    DM.Datamodule1.FDQuery1.Open;
+    text42.Text := DM.Datamodule1.FDQuery1.FieldByName('cnt').asstring;
+
+
 
 end;
 
