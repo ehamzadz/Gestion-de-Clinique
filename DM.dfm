@@ -41,6 +41,7 @@ object DataModule1: TDataModule1
   end
   object table_patients: TFDTable
     Active = True
+    IndexFieldNames = 'CDEP'
     Connection = FDConnection1
     TableName = 'patients'
     Left = 80

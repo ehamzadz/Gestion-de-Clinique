@@ -280,6 +280,7 @@ type
     ColorAnimation29: TColorAnimation;
     Timer2: TTimer;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    to_waiting_room: TMenuItem;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -324,12 +325,14 @@ type
     procedure Rectangle53Click(Sender: TObject);
     procedure Rectangle50Click(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
+    procedure to_waiting_roomClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     U,P :string;
     USER_username, USER_password, USER_fullName, USER_type, filter_by_role :string;
+    PATIENT :string;
   end;
 
 const
@@ -510,12 +513,13 @@ begin
       end;
 
       DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO tickets values (:num,:ticket_number,:status,:created_at,:updated_at)');
+      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO tickets values (:num,:ticket_number,:status,:created_at,:updated_at,:patient)');
       DM.DataModule1.FDQuery1.ParamByName('num').asinteger := num;
       DM.DataModule1.FDQuery1.ParamByName('ticket_number').asinteger := ticket_number;
       DM.DataModule1.FDQuery1.ParamByName('status').AsWideString := room;
       DM.DataModule1.FDQuery1.ParamByName('created_at').asdatetime := now;
       DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
+      DM.DataModule1.FDQuery1.ParamByName('patient').asstring := PATIENT;
       DM.Datamodule1.FDQuery1.Execute;
 
       DM.Datamodule1.table_tickets.Filtered := false;
@@ -532,6 +536,7 @@ begin
       rec(record_msg);
 
       DM.Datamodule1.table_tickets.Filtered := false;
+      tabcontrol1.TabIndex := 1;
     end;
 
 end;
@@ -1117,6 +1122,20 @@ begin
 
 
 
+end;
+
+procedure Tfrm_main.to_waiting_roomClick(Sender: TObject);
+begin
+  PATIENT := grid_patients.Cells[1,grid_patients.Selected];
+
+  showmessage('1');
+
+  DM.Datamodule1.table_patients.Filtered := false;
+  DM.Datamodule1.table_patients.Filter := 'CODE_B like '+ quotedstr('%'+PATIENT+'%') ;
+  DM.Datamodule1.table_patients.Filtered := true;
+
+  tabcontrol1.TabIndex := 2;
+  showmessage('2');
 end;
 
 end.
