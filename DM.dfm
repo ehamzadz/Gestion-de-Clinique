@@ -53,6 +53,6 @@ object DataModule1: TDataModule1
       'DriverID=MSAcc')
     LoginPrompt = False
     Left = 264
-    Top = 80
+    Top = 48
   end
 end
