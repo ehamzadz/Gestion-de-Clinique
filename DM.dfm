@@ -1,6 +1,7 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
+  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
@@ -8,7 +9,7 @@ object DataModule1: TDataModule1
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=Z:\Projects\Gestion-de-Clinique\DB\db.mdb'
+      'Database=F:\Projects\Gestion-de-Clinique\DB\db.mdb'
       'DriverID=MSAcc')
     Connected = True
     LoginPrompt = False
@@ -59,7 +60,7 @@ object DataModule1: TDataModule1
     Active = True
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from patients order by CODE_B DESC')
+      'select * from patients order by CDEP DESC')
     Left = 264
     Top = 160
   end

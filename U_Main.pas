@@ -329,6 +329,9 @@ type
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     affect_to_waiting_room: TMenuItem;
+    Text56: TText;
+    Edit_id: TEdit;
+    Rectangle57: TRectangle;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -338,6 +341,7 @@ type
       Shift: TShiftState; X, Y: Single);
     procedure rect_profile_barClick(Sender: TObject);
     procedure rec(type_rc :string);
+    procedure alert(note, degree :string);
     procedure btn_logout_from_profile_menuClick(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure btn_switchClick(Sender: TObject);
@@ -605,6 +609,24 @@ begin
   tabcontrol1.TabIndex := 2;
 end;
 
+procedure Tfrm_main.alert(note, degree: string);
+var id :integer;
+begin
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('select id_alert from alerts order by id_alert DESC');
+      DM.Datamodule1.FDQuery1.Open;
+      id := DM.Datamodule1.FDQuery1.FieldByName('id_alert').asinteger + 1;
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO alerts values (:id, :note,:degree,:when, :user)');
+      DM.DataModule1.FDQuery1.ParamByName('id').asinteger := id;
+      DM.DataModule1.FDQuery1.ParamByName('note').asstring := note;
+      DM.DataModule1.FDQuery1.ParamByName('degree').asstring := degree;
+      DM.DataModule1.FDQuery1.ParamByName('when').asdatetime := now;
+      DM.DataModule1.FDQuery1.ParamByName('user').asstring := USER_username;
+      DM.Datamodule1.FDQuery1.Execute;
+end;
+
 procedure Tfrm_main.btn_add_cardioClick(Sender: TObject);
 begin
   add_ticket('أمراض القلب والشرايين');
@@ -613,7 +635,7 @@ end;
 procedure Tfrm_main.btn_add_patientClick(Sender: TObject);
 var
   CDEP :integer;
-  RandomString: string;
+  RandomString, CODE_B: string;
 begin
 
   if MessageDlg('Confirm ?',
@@ -630,33 +652,49 @@ begin
 //      showmessage(RandomString);
 
       DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patients (CDEP, CODE_B, PRP, AGE, DATEN, TEL, ADP, sit_fam,sexe) values (:CDEP, :CODE_B, :PRP, :AGE, :DATEN, :TEL, :ADP, :sit_fam, :sexe)');
-      DM.DataModule1.FDQuery1.ParamByName('CDEP').asinteger := CDEP;
-      DM.DataModule1.FDQuery1.ParamByName('CODE_B').asstring:= RandomString;
-      DM.DataModule1.FDQuery1.ParamByName('PRP').asstring := edit_name.Text;
-      DM.DataModule1.FDQuery1.ParamByName('AGE').asinteger := strtoint(edit_age.Text);
-      DM.DataModule1.FDQuery1.ParamByName('DATEN').asdate := dateedit1.Date;
-      DM.DataModule1.FDQuery1.ParamByName('TEL').asstring := edit_phone.Text;
-      DM.DataModule1.FDQuery1.ParamByName('ADP').asstring := edit_adr.Text;
-      DM.DataModule1.FDQuery1.ParamByName('sit_fam').asstring := ComboBox1.Items[ComboBox1.ItemIndex];
-      DM.DataModule1.FDQuery1.ParamByName('sexe').asstring := ComboBox3.Items[ComboBox3.ItemIndex];
-      DM.Datamodule1.FDQuery1.Execute;
-      showmessage('Ajouté avec succès!');
+      DM.DataModule1.FDQuery1.SQL.Add('select n_id from patients where n_id=:n_id');
+      DM.DataModule1.FDQuery1.ParamByName('n_id').asstring:= edit_id.Text;
+      DM.Datamodule1.FDQuery1.Open;
 
-      edit_name.Text := '';
-      edit_age.Text := '';
-      edit_phone.Text := '';
-      edit_adr.Text := '';
-      dateedit1.IsEmpty := true;
-      ComboBox1.ItemIndex := -1;
-      ComboBox3.ItemIndex := -1;
+      CODE_B := DM.Datamodule1.FDQuery1.Fields[0].asstring;
 
-      SpeedButton7Click(nil);
+      if strtoint(CODE_B) <> strtoint(edit_id.Text) then begin
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patients (CDEP, CODE_B, n_id, PRP, AGE, DATEN, TEL, ADP, sit_fam,sexe, created_at) values (:CDEP, :CODE_B, :n_id, :PRP, :AGE, :DATEN, :TEL, :ADP, :sit_fam, :sexe, :created_at)');
+        DM.DataModule1.FDQuery1.ParamByName('CDEP').asinteger := CDEP;
+        DM.DataModule1.FDQuery1.ParamByName('CODE_B').asstring:= RandomString;
+        DM.DataModule1.FDQuery1.ParamByName('n_id').asstring := edit_id.Text;
+        DM.DataModule1.FDQuery1.ParamByName('PRP').asstring := edit_name.Text;
+        DM.DataModule1.FDQuery1.ParamByName('AGE').asinteger := strtoint(edit_age.Text);
+        DM.DataModule1.FDQuery1.ParamByName('DATEN').asdate := dateedit1.Date;
+        DM.DataModule1.FDQuery1.ParamByName('TEL').asstring := edit_phone.Text;
+        DM.DataModule1.FDQuery1.ParamByName('ADP').asstring := edit_adr.Text;
+        DM.DataModule1.FDQuery1.ParamByName('sit_fam').asstring := ComboBox1.Items[ComboBox1.ItemIndex];
+        DM.DataModule1.FDQuery1.ParamByName('sexe').asstring := ComboBox3.Items[ComboBox3.ItemIndex];
+        DM.DataModule1.FDQuery1.ParamByName('created_at').asdate := now;
+        DM.Datamodule1.FDQuery1.Execute;
+        showmessage('Ajouté avec succès!');
 
-      DM.DataModule1.qry_patients.refresh;
-      DM.DataModule1.qry_patients.first;
+        rec('Patient inserted / ID: ' + RandomString);
 
-      edit7.SetFocus;
+        edit_name.Text := '';
+        edit_age.Text := '';
+        edit_phone.Text := '';
+        edit_adr.Text := '';
+        dateedit1.IsEmpty := true;
+        ComboBox1.ItemIndex := -1;
+        ComboBox3.ItemIndex := -1;
+
+        SpeedButton7Click(nil);
+
+        DM.DataModule1.qry_patients.refresh;
+        DM.DataModule1.qry_patients.first;
+
+        edit7.SetFocus;
+      end else begin
+        rec('Trying to add available patient / ID: ' + CODE_B);
+        alert('Trying to add available patient / ID: ' + CODE_B,'50%');
+      end;
 
     end;
 end;
@@ -921,7 +959,7 @@ begin
   DM.DataModule1.FDQuery1.SQL.Clear;
   DM.DataModule1.FDQuery1.SQL.Add('insert into records values(:id_rc, :type, :date, :usr)');
   DM.DataModule1.FDQuery1.ParamByName('id_rc').AsInteger := id_rc;
-  DM.DataModule1.FDQuery1.ParamByName('type').AsString := type_rc;
+  DM.DataModule1.FDQuery1.ParamByName('type').aswidestring := type_rc;
   DM.DataModule1.FDQuery1.ParamByName('date').AsDateTime := now;
   DM.DataModule1.FDQuery1.ParamByName('usr').AsString := USER_username;
   DM.DataModule1.FDQuery1.Execute;
@@ -993,7 +1031,6 @@ end;
 
 procedure Tfrm_main.Rectangle71Click(Sender: TObject);
 begin
-
       edit7.SetFocus;
 end;
 
