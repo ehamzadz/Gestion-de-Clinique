@@ -10,7 +10,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MSAcc,
   FireDAC.Phys.MSAccDef, FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client,
-  FireDAC.Comp.DataSet, FireDAC.Comp.UI, ComObj;
+  FireDAC.Comp.DataSet, FireDAC.Comp.UI, ComObj, FMX.Media,
+  FMX.Controls.Presentation, FMX.StdCtrls;
 
 type
   TForm1 = class(TForm)
@@ -64,19 +65,25 @@ type
     Rectangle14: TRectangle;
     Image5: TImage;
     Rectangle15: TRectangle;
-    Rectangle16: TRectangle;
-    Image6: TImage;
-    Text21: TText;
-    time: TText;
-    Image7: TImage;
-    Rectangle17: TRectangle;
-    Text23: TText;
     FDQuery1: TFDQuery;
     FDConnection1: TFDConnection;
     Timer1: TTimer;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    Rectangle18: TRectangle;
+    Image8: TImage;
+    Rectangle19: TRectangle;
+    time: TText;
+    Image10: TImage;
+    Rectangle16: TRectangle;
+    MediaPlayer1: TMediaPlayer;
+    MediaPlayerControl1: TMediaPlayerControl;
+    Timer2: TTimer;
+    Button1: TButton;
     procedure Timer1Timer(Sender: TObject);
     procedure Image5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -89,6 +96,22 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  SecondMonitor: TDisplay;
+begin
+  showmessage(inttostr(Screen.DisplayCount));
+  if Screen.DisplayCount > 0 then begin
+    // Get the second monitor
+    SecondMonitor := Screen.Displays[0];
+  end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  mediaplayer1.Play;
+end;
 
 procedure TForm1.Image5Click(Sender: TObject);
 var
@@ -133,6 +156,13 @@ begin
     time.text := timetostr(now);
 
 
+end;
+
+procedure TForm1.Timer2Timer(Sender: TObject);
+begin
+
+  mediaplayer1.FileName := '123.avi';
+  mediaplayer1.Play;
 end;
 
 end.
