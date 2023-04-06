@@ -2,46 +2,46 @@
 Coordinates=428,78,131,36
 
 [btn_logout]
-Coordinates=115,1068,75,36
+Coordinates=1479,1152,75,36
 
 [Rectangle9]
-Coordinates=1303,860,80,36
+Coordinates=1133,1028,80,36
 
 [Image2]
-Coordinates=83,860,57,58
+Coordinates=2431,10,57,58
 
 [Text4]
-Coordinates=10,860,47,58
+Coordinates=1537,944,47,58
 
 [ColorAnimation10]
 Coordinates=597,1,117,36
 
 [Rect_patients]
-Coordinates=886,860,93,36
+Coordinates=2802,1214,93,36
 
 [current_tab]
-Coordinates=554,1006,80,36
+Coordinates=2540,1214,80,36
 
 [BG]
 Coordinates=67,269,40,36
 
 [Rectangle4]
-Coordinates=771,1006,80,36
+Coordinates=835,1214,80,36
 
 [ShadowEffect1]
 Coordinates=597,111,101,36
 
 [Text7]
-Coordinates=1627,776,47,58
+Coordinates=933,860,47,58
 
 [Text3]
-Coordinates=242,776,47,58
+Coordinates=1899,860,47,58
 
 [ColorAnimation6]
 Coordinates=597,221,110,36
 
 [Image4]
-Coordinates=778,776,57,58
+Coordinates=263,944,57,58
 
 [Gradient_Light_Blue]
 Coordinates=578,269,132,36
@@ -50,34 +50,34 @@ Coordinates=578,269,132,36
 Coordinates=597,324,110,36
 
 [img_users]
-Coordinates=166,860,74,58
+Coordinates=1799,860,74,58
 
 [ColorAnimation2]
 Coordinates=578,365,110,36
 
 [Image5]
-Coordinates=1183,776,57,58
+Coordinates=540,860,57,58
 
 [Rect_users]
-Coordinates=10,1068,79,36
+Coordinates=121,1152,79,36
 
 [Text5]
-Coordinates=995,10,47,58
+Coordinates=601,944,47,58
 
 [Rectangle6]
-Coordinates=229,1006,80,36
+Coordinates=307,1090,80,36
 
 [ColorAnimation7]
 Coordinates=162,365,110,36
 
 [Circle2]
-Coordinates=1138,1006,55,36
+Coordinates=2118,1152,55,36
 
 [TabControl1]
-Coordinates=660,1006,85,36
+Coordinates=10,1152,85,36
 
 [Image1]
-Coordinates=1253,10,57,58
+Coordinates=1553,860,57,58
 
 [ColorAnimation9]
 Coordinates=752,221,110,36
@@ -86,104 +86,104 @@ Coordinates=752,221,110,36
 Coordinates=752,276,110,36
 
 [img_patients]
-Coordinates=1336,10,88,58
+Coordinates=1940,776,88,58
 
 [img_logoff]
-Coordinates=386,776,74,58
+Coordinates=3017,776,74,58
 
 [Text6]
-Coordinates=89,776,47,58
+Coordinates=1665,776,47,58
 
 [Rectangle5]
-Coordinates=446,944,80,36
+Coordinates=462,1276,80,36
 
 [ColorAnimation1]
 Coordinates=525,439,110,36
 
 [N_of_Users_Invts]
-Coordinates=861,776,117,58
+Coordinates=1154,944,117,58
 
 [content_area]
-Coordinates=1493,1006,90,36
+Coordinates=236,1214,90,36
 
 [Rect_Exit]
-Coordinates=1005,860,70,36
+Coordinates=1046,1214,70,36
 
 [nav_bar]
-Coordinates=166,944,61,36
+Coordinates=362,1028,61,36
 
 [rect_profile_bar]
-Coordinates=1268,944,104,36
+Coordinates=449,1028,104,36
 
 [rect_profile_bar_menu]
-Coordinates=921,944,143,36
+Coordinates=2716,1152,143,36
 
 []
-Coordinates=308,1334,87,36
+Coordinates=1505,1281,90,36
 Visible=True
 
 [btn_logout_from_profile_menu]
-Coordinates=1609,1006,189,36
+Coordinates=805,1028,189,36
 
 [text_USER_fullName]
-Coordinates=416,860,136,58
+Coordinates=2594,10,136,58
 
 [text_USER_type]
-Coordinates=1492,776,109,58
+Coordinates=2103,944,109,58
 
 [MenuItem1]
-Coordinates=1101,860,79,36
+Coordinates=226,1152,79,36
 
 [DataModule1.FDQuery1]
-Coordinates=1004,776,153,58
+Coordinates=1374,860,153,58
 
 [BindSourceDB1]
-Coordinates=539,10,158,168
+Coordinates=1060,210,158,168
 
 [BindingsList1]
 Coordinates=87,1,91,36
 
 [rect_top_bar]
-Coordinates=877,1006,87,36
+Coordinates=2471,944,87,36
 
 [Text2]
-Coordinates=1266,776,47,58
+Coordinates=1006,860,47,58
 
 [VertScrollBox1]
-Coordinates=1367,1006,100,36
+Coordinates=352,1214,100,36
 
 [Text11]
-Coordinates=1412,776,54,58
+Coordinates=2108,10,54,58
 
 [rect_logo]
-Coordinates=1514,860,68,36
+Coordinates=10,1090,68,36
 
 [logo]
-Coordinates=315,776,45,58
+Coordinates=2052,860,45,58
 
 [Text12]
-Coordinates=578,860,54,58
+Coordinates=1297,944,54,58
 
 [Label1]
-Coordinates=10,776,53,58
+Coordinates=10,860,53,58
 
 [StyleBook1]
 Coordinates=506,155,80,36
 
 [Image3]
-Coordinates=695,776,57,58
+Coordinates=1770,944,57,58
 
 [rect123]
-Coordinates=1504,944,57,36
+Coordinates=331,1152,57,36
 
 [Brush1]
 Coordinates=456,343,55,36
 
 [btn_switch]
-Coordinates=1450,10,75,58
+Coordinates=707,776,75,58
 
 [btn_maximize_minimize]
-Coordinates=1090,944,152,36
+Coordinates=2538,1152,152,36
 
 [sky_blue]
 Coordinates=308,343,65,36
@@ -192,11 +192,11 @@ Coordinates=308,343,65,36
 Coordinates=911,56,134,36
 
 [rec_BG]
-Coordinates=10,1006,58,36
+Coordinates=2487,1090,58,36
 Visible=True
 
 [Circle_new_users_counter]
-Coordinates=253,944,167,36
+Coordinates=414,1152,167,36
 
 [blue]
 Coordinates=278,78,40,36
@@ -214,13 +214,13 @@ Coordinates=959,276,110,36
 Coordinates=506,269,53,36
 
 [Text1]
-Coordinates=922,10,47,58
+Coordinates=467,860,47,58
 
 [rect_dashboard]
-Coordinates=685,944,104,36
+Coordinates=1142,1214,104,36
 
 [img_dashboard]
-Coordinates=566,776,103,58
+Coordinates=3077,860,103,58
 
 [DataModule1.table_records]
 Coordinates=770,110,173,36
@@ -231,11 +231,11 @@ Coordinates=1218,20,161,36
 Visible=False
 
 [grid_users]
-Coordinates=880,170,75,124
+Coordinates=920,30,75,124
 Visible=True
 
 [BindSourceDB2]
-Coordinates=1130,160,147,168
+Coordinates=1070,20,147,168
 
 [PopupMenu_esc]
 Coordinates=98,1,110,36
@@ -244,34 +244,34 @@ Coordinates=98,1,110,36
 Coordinates=860,1,151,36
 
 [btn_export_to_excel]
-Coordinates=10,944,130,36
+Coordinates=2646,1214,130,36
 
 [tab_users]
-Coordinates=1206,860,71,36
+Coordinates=1675,1152,71,36
 
 [Text15]
-Coordinates=266,860,54,58
+Coordinates=93,944,54,58
 
 [Rectangle1]
-Coordinates=1703,860,80,36
+Coordinates=1837,1214,80,36
 
 [SaveDialog1]
 Coordinates=1141,207,87,36
 
 [Rectangle10]
-Coordinates=441,1006,87,36
+Coordinates=1340,1090,87,36
 
 [Rectangle7]
-Coordinates=335,1006,80,36
+Coordinates=1698,1028,80,36
 
 [Rectangle3]
-Coordinates=1587,944,80,36
+Coordinates=591,1214,80,36
 
 [ColorAnimation4]
 Coordinates=1114,427,110,36
 
 [Rectangle8]
-Coordinates=815,944,80,36
+Coordinates=1147,1152,80,36
 
 [frxReport_ticket]
 Coordinates=1417,56,105,36
@@ -280,17 +280,17 @@ Coordinates=1417,56,105,36
 Coordinates=1114,1,98,36
 
 [Edit_num_recent_ticket]
-Coordinates=1551,10,149,58
+Coordinates=426,944,149,58
 
 [MenuItem2]
-Coordinates=1409,860,79,36
+Coordinates=941,1214,79,36
 
 [Rectangle11]
-Coordinates=773,860,87,36
+Coordinates=1272,1214,87,36
 Visible=True
 
 [grid_patients]
-Coordinates=310,70,89,212
+Coordinates=251,274,89,212
 Visible=True
 
 [DataModule1.table_patients]
@@ -301,10 +301,10 @@ Visible=False
 Coordinates=10,10,161,740
 
 [tab_patients]
-Coordinates=1608,860,85,36
+Coordinates=890,1090,85,36
 
 [edit_search_patients]
-Coordinates=1068,10,134,58
+Coordinates=1505,776,134,58
 
 [frxReport_patient_id]
 Coordinates=227,1,131,36
@@ -316,16 +316,16 @@ Coordinates=227,301,164,36
 Coordinates=227,494,98,36
 
 [print_patient_id]
-Coordinates=227,549,103,36
+Coordinates=2169,1214,103,36
 
 [Rectangle12]
-Coordinates=204,210,87,36
+Coordinates=2425,1152,87,36
 
 [yellow]
 Coordinates=204,420,50,36
 
 [Text18]
-Coordinates=204,56,54,58
+Coordinates=1425,776,54,58
 
 [green]
 Coordinates=204,604,47,36
@@ -334,7 +334,7 @@ Coordinates=204,604,47,36
 Coordinates=227,659,117,36
 
 [Rectangle13]
-Coordinates=204,714,87,36
+Coordinates=10,1214,87,36
 
 [ColorAnimation14]
 Coordinates=437,197,117,36
@@ -343,137 +343,137 @@ Coordinates=437,197,117,36
 Coordinates=437,398,140,36
 
 [SizeGrip1]
-Coordinates=164,791,71,36
+Coordinates=210,1090,71,36
 
 [Rectangle14]
-Coordinates=429,1,87,36
+Coordinates=2199,1152,87,36
 
 [SpeedButton1]
-Coordinates=204,133,96,58
+Coordinates=1079,860,96,58
 
 [frxBarCodeObject1]
 Coordinates=437,494,124,36
 
 [Rectangle17]
-Coordinates=429,453,87,36
+Coordinates=136,1028,87,36
 
 [ColorAnimation18]
 Coordinates=735,165,117,36
 
 [Text9]
-Coordinates=429,252,47,58
+Coordinates=512,776,47,58
 
 [Rectangle25]
-Coordinates=624,648,87,36
+Coordinates=1611,1214,87,36
 
 [ComboBox2]
-Coordinates=437,549,101,146
+Coordinates=1515,10,101,146
 
 [Rectangle28]
-Coordinates=624,703,87,36
+Coordinates=1034,1152,87,36
 
 [Rectangle18]
-Coordinates=594,968,87,36
+Coordinates=2584,944,87,36
 
 [Text14]
-Coordinates=429,133,54,58
+Coordinates=2444,776,54,58
 
 [Text13]
-Coordinates=615,571,54,58
+Coordinates=1636,860,54,58
 
 [Rectangle20]
-Coordinates=827,313,87,36
+Coordinates=2312,1152,87,36
 
 [Rectangle22]
-Coordinates=827,368,87,36
+Coordinates=2056,1214,87,36
 
 [rect_popup_accept_users]
-Coordinates=752,574,162,36
+Coordinates=846,1152,162,36
 Visible=True
 
 [ColorAnimation15]
 Coordinates=735,629,117,36
 
 [Rectangle16]
-Coordinates=827,423,87,36
+Coordinates=10,1276,87,36
 
 [Rectangle19]
-Coordinates=827,478,87,36
+Coordinates=349,1276,87,36
 
 [Rectangle23]
-Coordinates=827,533,87,36
+Coordinates=123,1214,87,36
 
 [SpeedButton3]
-Coordinates=673,420,96,58
+Coordinates=1738,776,96,58
 
 [ColorAnimation12]
 Coordinates=735,684,117,36
 
 [Rectangle15]
-Coordinates=827,739,87,36
+Coordinates=249,1028,87,36
 
 [Rectangle27]
-Coordinates=1049,87,87,36
+Coordinates=1239,1028,87,36
 
 [ColorAnimation17]
 Coordinates=981,331,117,36
 
 [Rectangle26]
-Coordinates=1049,386,87,36
+Coordinates=1253,1152,87,36
 
 [Rectangle21]
-Coordinates=1049,482,87,36
+Coordinates=2804,1028,87,36
 
 [Text10]
-Coordinates=429,714,54,58
+Coordinates=1074,944,54,58
 
 [Rectangle24]
-Coordinates=1049,537,87,36
+Coordinates=1453,1090,87,36
 
 [ColorAnimation16]
 Coordinates=981,441,117,36
 
 [Text8]
-Coordinates=615,494,47,58
+Coordinates=2398,944,47,58
 
 [SpeedButton2]
-Coordinates=673,497,96,58
+Coordinates=1143,776,96,58
 
 [edit_search_users]
-Coordinates=367,872,120,58
+Coordinates=1642,10,120,58
 
 [Timer1]
 Coordinates=535,968,55,36
 
 [Button1]
-Coordinates=190,1,59,58
+Coordinates=968,776,59,58
 
 [Memo1]
-Coordinates=0,0,57,58
+Coordinates=2934,776,57,58
 
 [add_new_patient]
-Coordinates=981,592,112,36
+Coordinates=697,1214,112,36
 
 [DataModule1.table_tickets]
-Coordinates=723,10,166,190
+Coordinates=1270,190,166,190
 
 [VertScrollBox2]
-Coordinates=120,983,100,36
+Coordinates=10,1028,100,36
 
 [FDGUIxWaitCursor1]
 Coordinates=1049,647,132,36
 
 [Rectangle54]
-Coordinates=827,1061,87,36
+Coordinates=1227,1090,87,36
 
 [Text32]
-Coordinates=382,868,54,58
+Coordinates=2363,860,54,58
 
 [Rectangle2]
-Coordinates=808,1114,80,36
+Coordinates=104,1090,80,36
 
 [Text50]
-Coordinates=521,999,54,58
+Coordinates=2604,776,54,58
 
 [FloatAnimation2]
 Coordinates=952,724,108,36
@@ -482,154 +482,154 @@ Coordinates=952,724,108,36
 Coordinates=952,1061,117,36
 
 [Text19]
-Coordinates=336,1142,54,58
+Coordinates=1377,944,54,58
 
 [Text52]
-Coordinates=521,853,54,58
+Coordinates=1860,776,54,58
 
 [Rectangle30]
-Coordinates=1049,999,87,36
+Coordinates=2427,1214,87,36
 
 [Rectangle38]
-Coordinates=1049,1116,87,36
+Coordinates=2005,1152,87,36
 
 [Text28]
-Coordinates=735,276,54,58
+Coordinates=888,776,54,58
 
 [Rectangle34]
-Coordinates=1049,1171,87,36
+Coordinates=1724,1214,87,36
 
 [Text29]
-Coordinates=62,791,54,58
+Coordinates=1853,944,54,58
 
 [ColorAnimation27]
 Coordinates=923,1114,117,36
 
 [Text34]
-Coordinates=749,684,54,58
+Coordinates=853,860,54,58
 
 [Text46]
-Coordinates=218,1142,54,58
+Coordinates=1788,10,54,58
 
 [ColorAnimation28]
 Coordinates=1240,87,117,36
 
 [Text20]
-Coordinates=952,496,54,58
+Coordinates=2443,860,54,58
 
 [Rectangle33]
-Coordinates=1049,1226,87,36
+Coordinates=1366,1152,87,36
 
 [Text53]
-Coordinates=190,155,54,58
+Coordinates=754,944,54,58
 
 [Text17]
-Coordinates=382,532,54,58
+Coordinates=2753,860,54,58
 
 [Text90]
-Coordinates=190,232,54,58
+Coordinates=3117,776,54,58
 
 [Image13]
-Coordinates=97,887,64,58
+Coordinates=2844,776,64,58
 
 [ColorAnimation25]
 Coordinates=1240,347,117,36
 
 [Text38]
-Coordinates=41,1142,54,58
+Coordinates=2514,10,54,58
 
 [Rectangle145]
-Coordinates=1102,347,94,36
+Coordinates=2706,1090,94,36
 
 [Rectangle55]
-Coordinates=960,1238,87,36
+Coordinates=2697,944,87,36
 
 [FloatAnimation6]
 Coordinates=1219,482,108,36
 
 [Text40]
-Coordinates=190,1,54,58
+Coordinates=2593,860,54,58
 
 [Rectangle146]
-Coordinates=1102,592,94,36
+Coordinates=1352,1028,94,36
 
 [Text24]
-Coordinates=382,301,54,58
+Coordinates=1457,944,54,58
 
 [Rectangle49]
-Coordinates=871,1238,87,36
+Coordinates=1804,1028,87,36
 
 [ColorAnimation22]
 Coordinates=1240,402,117,36
 
 [Text25]
-Coordinates=462,1018,54,58
+Coordinates=914,944,54,58
 
 [SpeedButton4]
-Coordinates=807,684,96,58
+Coordinates=159,860,96,58
 
 [Text39]
-Coordinates=323,887,54,58
+Coordinates=2997,860,54,58
 
 [ColorAnimation29]
 Coordinates=1240,537,117,36
 
 [FlowLayout_AR]
-Coordinates=1219,592,105,36
+Coordinates=526,1090,105,36
 
 [Image9]
-Coordinates=615,937,57,58
+Coordinates=1201,860,57,58
 
 [Rectangle37]
-Coordinates=782,1238,87,36
+Coordinates=478,1214,87,36
 
 [Text47]
-Coordinates=382,1,54,58
+Coordinates=674,944,54,58
 
 [Text43]
-Coordinates=521,252,54,58
+Coordinates=994,944,54,58
 
 [Rectangle53]
-Coordinates=693,1238,87,36
+Coordinates=2810,944,87,36
 
 [Text48]
-Coordinates=749,1061,54,58
+Coordinates=2684,776,54,58
 
 [Rectangle41]
-Coordinates=604,1238,87,36
+Coordinates=733,1152,87,36
 
 [Text42]
-Coordinates=382,791,54,58
+Coordinates=1345,776,54,58
 
 [Text21]
-Coordinates=454,1142,54,58
+Coordinates=834,944,54,58
 
 [FloatAnimation5]
 Coordinates=1219,647,108,36
 
 [Text89]
-Coordinates=382,378,54,58
+Coordinates=346,944,54,58
 
 [Text49]
-Coordinates=159,1142,54,58
+Coordinates=1868,10,54,58
 
 [Text37]
-Coordinates=190,791,54,58
+Coordinates=2054,776,54,58
 
 [Rectangle36]
-Coordinates=515,1238,87,36
+Coordinates=579,1028,87,36
 
 [ColorAnimation26]
 Coordinates=1240,702,117,36
 
 [Rectangle143]
-Coordinates=1102,702,94,36
+Coordinates=1885,1152,94,36
 
 [Rectangle51]
-Coordinates=426,1238,87,36
+Coordinates=692,1028,87,36
 
 [Rectangle43]
-Coordinates=337,1238,87,36
+Coordinates=1585,1028,87,36
 
 [FloatAnimation8]
 Coordinates=1219,999,108,36
@@ -638,209 +638,298 @@ Coordinates=1219,999,108,36
 Coordinates=1219,1054,108,36
 
 [Text35]
-Coordinates=513,1142,54,58
+Coordinates=2364,776,54,58
 
 [Rectangle52]
-Coordinates=248,1238,87,36
+Coordinates=1001,1090,87,36
 
 [ColorAnimation19]
 Coordinates=1240,1109,117,36
 
 [Rectangle46]
-Coordinates=159,1238,87,36
+Coordinates=1566,1090,87,36
 
 [Text27]
-Coordinates=521,329,54,58
+Coordinates=2351,10,54,58
 
 [Image8]
-Coordinates=382,609,57,58
+Coordinates=2188,10,57,58
 
 [FloatAnimation7]
 Coordinates=1219,1164,108,36
 
 [Text26]
-Coordinates=521,714,54,58
+Coordinates=2283,860,54,58
 
 [Text41]
-Coordinates=690,1142,54,58
+Coordinates=432,776,54,58
 
 [Timer2]
 Coordinates=952,111,55,36
 
 [Text45]
-Coordinates=190,714,54,58
+Coordinates=2238,944,54,58
 
 [Rectangle31]
-Coordinates=70,1238,87,36
+Coordinates=1498,1214,87,36
 
 [Image10]
-Coordinates=807,423,64,58
+Coordinates=1053,776,64,58
 
 [Rectangle40]
-Coordinates=1315,142,87,36
+Coordinates=1385,1214,87,36
 
 [ColorAnimation24]
 Coordinates=1240,1219,117,36
 
 [Text91]
-Coordinates=749,1138,54,58
+Coordinates=1690,944,54,58
 
 [Text88]
-Coordinates=277,1142,54,58
+Coordinates=1265,776,54,58
 
 [Rectangle149]
-Coordinates=1102,1061,94,36
+Coordinates=770,1090,94,36
 
 [Rectangle48]
-Coordinates=1315,197,87,36
+Coordinates=568,1276,87,36
 
 [ColorAnimation23]
 Coordinates=1462,111,117,36
 
 [Image11]
-Coordinates=615,574,64,58
+Coordinates=2013,944,64,58
 
 [Text44]
-Coordinates=190,540,54,58
+Coordinates=1933,944,54,58
 
 [Rectangle44]
-Coordinates=1315,252,87,36
+Coordinates=1020,1028,87,36
 
 [Text55]
-Coordinates=100,1142,54,58
+Coordinates=387,860,54,58
 
 [Rectangle144]
-Coordinates=1315,307,94,36
+Coordinates=2684,1028,94,36
 
 [Rectangle32]
-Coordinates=1315,757,87,36
+Coordinates=1472,1028,87,36
 
 [Text51]
-Coordinates=572,1142,54,58
+Coordinates=1972,860,54,58
 
 [FlowLayout_FR]
-Coordinates=1440,166,104,36
+Coordinates=1679,1090,104,36
 
 [StringGrid1]
-Coordinates=190,386,80,58
+Coordinates=281,860,80,58
 
 [Rectangle35]
-Coordinates=1315,812,87,36
+Coordinates=2923,944,87,36
 
 [ColorAnimation21]
 Coordinates=1462,221,117,36
 
 [tab_dashboard]
-Coordinates=1139,1238,100,36
+Coordinates=607,1152,100,36
 
 [Rectangle45]
-Coordinates=1315,1274,87,36
+Coordinates=236,1276,87,36
 
 [btn_add_cardio]
-Coordinates=1440,276,103,36
+Coordinates=2298,1214,103,36
 
 [Image12]
-Coordinates=615,324,64,58
+Coordinates=173,944,64,58
 
 [Edit1]
-Coordinates=382,686,44,58
+Coordinates=2214,776,44,58
 
 [Text16]
-Coordinates=190,78,54,58
+Coordinates=773,860,54,58
 
 [Image6]
-Coordinates=190,309,57,58
+Coordinates=10,944,57,58
 
 [Text33]
-Coordinates=952,647,54,58
+Coordinates=1948,10,54,58
 
 [Text31]
-Coordinates=382,455,54,58
+Coordinates=2203,860,54,58
 
 [Rectangle50]
-Coordinates=1296,1312,87,36
+Coordinates=123,1276,87,36
 
 [Image14]
-Coordinates=121,791,64,58
+Coordinates=1284,860,64,58
 
 [Text30]
-Coordinates=735,430,54,58
+Coordinates=150,776,54,58
 
 [FloatAnimation1]
 Coordinates=1440,331,108,36
 
 [Text23]
-Coordinates=395,1142,54,58
+Coordinates=230,776,54,58
 
 [FloatAnimation3]
 Coordinates=1440,386,108,36
 
 [Image7]
-Coordinates=749,915,57,58
+Coordinates=1716,860,57,58
 
 [Rectangle29]
-Coordinates=1207,1312,87,36
+Coordinates=1772,1152,87,36
 
 [Text54]
-Coordinates=190,463,54,58
+Coordinates=2524,776,54,58
 
 [Text36]
-Coordinates=735,353,54,58
+Coordinates=2764,776,54,58
 
 [Rectangle39]
-Coordinates=1118,1312,87,36
+Coordinates=2826,1090,87,36
 
 [Rectangle42]
-Coordinates=1029,1312,87,36
+Coordinates=657,1090,87,36
 
 [Text22]
-Coordinates=631,1142,54,58
+Coordinates=2284,776,54,58
 
 [to_waiting_room]
-Coordinates=125,638,109,36
-
-[SpeedButton5]
-Coordinates=673,853,96,58
+Coordinates=2571,1090,109,36
 
 [Rectangle60]
-Coordinates=832,1334,87,36
-
-[Edit3]
-Coordinates=980,1334,44,58
-
-[Text56]
-Coordinates=952,1169,54,58
-
-[ColorAnimation31]
-Coordinates=1462,518,117,36
-
-[Rectangle57]
-Coordinates=743,1334,87,36
+Coordinates=1943,1214,87,36
 
 [Rectangle61]
-Coordinates=654,1334,87,36
-
-[Rectangle56]
-Coordinates=565,1334,87,36
+Coordinates=3036,944,87,36
 
 [TabItem1]
-Coordinates=486,1334,69,36
+Coordinates=1580,1152,69,36
 
 [Rectangle62]
-Coordinates=219,1334,87,36
+Coordinates=413,1090,87,36
 
 [Rectangle47]
-Coordinates=130,1334,87,36
+Coordinates=1114,1090,87,36
 
-[Rectangle58]
-Coordinates=41,1334,87,36
+[Text58]
+Coordinates=2318,944,54,58
 
-[ColorAnimation30]
-Coordinates=1462,683,117,36
+[ColorAnimation33]
+Coordinates=804,1167,117,36
 
-[Edit2]
-Coordinates=21,1238,44,58
+[Rectangle67]
+Coordinates=2374,1090,87,36
 
-[Rectangle59]
-Coordinates=1505,738,87,36
+[Text62]
+Coordinates=2123,860,54,58
+
+[ComboBox1]
+Coordinates=1261,10,101,146
+
+[DateEdit1]
+Coordinates=2833,860,138,58
+
+[Text59]
+Coordinates=2134,776,54,58
+
+[grey_border]
+Coordinates=397,1334,84,36
+
+[Text60]
+Coordinates=2271,10,54,58
+
+[Rectangle63]
+Coordinates=2148,1090,87,36
+
+[Text63]
+Coordinates=693,860,54,58
+
+[Rectangle66]
+Coordinates=2035,1090,87,36
+
+[ComboBox3]
+Coordinates=1388,10,101,146
+
+[Rectangle64]
+Coordinates=1922,1090,87,36
+
+[Text61]
+Coordinates=1610,944,54,58
+
+[Text65]
+Coordinates=808,776,54,58
+
+[Rectangle65]
+Coordinates=1809,1090,87,36
+
+[Text64]
+Coordinates=2673,860,54,58
+
+[Text57]
+Coordinates=2028,10,54,58
+
+[ColorAnimation32]
+Coordinates=1462,705,117,36
+
+[GradientAnimation1]
+Coordinates=1586,87,128,36
+
+[Rectangle56]
+Coordinates=2361,1028,87,36
+
+[SpeedButton6]
+Coordinates=585,776,96,58
+
+[FloatAnimation9]
+Coordinates=1440,1226,108,36
+
+[DataModule1.qry_patients]
+Coordinates=366,10,165,36
+Visible=False
+
+[Rectangle71]
+Coordinates=2143,1028,87,36
+
+[green_btn]
+Coordinates=1462,1430,72,36
+
+[Rectangle70]
+Coordinates=2030,1028,87,36
+
+[SpeedButton7]
+Coordinates=310,776,96,58
+
+[Rectangle69]
+Coordinates=1917,1028,87,36
+
+[Edit7]
+Coordinates=80,776,44,58
+
+[FloatAnimation10]
+Coordinates=1738,1,115,36
+
+[BindSourceDB4]
+Coordinates=366,10,151,740
+
+[btn_add_patient]
+Coordinates=2261,1090,87,36
+
+[edit_name]
+Coordinates=2523,860,44,58
+
+[edit_age]
+Coordinates=623,860,44,58
+
+[edit_adr]
+Coordinates=89,860,44,58
+
+[edit_phone]
+Coordinates=10,776,44,58
+
+[StringGrid_patients]
+Coordinates=660,50,80,212
+Visible=True
 

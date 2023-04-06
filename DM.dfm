@@ -55,4 +55,12 @@ object DataModule1: TDataModule1
     Left = 264
     Top = 48
   end
+  object qry_patients: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from patients order by CODE_B DESC')
+    Left = 264
+    Top = 160
+  end
 end

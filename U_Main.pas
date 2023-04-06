@@ -283,22 +283,13 @@ type
     to_waiting_room: TMenuItem;
     TabItem1: TTabItem;
     Rectangle47: TRectangle;
-    Rectangle56: TRectangle;
-    Rectangle57: TRectangle;
-    Edit2: TEdit;
-    Rectangle58: TRectangle;
-    SpeedButton5: TSpeedButton;
-    ColorAnimation30: TColorAnimation;
-    Rectangle59: TRectangle;
-    ColorAnimation31: TColorAnimation;
-    Text56: TText;
     Rectangle61: TRectangle;
     Rectangle62: TRectangle;
     Rectangle60: TRectangle;
-    Edit3: TEdit;
-    Edit4: TEdit;
+    edit_name: TEdit;
+    edit_age: TEdit;
     Rectangle64: TRectangle;
-    Edit5: TEdit;
+    edit_adr: TEdit;
     Rectangle65: TRectangle;
     Text58: TText;
     Text59: TText;
@@ -311,18 +302,33 @@ type
     ColorAnimation33: TColorAnimation;
     Text62: TText;
     Text57: TText;
-    Edit6: TEdit;
+    edit_phone: TEdit;
     Rectangle63: TRectangle;
     Text63: TText;
     ComboBox1: TComboBox;
     Text64: TText;
     ComboBox3: TComboBox;
-    Rectangle68: TRectangle;
-    ColorAnimation32: TColorAnimation;
-    Rectangle69: TRectangle;
-    ColorAnimation34: TColorAnimation;
+    btn_add_patient: TRectangle;
     Text65: TText;
-    Text66: TText;
+    GradientAnimation1: TGradientAnimation;
+    green_btn: TBrushObject;
+    Rectangle69: TRectangle;
+    Rectangle70: TRectangle;
+    Edit7: TEdit;
+    Rectangle71: TRectangle;
+    SpeedButton6: TSpeedButton;
+    ColorAnimation32: TColorAnimation;
+    SpeedButton7: TSpeedButton;
+    StringGrid_patients: TStringGrid;
+    Rectangle56: TRectangle;
+    FloatAnimation9: TFloatAnimation;
+    FloatAnimation10: TFloatAnimation;
+    BindSourceDB4: TBindSourceDB;
+    LinkGridToDataSourceBindSourceDB4: TLinkGridToDataSource;
+    PopupMenu_patients: TPopupMenu;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    affect_to_waiting_room: TMenuItem;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -368,6 +374,11 @@ type
     procedure Rectangle50Click(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
     procedure to_waiting_roomClick(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure btn_add_patientClick(Sender: TObject);
+    procedure Edit7Typing(Sender: TObject);
+    procedure Rectangle71Click(Sender: TObject);
+    procedure affect_to_waiting_roomClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -578,14 +589,76 @@ begin
       rec(record_msg);
 
       DM.Datamodule1.table_tickets.Filtered := false;
-      tabcontrol1.TabIndex := 1;
+      tabcontrol1.TabIndex := 3;
     end;
 
+end;
+
+procedure Tfrm_main.affect_to_waiting_roomClick(Sender: TObject);
+begin
+  PATIENT := StringGrid_patients.Cells[1,StringGrid_patients.Selected];
+
+  DM.Datamodule1.table_patients.Filtered := false;
+  DM.Datamodule1.table_patients.Filter := 'CODE_B like '+ quotedstr('%'+PATIENT+'%') ;
+  DM.Datamodule1.table_patients.Filtered := true;
+
+  tabcontrol1.TabIndex := 2;
 end;
 
 procedure Tfrm_main.btn_add_cardioClick(Sender: TObject);
 begin
   add_ticket('أمراض القلب والشرايين');
+end;
+
+procedure Tfrm_main.btn_add_patientClick(Sender: TObject);
+var
+  CDEP :integer;
+  RandomString: string;
+begin
+
+  if MessageDlg('Confirm ?',
+      mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+    begin
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from patients order by CDEP DESC');
+      DM.Datamodule1.FDQuery1.Open;
+      CDEP := DM.Datamodule1.FDQuery1.FieldByName('CDEP').asinteger + 1;
+
+      // Generate new BarCode
+      RandomString := GenerateRandomString;
+      while IsInDatabase(RandomString) do RandomString := GenerateRandomString;
+//      showmessage(RandomString);
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patients (CDEP, CODE_B, PRP, AGE, DATEN, TEL, ADP, sit_fam,sexe) values (:CDEP, :CODE_B, :PRP, :AGE, :DATEN, :TEL, :ADP, :sit_fam, :sexe)');
+      DM.DataModule1.FDQuery1.ParamByName('CDEP').asinteger := CDEP;
+      DM.DataModule1.FDQuery1.ParamByName('CODE_B').asstring:= RandomString;
+      DM.DataModule1.FDQuery1.ParamByName('PRP').asstring := edit_name.Text;
+      DM.DataModule1.FDQuery1.ParamByName('AGE').asinteger := strtoint(edit_age.Text);
+      DM.DataModule1.FDQuery1.ParamByName('DATEN').asdate := dateedit1.Date;
+      DM.DataModule1.FDQuery1.ParamByName('TEL').asstring := edit_phone.Text;
+      DM.DataModule1.FDQuery1.ParamByName('ADP').asstring := edit_adr.Text;
+      DM.DataModule1.FDQuery1.ParamByName('sit_fam').asstring := ComboBox1.Items[ComboBox1.ItemIndex];
+      DM.DataModule1.FDQuery1.ParamByName('sexe').asstring := ComboBox3.Items[ComboBox3.ItemIndex];
+      DM.Datamodule1.FDQuery1.Execute;
+      showmessage('Ajouté avec succès!');
+
+      edit_name.Text := '';
+      edit_age.Text := '';
+      edit_phone.Text := '';
+      edit_adr.Text := '';
+      dateedit1.IsEmpty := true;
+      ComboBox1.ItemIndex := -1;
+      ComboBox3.ItemIndex := -1;
+
+      SpeedButton7Click(nil);
+
+      DM.DataModule1.qry_patients.refresh;
+      DM.DataModule1.qry_patients.first;
+
+      edit7.SetFocus;
+
+    end;
 end;
 
 procedure Tfrm_main.btn_export_to_excelClick(Sender: TObject);
@@ -666,6 +739,17 @@ begin
   timer1.Enabled := true;
 end;
 
+procedure Tfrm_main.Edit7Typing(Sender: TObject);
+begin
+  if edit7.Text ='' then begin
+    DM.Datamodule1.qry_patients.Filtered := false;
+  end else begin
+    DM.Datamodule1.qry_patients.Filtered := false;
+    DM.Datamodule1.qry_patients.Filter := 'CODE_B like '+ quotedstr('%'+edit7.Text+'%') ;
+    DM.Datamodule1.qry_patients.Filtered := true;
+  end;
+end;
+
 procedure Tfrm_main.edit_search_patientsTyping(Sender: TObject);
 begin
   if edit_search_patients.Text ='' then begin
@@ -728,6 +812,25 @@ begin
   LinkGridToDataSourceBindSourceDB3.Columns[6].Width := round(rest_width)-45;                                 ///
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  // Auto Adjust Columns width for ***PATIENT*** StringGrid//////////////////////////////////////////////////////
+  form_width := frm_main.Width;                                                                               ///
+  grid_patients_list_width := form_width - 57 - 60;                                                           ///
+  rest_width := grid_patients_list_width;                                                                     ///
+  LinkGridToDataSourceBindSourceDB4.Columns[0].Width := round((5.93) * grid_patients_list_width / 100);       ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;                              ///
+  LinkGridToDataSourceBindSourceDB4.Columns[1].Width := round((8.30) * grid_patients_list_width / 100);       ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;                              ///
+  LinkGridToDataSourceBindSourceDB4.Columns[2].Width := round((23.72) * grid_patients_list_width / 100);      ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;                              ///
+  LinkGridToDataSourceBindSourceDB4.Columns[3].Width := round((7.86) * grid_patients_list_width / 100);       ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[3].Width;                              ///
+  LinkGridToDataSourceBindSourceDB4.Columns[4].Width := round((11.30) * grid_patients_list_width / 100);       ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[4].Width;                              ///
+  LinkGridToDataSourceBindSourceDB4.Columns[5].Width := round((12.79) * grid_patients_list_width / 100);      ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[5].Width;                              ///
+  LinkGridToDataSourceBindSourceDB4.Columns[6].Width := round(rest_width);                                    ///
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   // Auto Adjust Columns width for ***USERS*** StringGrid////////////////////////////////////////////////////////
   form_width := frm_main.Width;                                                                               ///
@@ -766,6 +869,9 @@ begin
 
   // User Roles
   roles(USER_type);
+
+
+  edit7.SetFocus;
 
 
 
@@ -885,6 +991,12 @@ begin
   add_ticket('أمراض السكري والغدة الدرقية');
 end;
 
+procedure Tfrm_main.Rectangle71Click(Sender: TObject);
+begin
+
+      edit7.SetFocus;
+end;
+
 procedure Tfrm_main.Rectangle8Click(Sender: TObject);
 var
   num, ticket_number, day, month, year :integer;
@@ -972,6 +1084,8 @@ begin
   img_patients.Opacity := 0.5;
   img_users.Opacity := 0.5;
   tabcontrol1.TabIndex := 2;
+
+  edit7.SetFocus;
 end;
 
 procedure Tfrm_main.Rect_patientsClick(Sender: TObject);
@@ -984,7 +1098,7 @@ begin
   img_patients.Opacity := 0.8;
   img_users.Opacity := 0.5;
   //Switch to Patients TAB
-  tabcontrol1.TabIndex := 1;
+  tabcontrol1.TabIndex := 3;
 end;
 
 procedure Tfrm_main.rect_profile_barClick(Sender: TObject);
@@ -1114,6 +1228,32 @@ end;
 procedure Tfrm_main.SpeedButton3Click(Sender: TObject);
 begin
   rect_popup_accept_users.Visible := false;
+end;
+
+procedure Tfrm_main.SpeedButton7Click(Sender: TObject);
+begin
+
+  if rectangle61.Visible then begin
+    floatanimation9.StartValue := 288;
+    floatanimation9.StopValue := 65;
+    floatanimation10.StartValue := 288;
+    floatanimation10.StopValue := 65;
+    floatanimation9.Enabled := true;
+    floatanimation10.Enabled := true;
+    rectangle61.Visible := false;
+  end else begin
+    floatanimation9.StartValue := 65;
+    floatanimation9.StopValue := 288;
+    floatanimation10.StartValue := 65;
+    floatanimation10.StopValue := 288;
+    floatanimation9.Enabled := true;
+    floatanimation10.Enabled := true;
+    rectangle61.Visible := true;
+  end;
+
+  floatanimation9.Enabled := false;
+  floatanimation10.Enabled := false;
+
 end;
 
 procedure Tfrm_main.SubMenu_AnimationFinish(Sender: TObject);

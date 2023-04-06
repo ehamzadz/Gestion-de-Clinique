@@ -20,6 +20,7 @@ type
     table_tickets: TFDTable;
     table_patients: TFDTable;
     FDConnection2: TFDConnection;
+    qry_patients: TFDQuery;
   private
     { Private declarations }
   public
