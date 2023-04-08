@@ -9,7 +9,7 @@ object DataModule1: TDataModule1
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=F:\Projects\Gestion-de-Clinique\DB\db.mdb'
+      'Database=\\Serveur\db\db.mdb'
       'DriverID=MSAcc')
     Connected = True
     LoginPrompt = False

@@ -383,6 +383,7 @@ type
     procedure Edit7Typing(Sender: TObject);
     procedure Rectangle71Click(Sender: TObject);
     procedure affect_to_waiting_roomClick(Sender: TObject);
+    procedure DateEdit1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -634,8 +635,8 @@ end;
 
 procedure Tfrm_main.btn_add_patientClick(Sender: TObject);
 var
-  CDEP :integer;
-  RandomString, CODE_B: string;
+  CDEP,age :integer;
+  RandomString, n_id: string;
 begin
 
   if MessageDlg('Confirm ?',
@@ -649,16 +650,21 @@ begin
       // Generate new BarCode
       RandomString := GenerateRandomString;
       while IsInDatabase(RandomString) do RandomString := GenerateRandomString;
-//      showmessage(RandomString);
+//      showmessage('edit_id.Text');
 
       DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('select n_id from patients where n_id=:n_id');
+      DM.DataModule1.FDQuery1.SQL.Add('select count(n_id) from patients where n_id=:n_id');
       DM.DataModule1.FDQuery1.ParamByName('n_id').asstring:= edit_id.Text;
       DM.Datamodule1.FDQuery1.Open;
 
-      CODE_B := DM.Datamodule1.FDQuery1.Fields[0].asstring;
+      n_id := DM.Datamodule1.FDQuery1.Fields[0].asstring;
+//      showmessage(n_id);
 
-      if strtoint(CODE_B) <> strtoint(edit_id.Text) then begin
+      if strtoint(DM.Datamodule1.FDQuery1.Fields[0].asstring) < 1  then begin
+//      showmessage('11');
+
+        age := yearof(now) - yearof(dateedit1.Date) ;
+
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patients (CDEP, CODE_B, n_id, PRP, AGE, DATEN, TEL, ADP, sit_fam,sexe, created_at) values (:CDEP, :CODE_B, :n_id, :PRP, :AGE, :DATEN, :TEL, :ADP, :sit_fam, :sexe, :created_at)');
         DM.DataModule1.FDQuery1.ParamByName('CDEP').asinteger := CDEP;
@@ -674,6 +680,7 @@ begin
         DM.DataModule1.FDQuery1.ParamByName('created_at').asdate := now;
         DM.Datamodule1.FDQuery1.Execute;
         showmessage('Ajouté avec succès!');
+//      showmessage('12');
 
         rec('Patient inserted / ID: ' + RandomString);
 
@@ -692,8 +699,8 @@ begin
 
         edit7.SetFocus;
       end else begin
-        rec('Trying to add available patient / ID: ' + CODE_B);
-        alert('Trying to add available patient / ID: ' + CODE_B,'50%');
+        rec('Trying to add available patient / ID: ' +n_id);
+        alert('Trying to add available patient / ID: ' + n_id,'50%');
       end;
 
     end;
@@ -775,6 +782,16 @@ var text :string;
 begin
 //  RunDosInMemo('ping 8.8.8.8 -c 1',Memo1);
   timer1.Enabled := true;
+end;
+
+procedure Tfrm_main.DateEdit1Change(Sender: TObject);
+var
+  age:integer;
+begin
+
+        age := yearof(now) - yearof(dateedit1.Date) ;
+        edit_age.Text := inttostr(age);
+
 end;
 
 procedure Tfrm_main.Edit7Typing(Sender: TObject);
