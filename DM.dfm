@@ -9,15 +9,14 @@ object DataModule1: TDataModule1
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=\\Serveur\db\db.mdb'
+      'Database=F:\Projects\Gestion-de-Clinique\DB\db.mdb'
       'DriverID=MSAcc')
-    Connected = True
     LoginPrompt = False
+    AfterConnect = FDConnection1AfterConnect
     Left = 80
     Top = 48
   end
   object table_records: TFDTable
-    Active = True
     IndexFieldNames = 'id_rc'
     Connection = FDConnection1
     TableName = 'records'
@@ -25,7 +24,6 @@ object DataModule1: TDataModule1
     Top = 160
   end
   object table_users: TFDTable
-    Active = True
     IndexFieldNames = 'user'
     Connection = FDConnection1
     TableName = 'users'
@@ -33,7 +31,6 @@ object DataModule1: TDataModule1
     Top = 216
   end
   object table_tickets: TFDTable
-    Active = True
     IndexFieldNames = 'num'
     Connection = FDConnection1
     TableName = 'tickets'
@@ -41,7 +38,6 @@ object DataModule1: TDataModule1
     Top = 272
   end
   object table_patients: TFDTable
-    Active = True
     IndexFieldNames = 'CDEP'
     Connection = FDConnection1
     TableName = 'patients'
@@ -57,7 +53,6 @@ object DataModule1: TDataModule1
     Top = 48
   end
   object qry_patients: TFDQuery
-    Active = True
     Connection = FDConnection1
     SQL.Strings = (
       'select * from patients order by CDEP DESC')

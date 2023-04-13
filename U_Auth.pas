@@ -141,6 +141,7 @@ type
     procedure PasswordEditButton3Click(Sender: TObject);
     function EncryptThisPassword(password:string):string;
     function DecryptThisPassword(password:string):string;
+    procedure ConnectToDB;
   private
     { Private declarations }
   public
@@ -240,12 +241,15 @@ begin
 end;
 
 procedure Tfrm_auth.Timer1Timer(Sender: TObject);
+var
+  AppPath :string;
 begin
   FloatAnimation1.Enabled := false;
   FloatAnimation2.Enabled := false;
   timer1.Enabled := false;
   Visible := False; // Makes Form1 invisible
   try
+    ConnectToDB;
     frm_main.ShowModal; // Shows the Form
   finally
     application.Terminate;
@@ -394,6 +398,22 @@ begin
     end;
 
   end;
+end;
+
+procedure Tfrm_auth.ConnectToDB;
+var
+  AppPath :string;
+begin
+      AppPath := ExtractFilePath(ParamStr(0));
+
+      // Set other properties as needed
+      DM.DataModule1.FDConnection1.Params.Database := AppPath+'\db.mdb';
+
+      // Connect to the database
+      DM.DataModule1.FDConnection1.Open;
+
+      if DM.DataModule1.FDConnection1.Connected then
+        DM.DataModule1.FDConnection1.Connected := true;
 end;
 
 function Tfrm_auth.DecryptThisPassword(password: string): string;

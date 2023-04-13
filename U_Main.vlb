@@ -300,9 +300,6 @@ Visible=False
 [BindSourceDB3]
 Coordinates=10,10,161,740
 
-[tab_patients]
-Coordinates=890,1090,85,36
-
 [edit_search_patients]
 Coordinates=1505,776,134,58
 
@@ -805,9 +802,6 @@ Coordinates=1943,1214,87,36
 [Rectangle61]
 Coordinates=3036,944,87,36
 
-[TabItem1]
-Coordinates=1580,1152,69,36
-
 [Rectangle62]
 Coordinates=413,1090,87,36
 
@@ -932,4 +926,10 @@ Coordinates=10,776,44,58
 [StringGrid_patients]
 Coordinates=660,50,80,212
 Visible=True
+
+[tab_patient]
+Coordinates=1580,1152,69,36
+
+[tab_p]
+Coordinates=890,1090,85,36
 

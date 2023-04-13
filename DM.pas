@@ -21,6 +21,7 @@ type
     table_patients: TFDTable;
     FDConnection2: TFDConnection;
     qry_patients: TFDQuery;
+    procedure FDConnection1AfterConnect(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,5 +36,22 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDataModule1.FDConnection1AfterConnect(Sender: TObject);
+begin
+
+  table_records.Active :=true;
+
+  table_users.Active :=true;
+
+  table_tickets.Active :=true;
+
+//  table_patients.Active :=true;
+
+  qry_patients.Active :=true;
+
+
+
+end;
 
 end.
