@@ -338,11 +338,6 @@ type
     Rectangle68: TRectangle;
     ColorAnimation30: TColorAnimation;
     Text66: TText;
-    StringGrid2: TStringGrid;
-    PopupMenu1: TPopupMenu;
-    MenuItem5: TMenuItem;
-    MenuItem6: TMenuItem;
-    MenuItem7: TMenuItem;
     Rectangle72: TRectangle;
     Rectangle73: TRectangle;
     Rectangle74: TRectangle;
