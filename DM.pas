@@ -21,6 +21,7 @@ type
     table_patients: TFDTable;
     FDConnection2: TFDConnection;
     qry_patients: TFDQuery;
+    qry_commune: TFDQuery;
     procedure FDConnection1AfterConnect(Sender: TObject);
   private
     { Private declarations }

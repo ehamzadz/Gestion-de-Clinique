@@ -9,8 +9,9 @@ object DataModule1: TDataModule1
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=F:\Projects\Gestion-de-Clinique\DB\db.mdb'
+      'Database=F:\Projects\Gestion-de-Clinique\Win32\Debug\db.mdb'
       'DriverID=MSAcc')
+    Connected = True
     LoginPrompt = False
     AfterConnect = FDConnection1AfterConnect
     Left = 80
@@ -58,5 +59,13 @@ object DataModule1: TDataModule1
       'select * from patients order by CDEP DESC')
     Left = 264
     Top = 160
+  end
+  object qry_commune: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from commune order by id asc')
+    Left = 392
+    Top = 256
   end
 end
