@@ -1,7 +1,6 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
-  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
@@ -11,7 +10,6 @@ object DataModule1: TDataModule1
     Params.Strings = (
       'Database=F:\Projects\Gestion-de-Clinique\Win32\Debug\db.mdb'
       'DriverID=MSAcc')
-    Connected = True
     LoginPrompt = False
     AfterConnect = FDConnection1AfterConnect
     Left = 80
@@ -61,11 +59,10 @@ object DataModule1: TDataModule1
     Top = 160
   end
   object qry_commune: TFDQuery
-    Active = True
     Connection = FDConnection1
     SQL.Strings = (
       'select * from commune order by id asc')
-    Left = 392
-    Top = 256
+    Left = 264
+    Top = 216
   end
 end

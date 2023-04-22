@@ -1,0 +1,15 @@
+﻿[DataModule1.table_records]
+Visible=False
+
+[DataModule1.table_users]
+Visible=False
+
+[DataModule1.table_patients]
+Visible=False
+
+[DataModule1.qry_patients]
+Visible=False
+
+[DataModule1.qry_commune]
+Visible=False
+

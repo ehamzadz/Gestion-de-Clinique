@@ -121,7 +121,7 @@ object frm_auth: Tfrm_auth
     Size.Width = 949.000000000000000000
     Size.Height = 532.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 3
     TabPosition = None
     Sizes = (
@@ -135,7 +135,7 @@ object frm_auth: Tfrm_auth
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -966,7 +966,7 @@ object frm_auth: Tfrm_auth
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -977,7 +977,7 @@ object frm_auth: Tfrm_auth
       ExplicitSize.cy = 8.000000000000000000
       object Timer1: TTimer
         Enabled = False
-        Interval = 3000
+        Interval = 500
         OnTimer = Timer1Timer
         Left = 320
         Top = 88
@@ -1325,7 +1325,7 @@ object frm_auth: Tfrm_auth
         Stroke.Color = claSlategray
         object Rectangle18: TRectangle
           Align = Center
-          Fill.Color = claWhite
+          Fill.Color = x64878787
           Margins.Bottom = 10.000000000000000000
           Size.Width = 318.000000000000000000
           Size.Height = 249.000000000000000000
@@ -1339,8 +1339,9 @@ object frm_auth: Tfrm_auth
             Size.Width = 234.000000000000000000
             Size.Height = 93.000000000000000000
             Size.PlatformDefault = False
+            Text = 'sdfqsdf'
             TextSettings.Font.Size = 18.000000000000000000
-            TextSettings.FontColor = xFF6B6B6B
+            TextSettings.FontColor = xFF454545
             object Image1: TImage
               MultiResBitmap.Height = 900
               MultiResBitmap.Width = 900
@@ -1386,6 +1387,7 @@ object frm_auth: Tfrm_auth
             Softness = 0.500000000000000000
             Opacity = 0.600000023841857900
             ShadowColor = claBlack
+            Enabled = False
           end
         end
       end

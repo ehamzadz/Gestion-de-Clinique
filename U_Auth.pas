@@ -176,6 +176,21 @@ begin
   floatanimation1.Enabled := true;
 end;
 
+procedure Tfrm_auth.ConnectToDB;
+var
+  AppPath :string;
+begin
+      AppPath := ExtractFilePath(ParamStr(0));
+
+      // Set other properties as needed
+      DM.DataModule1.FDConnection1.Params.Database := AppPath+'\db.mdb';
+
+      // Connect to the database
+      DM.DataModule1.FDConnection1.Open;
+      DM.DataModule1.FDConnection1.Connected := true;
+
+end;
+
 procedure Tfrm_auth.FormShow(Sender: TObject);
 var
   sCmd: string;
@@ -185,33 +200,64 @@ begin
 
   //sCmd := Pwidechar('ping 8.8.8.8');
   //ShellExecute (Application.Handle, 'open', PChar('I:\Projects\Delphi\New folder\Win32\Debug\ping.bat'), nil, nil, SW_SHOW);
-  if FileExists('USER_SESSIONS.txt') then begin
-    AssignFile(mFile, 'USER_SESSIONS.txt');
-    // Reopen the file in read only mode
-    FileMode := fmOpenRead;
-    Reset(mFile);
-    // Display the file contents
-    while not Eof(mFile) do begin
-      Read(mFile, User);
-      U := User.usr;
-      P := User.pswd;
-      //Send username to main form
-      frm_main.USER_username := U;
+
+  ConnectToDB;
+  if DM.DataModule1.FDConnection1.Connected then begin
+
+    FloatAnimation1.Enabled := false;
+    FloatAnimation2.Enabled := false;
+//      timer1.Enabled := false;
+
+    if FileExists('USER_SESSIONS.txt') then begin
+      AssignFile(mFile, 'USER_SESSIONS.txt');
+      // Reopen the file in read only mode
+      FileMode := fmOpenRead;
+      Reset(mFile);
+      // Display the file contents
+      while not Eof(mFile) do begin
+        Read(mFile, User);
+        U := User.usr;
+        P := User.pswd;
+        //Send username to main form
+        frm_main.USER_username := U;
+      end;
+      // Close the file for the last time
+      CloseFile(mFile);
+      text_welcome.text := 'Bienvenue ' + U + ' ..';
+
+      timer1.Enabled := true;
+
+    end else begin
+      U := '';
+      P := '';
+      tabcontrol1.TabIndex := 0;
+      edit_user.text := '';
+      edit_pass.text := '';
+      text_err_msg.text := '';
     end;
-    // Close the file for the last time
-    CloseFile(mFile);
-    text_welcome.text := 'Bienvenue ' + U + ' ..';
-    timer1.Enabled := true;
-
-
   end else begin
-    U := '';
-    P := '';
-    tabcontrol1.TabIndex := 0;
-    edit_user.text := '';
-    edit_pass.text := '';
-    text_err_msg.text := '';
+    showmessage('Not Connected!');
   end;
+
+end;
+
+procedure Tfrm_auth.Timer1Timer(Sender: TObject);
+var
+  AppPath :string;
+begin
+
+      timer1.Enabled := false;
+
+      FloatAnimation2.Enabled := true;
+//
+//      Visible := False; // Makes Form1 invisible
+//      try
+//        frm_main.ShowModal; // Shows the Form
+//      finally
+//        application.Terminate;
+//        // Makes Form1 visible again
+//      end;
+
 end;
 
 procedure Tfrm_auth.PasswordEditButton1Click(Sender: TObject);
@@ -238,23 +284,6 @@ procedure Tfrm_auth.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
   if (Button = TMouseButton.mbLeft) then StartWindowDrag;
-end;
-
-procedure Tfrm_auth.Timer1Timer(Sender: TObject);
-var
-  AppPath :string;
-begin
-  FloatAnimation1.Enabled := false;
-  FloatAnimation2.Enabled := false;
-  timer1.Enabled := false;
-  Visible := False; // Makes Form1 invisible
-  try
-    ConnectToDB;
-    frm_main.ShowModal; // Shows the Form
-  finally
-    application.Terminate;
-    // Makes Form1 visible again
-  end;
 end;
 
 procedure Tfrm_auth.btn_go_to_register_formClick(Sender: TObject);
@@ -400,21 +429,6 @@ begin
   end;
 end;
 
-procedure Tfrm_auth.ConnectToDB;
-var
-  AppPath :string;
-begin
-      AppPath := ExtractFilePath(ParamStr(0));
-
-      // Set other properties as needed
-      DM.DataModule1.FDConnection1.Params.Database := AppPath+'\db.mdb';
-
-      // Connect to the database
-      DM.DataModule1.FDConnection1.Open;
-
-      if DM.DataModule1.FDConnection1.Connected then
-        DM.DataModule1.FDConnection1.Connected := true;
-end;
 
 function Tfrm_auth.DecryptThisPassword(password: string): string;
 var
