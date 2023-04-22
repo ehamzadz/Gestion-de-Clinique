@@ -18,7 +18,7 @@ uses
   Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, System.ImageList, ComObj,
   FMX.frxClass, FMX.frxDBSet, FMX.frxDesgn, FMX.frxBarcode, FMX.frxBarcode2DView, Winapi.ShellAPI, Winapi.Windows,
-  FMX.Memo.Types, FMX.Memo, DateUtils;
+  FMX.Memo.Types, FMX.Memo, DateUtils, FMX.ComboEdit;
 
 type
   Tfrm_main = class(TForm)
@@ -374,14 +374,11 @@ type
     Text68: TText;
     ComboBox6: TComboBox;
     Text76: TText;
-    Edit3: TEdit;
-    Rectangle76: TRectangle;
     Text77: TText;
     ComboBox7: TComboBox;
-    Text78: TText;
-    ComboBox8: TComboBox;
     BindSourceDB5: TBindSourceDB;
     LinkFillControlToField1: TLinkFillControlToField;
+    ComboEdit1: TComboEdit;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);

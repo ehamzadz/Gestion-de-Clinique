@@ -119,7 +119,7 @@ Coordinates=1104,1172,104,36
 Coordinates=10,1048,143,36
 
 []
-Coordinates=1505,1281,90,36
+Coordinates=2060,10,101,146
 Visible=True
 
 [btn_logout_from_profile_menu]
@@ -1071,9 +1071,6 @@ Coordinates=543,442,54,58
 [ColorAnimation31]
 Coordinates=230,703,117,36
 
-[Edit3]
-Coordinates=1389,270,44,58
-
 [Text77]
 Coordinates=729,270,54,58
 
@@ -1084,21 +1081,11 @@ Visible=False
 [Text68]
 Coordinates=894,270,54,58
 
-[ComboBox8]
-Coordinates=2060,10,101,146
-Visible=True
-
-[Rectangle76]
-Coordinates=1810,778,87,36
-
 [Text76]
 Coordinates=1309,270,54,58
 
 [ComboBox6]
 Coordinates=748,10,101,146
-
-[Text78]
-Coordinates=1994,270,54,58
 
 [ComboBox7]
 Coordinates=1002,10,101,146
