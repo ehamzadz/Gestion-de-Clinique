@@ -65,4 +65,12 @@ object DataModule1: TDataModule1
     Left = 264
     Top = 216
   end
+  object UniQuery1: TUniQuery
+    Left = 424
+    Top = 184
+  end
+  object UniConnection1: TUniConnection
+    Left = 424
+    Top = 104
+  end
 end

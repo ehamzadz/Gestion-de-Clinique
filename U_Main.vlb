@@ -972,9 +972,6 @@ Coordinates=1803,924,79,36
 [Rectangle74]
 Coordinates=1577,924,87,36
 
-[Edit6]
-Coordinates=10,442,44,58
-
 [Rectangle72]
 Coordinates=1464,924,87,36
 
@@ -986,12 +983,6 @@ Coordinates=396,436,128,36
 
 [Rectangle59]
 Coordinates=1238,924,87,36
-
-[Rectangle79]
-Coordinates=1125,924,87,36
-
-[Edit4]
-Coordinates=980,610,44,58
 
 [SpeedButton8]
 Coordinates=1417,526,96,58
@@ -1059,12 +1050,6 @@ Coordinates=438,703,117,36
 [Rectangle78]
 Coordinates=1084,862,87,36
 
-[Edit2]
-Coordinates=194,526,44,58
-
-[Edit5]
-Coordinates=10,610,44,58
-
 [Text70]
 Coordinates=543,442,54,58
 
@@ -1092,4 +1077,19 @@ Coordinates=1002,10,101,146
 
 [BindSourceDB5]
 Coordinates=2420,10,162,146
+
+[btn_addPatient]
+Coordinates=1125,924,87,36
+
+[edit__id]
+Coordinates=10,442,44,58
+
+[Edit_fullName]
+Coordinates=194,526,44,58
+
+[Edit__phone]
+Coordinates=10,610,44,58
+
+[Edit_address]
+Coordinates=980,610,44,58
 

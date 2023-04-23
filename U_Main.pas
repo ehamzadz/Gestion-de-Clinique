@@ -341,26 +341,26 @@ type
     Rectangle72: TRectangle;
     Rectangle73: TRectangle;
     Rectangle74: TRectangle;
-    Edit2: TEdit;
+    Edit_fullName: TEdit;
     Rectangle75: TRectangle;
-    Edit4: TEdit;
+    Edit_address: TEdit;
     Rectangle77: TRectangle;
     Text67: TText;
     Text69: TText;
     DateEdit2: TDateEdit;
     Text70: TText;
     Text71: TText;
-    Edit5: TEdit;
+    Edit__phone: TEdit;
     Rectangle78: TRectangle;
     Text72: TText;
     ComboBox4: TComboBox;
     Text73: TText;
     ComboBox5: TComboBox;
-    Rectangle79: TRectangle;
+    btn_addPatient: TRectangle;
     Text74: TText;
     GradientAnimation2: TGradientAnimation;
     Text75: TText;
-    Edit6: TEdit;
+    edit__id: TEdit;
     Rectangle80: TRectangle;
     Rectangle81: TRectangle;
     Rectangle82: TRectangle;
@@ -378,6 +378,16 @@ type
     ComboBox7: TComboBox;
     BindSourceDB5: TBindSourceDB;
     LinkFillControlToField1: TLinkFillControlToField;
+    ComboEdit_nationality: TComboEdit;
+    Text78: TText;
+    CheckBox1: TCheckBox;
+    Rectangle76: TRectangle;
+    Text79: TText;
+    CheckBox2: TCheckBox;
+    Text80: TText;
+    CheckBox3: TCheckBox;
+    Text81: TText;
+    Text82: TText;
     ComboEdit1: TComboEdit;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
@@ -431,6 +441,7 @@ type
     procedure Rectangle71Click(Sender: TObject);
     procedure affect_to_waiting_roomClick(Sender: TObject);
     procedure DateEdit1Change(Sender: TObject);
+    procedure btn_addPatientClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -465,8 +476,8 @@ end;
 function IsInDatabase(const S: string): Boolean;                                    // check if Generated Barcode is available
 begin
   DM.DataModule1.FDQuery1.SQL.Clear;
-  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from patients where CODE_B = :code_b');
-  DM.DataModule1.FDQuery1.ParamByName('code_b').asstring := S;
+  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from patient where barcode = :barcode');
+  DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := S;
   DM.DataModule1.FDQuery1.Open;
   Result := DM.DataModule1.FDQuery1.Fields[0].AsInteger > 0;
 end;
@@ -1096,6 +1107,100 @@ end;
 procedure Tfrm_main.Rectangle71Click(Sender: TObject);
 begin
       edit7.SetFocus;
+end;
+
+procedure Tfrm_main.btn_addPatientClick(Sender: TObject);
+
+var
+  CDEP, age, count_n_id :integer;
+  RandomString, type_ass, allergies, checkbox3_IsChecked, checkbox2_IsChecked, checkbox1_IsChecked: string;
+begin
+
+  if MessageDlg('Confirm ?',
+      mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
+    begin
+//      DM.DataModule1.FDQuery1.SQL.Clear;
+//      DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from patient order by record DESC');
+//      DM.Datamodule1.FDQuery1.Open;
+//      CDEP := DM.Datamodule1.FDQuery1.FieldByName('CDEP').asinteger + 1;
+
+        showmessage('1');
+      // Generate new BarCode
+      RandomString := GenerateRandomString;
+      while IsInDatabase(RandomString) do RandomString := GenerateRandomString;
+      showmessage(RandomString);
+        showmessage('2');
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add('select count(n_id) from patients where n_id=:n_id');
+      DM.DataModule1.FDQuery1.ParamByName('n_id').asstring:= edit__id.Text;
+      DM.Datamodule1.FDQuery1.Open;
+        showmessage('3');
+
+      count_n_id := DM.Datamodule1.FDQuery1.Fields[0].asinteger;
+      showmessage(edit__id.Text);
+
+      if count_n_id < 1  then begin
+        showmessage('11');
+
+        age := yearof(now) - yearof(dateedit1.Date) ;
+
+
+        if checkbox2.IsChecked OR checkbox3.IsChecked then begin
+          if checkbox2.IsChecked then begin
+            type_ass := 'CNAS';
+          end else begin
+            if checkbox3.IsChecked then begin
+              type_ass := 'CASNOS';
+            end
+          end;
+        end else begin
+          type_ass := 'CNAS / CASNOS';
+        end;
+
+        if checkbox1.IsChecked then begin
+          allergies := 'oui';
+        end;
+
+        DM.DataModule1.FDQuery1.SQL.Clear;
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patient (barcode,id_number,fullName,date_of_birth,age,gender,phone,sit_f,blood_type,nationality,wilaya,region,allergies,type_ass,percentage_ass,created_at) ');
+        DM.DataModule1.FDQuery1.SQL.Add('values (:barcode,:id_number,:fullName,:date_of_birth,:age,:gender,:phone,:sit_f,:blood_type,:nationality,:wilaya,:region,:allergies,:type_ass,:percentage_ass,:created_at)');
+        DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := RandomString;
+        DM.DataModule1.FDQuery1.ParamByName('id_number').asstring:= edit__id.text;
+        DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := edit_fullName.Text;
+        DM.DataModule1.FDQuery1.ParamByName('date_of_birth').asdate := dateedit2.date;
+        DM.DataModule1.FDQuery1.ParamByName('age').asstring := inttostr(age);
+        DM.DataModule1.FDQuery1.ParamByName('gender').asstring := ComboBox5.Items[ComboBox5.ItemIndex];
+        DM.DataModule1.FDQuery1.ParamByName('phone').asstring := edit__phone.Text;
+        DM.DataModule1.FDQuery1.ParamByName('sit_f').asstring := ComboBox4.Items[ComboBox4.ItemIndex];
+        DM.DataModule1.FDQuery1.ParamByName('blood_type').asstring := ComboBox6.Items[ComboBox6.ItemIndex];
+        DM.DataModule1.FDQuery1.ParamByName('nationality').asstring := ComboEdit_nationality.Text;
+        DM.DataModule1.FDQuery1.ParamByName('wilaya').asstring := ComboBox7.Items[ComboBox7.ItemIndex];
+        DM.DataModule1.FDQuery1.ParamByName('region').asstring := edit_address.Text;
+        DM.DataModule1.FDQuery1.ParamByName('allergies').asstring := allergies;
+        DM.DataModule1.FDQuery1.ParamByName('type_ass').asstring := type_ass;
+        DM.DataModule1.FDQuery1.ParamByName('percentage_ass').asstring := comboedit1.Text;
+        DM.DataModule1.FDQuery1.ParamByName('created_at').asdatetime := now;
+        DM.Datamodule1.FDQuery1.Execute;
+        showmessage('Ajouté avec succès!');
+
+        showmessage('12');
+
+        rec('Patient Created / ID: ' + RandomString);
+
+
+//        SpeedButton7Click(nil);
+
+//        DM.DataModule1.qry_patients.refresh;
+//        DM.DataModule1.qry_patients.first;
+
+//        edit7.SetFocus;
+      end else begin
+        rec('Trying to add available patient / ID: ' +edit__id.Text);
+        alert('Trying to add available patient / ID: ' + edit__id.Text,'50%');
+      end;
+
+    end;
 end;
 
 procedure Tfrm_main.Rectangle8Click(Sender: TObject);
