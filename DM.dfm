@@ -8,8 +8,11 @@ object DataModule1: TDataModule1
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=F:\Projects\Gestion-de-Clinique\Win32\Debug\db.mdb'
-      'DriverID=MSAcc')
+      'Database=GC_DB'
+      'User_Name=hamza'
+      'Password=Hamza7911-/*'
+      'Server=127.0.0.1,1433'
+      'DriverID=MSSQL')
     LoginPrompt = False
     AfterConnect = FDConnection1AfterConnect
     Left = 80
@@ -18,14 +21,14 @@ object DataModule1: TDataModule1
   object table_records: TFDTable
     IndexFieldNames = 'id_rc'
     Connection = FDConnection1
-    TableName = 'records'
+    TableName = 'GC_DB.dbo.records'
     Left = 80
     Top = 160
   end
   object table_users: TFDTable
     IndexFieldNames = 'user'
     Connection = FDConnection1
-    TableName = 'users'
+    TableName = 'GC_DB.dbo.users'
     Left = 80
     Top = 216
   end
@@ -39,7 +42,7 @@ object DataModule1: TDataModule1
   object table_patients: TFDTable
     IndexFieldNames = 'CDEP'
     Connection = FDConnection1
-    TableName = 'patients'
+    TableName = 'GC_DB.dbo.patients'
     Left = 80
     Top = 328
   end
@@ -54,7 +57,7 @@ object DataModule1: TDataModule1
   object qry_patients: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from patients order by CDEP DESC')
+      'select * from patients order by record DESC')
     Left = 264
     Top = 160
   end
@@ -72,5 +75,14 @@ object DataModule1: TDataModule1
   object UniConnection1: TUniConnection
     Left = 424
     Top = 104
+  end
+  object FDConnection3: TFDConnection
+    Params.Strings = (
+      'Database=F:\Projects\Gestion-de-Clinique\Win32\Debug\db.mdb'
+      'DriverID=MSAcc')
+    LoginPrompt = False
+    AfterConnect = FDConnection1AfterConnect
+    Left = 176
+    Top = 48
   end
 end

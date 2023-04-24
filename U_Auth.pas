@@ -183,7 +183,7 @@ begin
       AppPath := ExtractFilePath(ParamStr(0));
 
       // Set other properties as needed
-      DM.DataModule1.FDConnection1.Params.Database := AppPath+'\db.mdb';
+//      DM.DataModule1.FDConnection1.Params.Database := AppPath+'\db.mdb';
 
       // Connect to the database
       DM.DataModule1.FDConnection1.Open;
@@ -223,6 +223,7 @@ begin
       end;
       // Close the file for the last time
       CloseFile(mFile);
+
       text_welcome.text := 'Bienvenue ' + U + ' ..';
 
       timer1.Enabled := true;
@@ -315,12 +316,16 @@ begin
     j:=0;
 
     DM.DataModule1.FDQuery1.SQL.Clear;
-    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user = :user and pass = :pswd');
+    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where [user] = :user and pass = :pswd');
     DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
     EncryptedPassword := pswd;
     DM.DataModule1.FDQuery1.ParamByName('pswd').asstring := DecryptThisPassword(EncryptedPassword);
     Datamodule1.FDQuery1.Open;
+
     j := Datamodule1.FDQuery1.Fields[0].AsInteger;
+
+//    showmessage(inttostr(j)+pswd+' / '+DecryptThisPassword(EncryptedPassword));
+
 
     if j=1 then begin
 
@@ -393,7 +398,7 @@ begin
 
       DM.DataModule1.FDQuery1.SQL.Clear;
       DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where user=:user');
-      DM.DataModule1.FDQuery1.ParamByName('user').AsWideString := user;
+      DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
       DM.Datamodule1.FDQuery1.Open;
 
       i := Datamodule1.FDQuery1.Fields[0].AsInteger;
@@ -405,11 +410,12 @@ begin
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users values (:user,:pass,:fullName,:type)');
-        DM.DataModule1.FDQuery1.ParamByName('user').AsWideString := user;
+        DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
 //        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2;
-        DM.DataModule1.FDQuery1.ParamByName('pass').AsWideString := EncryptThisPassword(pass2);
-        DM.DataModule1.FDQuery1.ParamByName('fullName').AsWideString := fullName;
-        DM.DataModule1.FDQuery1.ParamByName('type').AsWideString := 'Guest';
+        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := EncryptThisPassword(pass2);
+        showmessage(pass2+' / '+EncryptThisPassword(pass2));
+        DM.DataModule1.FDQuery1.ParamByName('fullName').aswidestring := fullName;
+        DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
         DM.Datamodule1.FDQuery1.Execute;
         showmessage('Inscrit avec succès');
 

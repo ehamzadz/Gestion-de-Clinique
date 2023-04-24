@@ -476,7 +476,7 @@ end;
 function IsInDatabase(const S: string): Boolean;                                    // check if Generated Barcode is available
 begin
   DM.DataModule1.FDQuery1.SQL.Clear;
-  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from patient where barcode = :barcode');
+  DM.DataModule1.FDQuery1.SQL.Add('select count(*) from patients where barcode = :barcode');
   DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := S;
   DM.DataModule1.FDQuery1.Open;
   Result := DM.DataModule1.FDQuery1.Fields[0].AsInteger > 0;
@@ -966,9 +966,10 @@ begin
 
   // Fetch USER data
   DM.DataModule1.FDQuery1.SQL.Clear;
-  DM.DataModule1.FDQuery1.SQL.Add('select * from users where user = :user');
+  DM.DataModule1.FDQuery1.SQL.Add('select * from users where [user] = :user');
   DM.DataModule1.FDQuery1.ParamByName('user').asstring := USER_username;
   Datamodule1.FDQuery1.Open;
+
   USER_fullName := DM.DataModule1.FDQuery1.FieldByName('fullName').AsString;
   USER_type := DM.DataModule1.FDQuery1.FieldByName('type').AsString;
   text_USER_fullName.Text := USER_fullName;
@@ -985,6 +986,8 @@ begin
 
 
   edit7.SetFocus;
+
+  showmessage(USER_type);
 
 
 
@@ -1036,7 +1039,7 @@ begin
   DM.DataModule1.FDQuery1.ParamByName('id_rc').AsInteger := id_rc;
   DM.DataModule1.FDQuery1.ParamByName('type').aswidestring := type_rc;
   DM.DataModule1.FDQuery1.ParamByName('date').AsDateTime := now;
-  DM.DataModule1.FDQuery1.ParamByName('usr').AsString := USER_username;
+  DM.DataModule1.FDQuery1.ParamByName('usr').aswidestring := USER_username;
   DM.DataModule1.FDQuery1.Execute;
 end;
 
@@ -1112,7 +1115,7 @@ end;
 procedure Tfrm_main.btn_addPatientClick(Sender: TObject);
 
 var
-  CDEP, age, count_n_id :integer;
+  CDEP, age, count_patient_id :integer;
   RandomString, type_ass, allergies, checkbox3_IsChecked, checkbox2_IsChecked, checkbox1_IsChecked: string;
 begin
 
@@ -1132,15 +1135,15 @@ begin
         showmessage('2');
 
       DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('select count(n_id) from patients where n_id=:n_id');
-      DM.DataModule1.FDQuery1.ParamByName('n_id').asstring:= edit__id.Text;
+      DM.DataModule1.FDQuery1.SQL.Add('select count(patient_id) from patients where patient_id=:patient_id');
+      DM.DataModule1.FDQuery1.ParamByName('patient_id').asstring:= edit__id.Text;
       DM.Datamodule1.FDQuery1.Open;
         showmessage('3');
 
-      count_n_id := DM.Datamodule1.FDQuery1.Fields[0].asinteger;
+      count_patient_id := DM.Datamodule1.FDQuery1.Fields[0].asinteger;
       showmessage(edit__id.Text);
 
-      if count_n_id < 1  then begin
+      if count_patient_id < 1  then begin
         showmessage('11');
 
         age := yearof(now) - yearof(dateedit1.Date) ;
@@ -1163,10 +1166,10 @@ begin
         end;
 
         DM.DataModule1.FDQuery1.SQL.Clear;
-        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patient (barcode,id_number,fullName,date_of_birth,age,gender,phone,sit_f,blood_type,nationality,wilaya,region,allergies,type_ass,percentage_ass,created_at) ');
-        DM.DataModule1.FDQuery1.SQL.Add('values (:barcode,:id_number,:fullName,:date_of_birth,:age,:gender,:phone,:sit_f,:blood_type,:nationality,:wilaya,:region,:allergies,:type_ass,:percentage_ass,:created_at)');
+        DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patients (barcode,patient_id,fullName,date_of_birth,age,gender,phone,sit_f,blood_type,nationality,wilaya,region,allergies,type_ass,percentage_ass,created_at) ');
+        DM.DataModule1.FDQuery1.SQL.Add('values (:barcode,:patient_id,:fullName,:date_of_birth,:age,:gender,:phone,:sit_f,:blood_type,:nationality,:wilaya,:region,:allergies,:type_ass,:percentage_ass,:created_at)');
         DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := RandomString;
-        DM.DataModule1.FDQuery1.ParamByName('id_number').asstring:= edit__id.text;
+        DM.DataModule1.FDQuery1.ParamByName('patient_id').asstring:= edit__id.text;
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := edit_fullName.Text;
         DM.DataModule1.FDQuery1.ParamByName('date_of_birth').asdate := dateedit2.date;
         DM.DataModule1.FDQuery1.ParamByName('age').asstring := inttostr(age);
