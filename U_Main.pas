@@ -980,15 +980,12 @@ begin
   // Fetch_n_users_invts
   fetch_n_users_invts;
 
-
   // User Roles
   roles(USER_type);
-
 
   edit7.SetFocus;
 
   showmessage(USER_type);
-
 
 
 end;

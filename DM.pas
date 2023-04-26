@@ -49,7 +49,7 @@ begin
 
   table_users.Active :=true;
 
-  table_tickets.Active :=true;
+//  table_tickets.Active :=true;
 //
 ////  table_patients.Active :=true;
 //
