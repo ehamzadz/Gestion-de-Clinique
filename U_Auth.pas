@@ -139,9 +139,9 @@ type
     procedure btn_logoutClick(Sender: TObject);
     procedure PasswordEditButton2Click(Sender: TObject);
     procedure PasswordEditButton3Click(Sender: TObject);
-    function EncryptThisPassword(password:string):string;
-    function DecryptThisPassword(password:string):string;
-    function CheckUserPass(username,password:string):boolean;
+    function PasswordEncryption(password:string):string;
+    function PasswordDecryption(password:string):string;
+    function CheckUserPass(username,password:string):integer;
     procedure ConnectToDB;
   private
     { Private declarations }
@@ -149,7 +149,7 @@ type
     { Public declarations }
     user,pswd : string;
     U,P: string;
-    EncryptedPassword, Password: string;
+    EncryptedPassword,DecryptedPassword: string;
   end;
 
 var
@@ -160,7 +160,6 @@ implementation
 {$R *.fmx}
 
 uses U_Main, DM;
-
 
 procedure Tfrm_auth.FloatAnimation1Finish(Sender: TObject);
 begin
@@ -175,36 +174,6 @@ end;
 procedure Tfrm_auth.FloatAnimation2Finish(Sender: TObject);
 begin
   floatanimation1.Enabled := true;
-end;
-
-function Tfrm_auth.CheckUserPass(username, password: string): boolean;
-begin
-//    CheckUserPass := false;
-
-    DM.DataModule1.FDQuery1.SQL.Clear;
-    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where [user] = :user and pass = :pswd');
-    DM.DataModule1.FDQuery1.ParamByName('user').asstring := username;
-    EncryptedPassword := pswd;
-    DM.DataModule1.FDQuery1.ParamByName('pswd').asstring := password; //DecryptThisPassword(EncryptedPassword);
-    Datamodule1.FDQuery1.Open;
-
-    if Datamodule1.FDQuery1.Fields[0].AsInteger > 0 then CheckUserPass := false
-    else CheckUserPass := true;
-end;
-
-procedure Tfrm_auth.ConnectToDB;
-var
-  AppPath :string;
-begin
-      AppPath := ExtractFilePath(ParamStr(0));
-
-      // Set other properties as needed
-//      DM.DataModule1.FDConnection1.Params.Database := AppPath+'\db.mdb';
-
-      // Connect to the database
-      DM.DataModule1.FDConnection1.Open;
-      DM.DataModule1.FDConnection1.Connected := true;
-
 end;
 
 procedure Tfrm_auth.FormShow(Sender: TObject);
@@ -222,7 +191,7 @@ begin
 
     FloatAnimation1.Enabled := false;
     FloatAnimation2.Enabled := false;
-//      timer1.Enabled := false;
+
 
     if FileExists('USER_SESSIONS.txt') then begin
       AssignFile(mFile, 'USER_SESSIONS.txt');
@@ -239,9 +208,9 @@ begin
       end;
       // Close the file for the last time
       CloseFile(mFile);
-      showmessage(U+' - '+P);
+//      showmessage(U+' - '+P);
 
-      if NOT CheckUserPass(U,P) then begin
+      if CheckUserPass(U,P)=1 then begin
         timer1.Enabled := true;
       end else begin
         showmessage('File was Modified!');
@@ -311,6 +280,63 @@ begin
   tabcontrol1.TabIndex := 1;
 end;
 
+procedure Tfrm_auth.ConnectToDB;
+var
+  AppPath :string;
+begin
+      AppPath := ExtractFilePath(ParamStr(0));
+
+      // Set other properties as needed
+//      DM.DataModule1.FDConnection1.Params.Database := AppPath+'\db.mdb';
+
+      // Connect to the database
+      DM.DataModule1.FDConnection1.Open;
+      DM.DataModule1.FDConnection1.Connected := true;
+end;
+
+function Tfrm_auth.CheckUserPass(username, password: string): integer;
+begin
+    CheckUserPass := 0;
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where [user] = :user and pass = :pswd');
+    DM.DataModule1.FDQuery1.ParamByName('user').asstring := username;
+    DM.DataModule1.FDQuery1.ParamByName('pswd').asstring := password; //PasswordEncryption(password);
+    Datamodule1.FDQuery1.Open;
+//    showmessage(username + ' - ' + password + ' : ' + inttostr(Datamodule1.FDQuery1.Fields[0].AsInteger));
+
+    if Datamodule1.FDQuery1.Fields[0].AsInteger > 0 then CheckUserPass := 1
+    else CheckUserPass := 0;
+end;
+                                                                  ///////////////
+function Tfrm_auth.PasswordEncryption(password: string): string;
+var
+    Key: Char;
+    i: integer;
+begin
+
+  EncryptedPassword:='';
+  for i := 1 to Length(Password) do begin
+    EncryptedPassword := EncryptedPassword + Char(Ord(Password[i]) +11);
+  end;
+
+  PasswordEncryption := EncryptedPassword;
+end;
+                                                                     ///////////////
+function Tfrm_auth.PasswordDecryption(password: string): string;
+var
+    Key: Char;
+    i: integer;
+begin
+
+  DecryptedPassword := '';
+  for i := 1 to Length(password) do begin
+    DecryptedPassword := DecryptedPassword + Char(Ord(password[i]) -11);
+  end;
+
+  PasswordDecryption := DecryptedPassword;
+end;
+
 procedure Tfrm_auth.btn_loginClick(Sender: TObject);
 var
   i,j : integer;
@@ -332,22 +358,14 @@ begin
 //    text_err_msg.TextSettings.FontColor := $FF008000;
   end else begin
 
-//    j:=0;
-//
-//    DM.DataModule1.FDQuery1.SQL.Clear;
-//    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from users where [user] = :user and pass = :pswd');
-//    DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-//    EncryptedPassword := pswd;
-//    DM.DataModule1.FDQuery1.ParamByName('pswd').asstring := DecryptThisPassword(EncryptedPassword);
-//    Datamodule1.FDQuery1.Open;
-//
-//    j := Datamodule1.FDQuery1.Fields[0].AsInteger;
 
-//    showmessage(inttostr(j)+' / '+EncryptedPassword+' / '+DecryptThisPassword(EncryptedPassword));
+//      showmessage(user+' // '+PasswordEncryption(pswd));
 
+//      showmessage('Boolean '+BoolToStr(CheckUserPass(user,pswd)));
+//      showmessage('Boolean 02 '+BoolToStr(CheckUserPass(user,PasswordEncryption(pswd))));
 
-    if CheckUserPass(user,pswd) then begin
-      showmessage(EncryptedPassword+' / '+DecryptThisPassword(EncryptedPassword));
+    if CheckUserPass(user,pswd)=1 then begin
+//      showmessage(user+' - '+PasswordEncryption(pswd));
 
       if (checkbox1.IsChecked=true) then begin
         AssignFile(mFile, 'USER_SESSIONS.txt');
@@ -431,7 +449,7 @@ begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO users values (:user,:pass,:fullName,:type)');
         DM.DataModule1.FDQuery1.ParamByName('user').asstring := user;
-        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := EncryptThisPassword(pass2);
+        DM.DataModule1.FDQuery1.ParamByName('pass').asstring := pass2; // PasswordEncryption(pass2);
 //        showmessage(pass2+' / '+EncryptThisPassword(pass2));
         DM.DataModule1.FDQuery1.ParamByName('fullName').asstring := fullName;
         DM.DataModule1.FDQuery1.ParamByName('type').asstring := 'Guest';
@@ -454,31 +472,5 @@ begin
   end;
 end;
 
-
-function Tfrm_auth.DecryptThisPassword(password: string): string;
-var
-    Key: Char;
-    i: integer;
-begin
-  Key := 'H';
-  Password := '';
-  for i := 1 to Length(EncryptedPassword) do
-    Password := Password + Char(Ord(EncryptedPassword[i]) xor Ord(Key));
-
-  DecryptThisPassword := Password;
-end;
-
-function Tfrm_auth.EncryptThisPassword(password: string): string;
-var
-    Key: Char;
-    i: integer;
-begin
-
-  Key := 'H';
-  for i := 1 to Length(Password) do
-    EncryptedPassword := EncryptedPassword + Char(Ord(Password[i]) xor Ord(Key));
-
-  EncryptThisPassword := EncryptedPassword;
-end;
 
 end.

@@ -442,6 +442,9 @@ type
     procedure affect_to_waiting_roomClick(Sender: TObject);
     procedure DateEdit1Change(Sender: TObject);
     procedure btn_addPatientClick(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure CheckBox2Change(Sender: TObject);
+    procedure CheckBox3Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -671,14 +674,13 @@ end;
 procedure Tfrm_main.alert(note, degree: string);
 var id :integer;
 begin
-      DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('select id_alert from alerts order by id_alert DESC');
-      DM.Datamodule1.FDQuery1.Open;
-      id := DM.Datamodule1.FDQuery1.FieldByName('id_alert').asinteger + 1;
+//      DM.DataModule1.FDQuery1.SQL.Clear;
+//      DM.DataModule1.FDQuery1.SQL.Add('select id_alert from alerts order by id_alert DESC');
+//      DM.Datamodule1.FDQuery1.Open;
+//      id := DM.Datamodule1.FDQuery1.FieldByName('id_alert').asinteger + 1;
 
       DM.DataModule1.FDQuery1.SQL.Clear;
-      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO alerts values (:id, :note,:degree,:when, :user)');
-      DM.DataModule1.FDQuery1.ParamByName('id').asinteger := id;
+      DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO alerts (note,degree,[when],[user]) values (:note,:degree,:when,:user)');
       DM.DataModule1.FDQuery1.ParamByName('note').asstring := note;
       DM.DataModule1.FDQuery1.ParamByName('degree').asstring := degree;
       DM.DataModule1.FDQuery1.ParamByName('when').asdatetime := now;
@@ -840,6 +842,16 @@ var text :string;
 begin
 //  RunDosInMemo('ping 8.8.8.8 -c 1',Memo1);
   timer1.Enabled := true;
+end;
+
+procedure Tfrm_main.CheckBox2Change(Sender: TObject);
+begin
+  if checkbox2.IsChecked then checkbox3.IsChecked := false;
+end;
+
+procedure Tfrm_main.CheckBox3Change(Sender: TObject);
+begin
+  if checkbox3.IsChecked then checkbox2.IsChecked := false;
 end;
 
 procedure Tfrm_main.DateEdit1Change(Sender: TObject);
@@ -1124,43 +1136,42 @@ begin
 //      DM.Datamodule1.FDQuery1.Open;
 //      CDEP := DM.Datamodule1.FDQuery1.FieldByName('CDEP').asinteger + 1;
 
-        showmessage('1');
       // Generate new BarCode
       RandomString := GenerateRandomString;
       while IsInDatabase(RandomString) do RandomString := GenerateRandomString;
-      showmessage(RandomString);
-        showmessage('2');
+//      showmessage(RandomString);
 
       DM.DataModule1.FDQuery1.SQL.Clear;
       DM.DataModule1.FDQuery1.SQL.Add('select count(patient_id) from patients where patient_id=:patient_id');
       DM.DataModule1.FDQuery1.ParamByName('patient_id').asstring:= edit__id.Text;
       DM.Datamodule1.FDQuery1.Open;
-        showmessage('3');
 
       count_patient_id := DM.Datamodule1.FDQuery1.Fields[0].asinteger;
-      showmessage(edit__id.Text);
+//      showmessage(edit__id.Text);
 
       if count_patient_id < 1  then begin
-        showmessage('11');
 
         age := yearof(now) - yearof(dateedit1.Date) ;
 
+//        if checkbox2.IsChecked OR checkbox3.IsChecked then begin
+//          if checkbox2.IsChecked then begin
+//            type_ass := 'CNAS';
+//          end else begin
+//            if checkbox3.IsChecked then begin
+//              type_ass := 'CASNOS';
+//            end
+//          end;
+//        end else begin
+//          if checkbox2.IsChecked AND checkbox3.IsChecked then begin
+//            type_ass := 'CNAS / CASNOS';
+//          end;
+//        end;
 
-        if checkbox2.IsChecked OR checkbox3.IsChecked then begin
-          if checkbox2.IsChecked then begin
-            type_ass := 'CNAS';
-          end else begin
-            if checkbox3.IsChecked then begin
-              type_ass := 'CASNOS';
-            end
-          end;
-        end else begin
-          type_ass := 'CNAS / CASNOS';
-        end;
+        if checkbox2.IsChecked then type_ass := 'CNAS';
 
-        if checkbox1.IsChecked then begin
-          allergies := 'oui';
-        end;
+        if checkbox3.IsChecked then type_ass := 'CASNOS';
+
+        if checkbox1.IsChecked then allergies := 'oui' else allergies := 'Non';
 
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('INSERT INTO patients (barcode,patient_id,fullName,date_of_birth,age,gender,phone,sit_f,blood_type,nationality,wilaya,region,allergies,type_ass,percentage_ass,created_at) ');
@@ -1184,17 +1195,14 @@ begin
         DM.Datamodule1.FDQuery1.Execute;
         showmessage('Ajouté avec succès!');
 
-        showmessage('12');
-
         rec('Patient Created / ID: ' + RandomString);
 
+        SpeedButton8Click(nil);
 
-//        SpeedButton7Click(nil);
+        DM.DataModule1.qry_patients.refresh;
+        DM.DataModule1.qry_patients.first;
 
-//        DM.DataModule1.qry_patients.refresh;
-//        DM.DataModule1.qry_patients.first;
-
-//        edit7.SetFocus;
+        edit8.SetFocus;
       end else begin
         rec('Trying to add available patient / ID: ' +edit__id.Text);
         alert('Trying to add available patient / ID: ' + edit__id.Text,'50%');
@@ -1460,6 +1468,31 @@ begin
   floatanimation9.Enabled := false;
   floatanimation10.Enabled := false;
 
+end;
+
+procedure Tfrm_main.SpeedButton8Click(Sender: TObject);
+begin
+
+  if rectangle74.Visible then begin
+    floatanimation12.StartValue := 417;
+    floatanimation12.StopValue := 65;
+    floatanimation11.StartValue := 417;
+    floatanimation11.StopValue := 65;
+    floatanimation12.Enabled := true;
+    floatanimation11.Enabled := true;
+    rectangle74.Visible := false;
+  end else begin
+    floatanimation12.StartValue := 65;
+    floatanimation12.StopValue := 417;
+    floatanimation11.StartValue := 65;
+    floatanimation11.StopValue := 417;
+    floatanimation12.Enabled := true;
+    floatanimation11.Enabled := true;
+    rectangle74.Visible := true;
+  end;
+
+  floatanimation9.Enabled := false;
+  floatanimation10.Enabled := false;
 end;
 
 procedure Tfrm_main.SubMenu_AnimationFinish(Sender: TObject);
