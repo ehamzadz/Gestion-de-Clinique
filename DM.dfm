@@ -1,7 +1,6 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
-  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
@@ -14,6 +13,7 @@ object DataModule1: TDataModule1
       'Password=Hamza7911-/*'
       'Server=127.0.0.1,1433'
       'DriverID=MSSQL')
+    Connected = True
     LoginPrompt = False
     AfterConnect = FDConnection1AfterConnect
     Left = 80
@@ -34,6 +34,7 @@ object DataModule1: TDataModule1
     Top = 216
   end
   object table_tickets: TFDTable
+    Active = True
     IndexFieldNames = 'num'
     Connection = FDConnection1
     TableName = 'tickets'
@@ -41,11 +42,12 @@ object DataModule1: TDataModule1
     Top = 272
   end
   object table_patients: TFDTable
-    IndexFieldNames = 'CDEP'
+    Active = True
+    IndexFieldNames = 'barcode'
     Connection = FDConnection1
     TableName = 'GC_DB.dbo.patients'
-    Left = 80
-    Top = 328
+    Left = 552
+    Top = 168
   end
   object FDConnection2: TFDConnection
     Params.Strings = (
@@ -56,11 +58,12 @@ object DataModule1: TDataModule1
     Top = 48
   end
   object qry_patients: TFDQuery
+    Active = True
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from patients order by record DESC')
-    Left = 264
-    Top = 160
+      'select * from patients order by created_at DESC')
+    Left = 552
+    Top = 224
   end
   object qry_commune: TFDQuery
     Connection = FDConnection1

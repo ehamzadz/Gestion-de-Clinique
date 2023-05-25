@@ -116,8 +116,6 @@ type
     Edit_num_recent_ticket: TEdit;
     Rectangle11: TRectangle;
     grid_patients: TStringGrid;
-    BindSourceDB3: TBindSourceDB;
-    LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource;
     PopupMenu_grid_patients: TPopupMenu;
     print_patient_id: TMenuItem;
     frxReport_patient_id: TfrxReport;
@@ -324,7 +322,6 @@ type
     FloatAnimation9: TFloatAnimation;
     FloatAnimation10: TFloatAnimation;
     BindSourceDB4: TBindSourceDB;
-    LinkGridToDataSourceBindSourceDB4: TLinkGridToDataSource;
     PopupMenu_patients: TPopupMenu;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
@@ -389,6 +386,11 @@ type
     Text81: TText;
     Text82: TText;
     ComboEdit1: TComboEdit;
+    GridPatients: TStringGrid;
+    PopupMenu1: TPopupMenu;
+    MenuItem5: TMenuItem;
+    MenuItem7: TMenuItem;
+    LinkGridToDataSourceBindSourceDB4: TLinkGridToDataSource;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -445,6 +447,9 @@ type
     procedure SpeedButton8Click(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
+    procedure MenuItem5Click(Sender: TObject);
+    procedure Edit8Typing(Sender: TObject);
   private
     { Private declarations }
   public
@@ -645,27 +650,26 @@ begin
       DM.Datamodule1.table_tickets.Filter := 'num like '+inttostr(num);
       DM.Datamodule1.table_tickets.Filtered := true;
 
-
-    //  FrxReport_ticket.ShowReport();
-      FrxReport_ticket.PrepareReport;
-      FrxReport_ticket.PrintOptions.ShowDialog := False;
-      FrxReport_ticket.Print;
-
-      record_msg := 'Impression de Ticket "' + room + ' Num:'+ inttostr(ticket_number)+'"';
+      FrxReport_ticket.ShowReport();
+//      FrxReport_ticket.PrepareReport;
+//      FrxReport_ticket.PrintOptions.ShowDialog := False;
+//      FrxReport_ticket.Print;
+      record_msg := 'Impression de Ticket  Num:'+ inttostr(ticket_number) + ' - ' + room;
+//      record_msg := 'Impression de Ticket Num:'+ inttostr(ticket_number)+' "' + room + '" pour "'+ PATIENT +'" ';
       rec(record_msg);
 
       DM.Datamodule1.table_tickets.Filtered := false;
-      tabcontrol1.TabIndex := 3;
+      tabcontrol1.TabIndex := 4;
     end;
 
 end;
 
 procedure Tfrm_main.affect_to_waiting_roomClick(Sender: TObject);
 begin
-  PATIENT := StringGrid_patients.Cells[1,StringGrid_patients.Selected];
+  PATIENT := Gridpatients.Cells[1,Gridpatients.Selected];
 
   DM.Datamodule1.table_patients.Filtered := false;
-  DM.Datamodule1.table_patients.Filter := 'CODE_B like '+ quotedstr('%'+PATIENT+'%') ;
+  DM.Datamodule1.table_patients.Filter := 'barcode like '+ quotedstr('%'+PATIENT+'%') ;
   DM.Datamodule1.table_patients.Filtered := true;
 
   tabcontrol1.TabIndex := 2;
@@ -744,14 +748,6 @@ begin
 
         rec('Patient inserted / ID: ' + RandomString);
 
-        edit_name.Text := '';
-        edit_age.Text := '';
-        edit_phone.Text := '';
-        edit_adr.Text := '';
-        dateedit1.IsEmpty := true;
-        ComboBox1.ItemIndex := -1;
-        ComboBox3.ItemIndex := -1;
-
         SpeedButton7Click(nil);
 
         DM.DataModule1.qry_patients.refresh;
@@ -780,6 +776,22 @@ end;
 procedure Tfrm_main.MenuItem2Click(Sender: TObject);
 begin
   Rectangle8Click(nil);
+end;
+
+procedure Tfrm_main.MenuItem5Click(Sender: TObject);
+begin
+
+//  showmessage(grid_patients.Cells[1,grid_patients.Selected]);
+
+  DM.Datamodule1.table_patients.Filtered := false;
+  DM.Datamodule1.table_patients.Filter := 'barcode = '''+GridPatients.Cells[1,GridPatients.Selected]+'''';
+  DM.Datamodule1.table_patients.Filtered := true;
+
+  FrxReport_patient_id.ShowReport();
+
+//  FrxReport_patient_id.PrepareReport;
+//  FrxReport_patient_id.PrintOptions.ShowDialog := False;
+//  FrxReport_patient_id.Print;
 end;
 
 procedure Tfrm_main.MenuItem1Click(Sender: TObject);
@@ -875,6 +887,21 @@ begin
   end;
 end;
 
+procedure Tfrm_main.Edit8Typing(Sender: TObject);
+begin
+
+//  ComboBox4.Items[ComboBox4.ItemIndex];
+
+
+  if edit8.Text ='' then begin
+    DM.Datamodule1.qry_patients.Filtered := false;
+  end else begin
+    DM.Datamodule1.qry_patients.Filtered := false;
+    DM.Datamodule1.qry_patients.Filter := 'barcode like '+ quotedstr('%'+edit8.Text+'%') + ' OR patient_id like '+ quotedstr('%'+edit8.Text+'%') + ' OR fullName like '+ quotedstr('%'+edit8.Text+'%');
+    DM.Datamodule1.qry_patients.Filtered := true;
+  end;
+end;
+
 procedure Tfrm_main.edit_search_patientsTyping(Sender: TObject);
 begin
   if edit_search_patients.Text ='' then begin
@@ -918,42 +945,36 @@ var
   form_width, grid_patients_list_width, grid_users_list_width, rest_width: real;
 begin
 
-  // Auto Adjust Columns width for ***PATIENT*** StringGrid//////////////////////////////////////////////////////
-  form_width := frm_main.Width;                                                                               ///
-  grid_patients_list_width := form_width - 57 - 60;                                                           ///
-  rest_width := grid_patients_list_width;                                                                     ///
-  LinkGridToDataSourceBindSourceDB3.Columns[0].Width := round((5.93) * grid_patients_list_width / 100);       ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;                              ///
-  LinkGridToDataSourceBindSourceDB3.Columns[1].Width := round((8.30) * grid_patients_list_width / 100);       ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;                              ///
-  LinkGridToDataSourceBindSourceDB3.Columns[2].Width := round((17.79) * grid_patients_list_width / 100);      ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;                              ///
-  LinkGridToDataSourceBindSourceDB3.Columns[3].Width := round((23.72) * grid_patients_list_width / 100);      ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[3].Width;                              ///
-  LinkGridToDataSourceBindSourceDB3.Columns[4].Width := round((8.30) * grid_patients_list_width / 100);       ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[4].Width;                              ///
-  LinkGridToDataSourceBindSourceDB3.Columns[5].Width := round((11.86) * grid_patients_list_width / 100);      ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[5].Width;                              ///
-  LinkGridToDataSourceBindSourceDB3.Columns[6].Width := round(rest_width)-45;                                 ///
+//  // Auto Adjust Columns width for ***PATIENT*** StringGrid//////////////////////////////////////////////////////
+//  form_width := frm_main.Width;                                                                               ///
+//  grid_patients_list_width := form_width - 57 - 60;                                                           ///
+//  rest_width := grid_patients_list_width;                                                                     ///
+//  LinkGridToDataSourceBindSourceDB3.Columns[0].Width := round((5.93) * grid_patients_list_width / 100);       ///
+//  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;                              ///
+//  LinkGridToDataSourceBindSourceDB3.Columns[1].Width := round((8.30) * grid_patients_list_width / 100);       ///
+//  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;                              ///
+//  LinkGridToDataSourceBindSourceDB3.Columns[2].Width := round((17.79) * grid_patients_list_width / 100);      ///
+//  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;                              ///
+//  LinkGridToDataSourceBindSourceDB3.Columns[3].Width := round((23.72) * grid_patients_list_width / 100);      ///
+//  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[3].Width;                              ///
+//  LinkGridToDataSourceBindSourceDB3.Columns[4].Width := round((8.30) * grid_patients_list_width / 100);       ///
+//  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[4].Width;                              ///
+//  LinkGridToDataSourceBindSourceDB3.Columns[5].Width := round((11.86) * grid_patients_list_width / 100);      ///
+//  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[5].Width;                              ///
+//  LinkGridToDataSourceBindSourceDB3.Columns[6].Width := round(rest_width)-45;                                 ///
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // Auto Adjust Columns width for ***PATIENT*** StringGrid//////////////////////////////////////////////////////
   form_width := frm_main.Width;                                                                               ///
   grid_patients_list_width := form_width - 57 - 60;                                                           ///
-  rest_width := grid_patients_list_width;                                                                     ///
-  LinkGridToDataSourceBindSourceDB4.Columns[0].Width := round((5.93) * grid_patients_list_width / 100);       ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;                              ///
-  LinkGridToDataSourceBindSourceDB4.Columns[1].Width := round((8.30) * grid_patients_list_width / 100);       ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;                              ///
-  LinkGridToDataSourceBindSourceDB4.Columns[2].Width := round((23.72) * grid_patients_list_width / 100);      ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;                              ///
-  LinkGridToDataSourceBindSourceDB4.Columns[3].Width := round((7.86) * grid_patients_list_width / 100);       ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[3].Width;                              ///
-  LinkGridToDataSourceBindSourceDB4.Columns[4].Width := round((11.30) * grid_patients_list_width / 100);       ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[4].Width;                              ///
-  LinkGridToDataSourceBindSourceDB4.Columns[5].Width := round((12.79) * grid_patients_list_width / 100);      ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[5].Width;                              ///
-  LinkGridToDataSourceBindSourceDB4.Columns[6].Width := round(rest_width);                                    ///
+  LinkGridToDataSourceBindSourceDB4.Columns[0].Width := round((8) * grid_patients_list_width / 100);       ///
+  LinkGridToDataSourceBindSourceDB4.Columns[1].Width := round((8) * grid_patients_list_width / 100);       ///
+  LinkGridToDataSourceBindSourceDB4.Columns[2].Width := round((8) * grid_patients_list_width / 100);      ///
+  LinkGridToDataSourceBindSourceDB4.Columns[3].Width := round((24) * grid_patients_list_width / 100);       ///
+  LinkGridToDataSourceBindSourceDB4.Columns[4].Width := round((8) * grid_patients_list_width / 100);     ///
+  LinkGridToDataSourceBindSourceDB4.Columns[5].Width := round((8) * grid_patients_list_width / 100);      ///
+  LinkGridToDataSourceBindSourceDB4.Columns[6].Width := round((8) * grid_patients_list_width / 100);      ///
+  LinkGridToDataSourceBindSourceDB4.Columns[7].Width := round((25.5) * grid_patients_list_width / 100);                                    ///
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -962,11 +983,11 @@ begin
   grid_users_list_width := form_width - 57 - 60;                                                              ///
   rest_width := grid_users_list_width;                                                                        ///
   LinkGridToDataSourceBindSourceDB2.Columns[0].Width := round((20) * grid_users_list_width / 100);            ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[0].Width;                              ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB2.Columns[0].Width;                              ///
   LinkGridToDataSourceBindSourceDB2.Columns[1].Width := round((40) * grid_users_list_width / 100);            ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[1].Width;                              ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB2.Columns[1].Width;                              ///
   LinkGridToDataSourceBindSourceDB2.Columns[2].Width := round((38) * grid_users_list_width / 100);            ///
-  rest_width := rest_width - LinkGridToDataSourceBindSourceDB3.Columns[2].Width;                              ///
+  rest_width := rest_width - LinkGridToDataSourceBindSourceDB2.Columns[2].Width;                              ///
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 end;
@@ -995,7 +1016,7 @@ begin
   // User Roles
   roles(USER_type);
 
-  edit7.SetFocus;
+  edit8.SetFocus;
 
   showmessage(USER_type);
 
@@ -1013,6 +1034,11 @@ procedure Tfrm_main.nav_barMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
 //  if (Button = TMouseButton.mbLeft) then StartWindowDrag;
+end;
+
+procedure Tfrm_main.PopupMenu1Popup(Sender: TObject);
+begin
+
 end;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1299,7 +1325,7 @@ begin
   img_users.Opacity := 0.5;
   tabcontrol1.TabIndex := 2;
 
-  edit7.SetFocus;
+  edit8.SetFocus;
 end;
 
 procedure Tfrm_main.Rect_patientsClick(Sender: TObject);
@@ -1311,8 +1337,28 @@ begin
   img_dashboard.Opacity := 0.5;
   img_patients.Opacity := 0.8;
   img_users.Opacity := 0.5;
-  //Switch to Patients TAB
-  tabcontrol1.TabIndex := 3;
+
+  // Refresh Patients Query
+  DM.DataModule1.qry_patients.refresh;
+
+  //Switch to Patients List TAB
+  tabcontrol1.TabIndex := 4;
+
+  // Hide Add Patients Panel
+  if rectangle74.Visible then begin
+    floatanimation12.StartValue := 417;
+    floatanimation12.StopValue := 65;
+    floatanimation11.StartValue := 417;
+    floatanimation11.StopValue := 65;
+    floatanimation12.Enabled := true;
+    floatanimation11.Enabled := true;
+    rectangle74.Visible := false;
+  end;
+  floatanimation11.Enabled := false;
+  floatanimation12.Enabled := false;
+
+  edit8.SetFocus;
+
 end;
 
 procedure Tfrm_main.rect_profile_barClick(Sender: TObject);
@@ -1491,8 +1537,8 @@ begin
     rectangle74.Visible := true;
   end;
 
-  floatanimation9.Enabled := false;
-  floatanimation10.Enabled := false;
+  floatanimation11.Enabled := false;
+  floatanimation12.Enabled := false;
 end;
 
 procedure Tfrm_main.SubMenu_AnimationFinish(Sender: TObject);
