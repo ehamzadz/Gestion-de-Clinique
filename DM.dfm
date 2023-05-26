@@ -20,6 +20,7 @@ object DataModule1: TDataModule1
     Top = 48
   end
   object table_records: TFDTable
+    Active = True
     IndexFieldNames = 'id_rc'
     Connection = FDConnection1
     TableName = 'GC_DB.dbo.records'
@@ -27,6 +28,7 @@ object DataModule1: TDataModule1
     Top = 160
   end
   object table_users: TFDTable
+    Active = True
     IndexFieldNames = 'user'
     Connection = FDConnection1
     TableName = 'GC_DB.dbo.users'
@@ -54,7 +56,7 @@ object DataModule1: TDataModule1
       'Database=D:\db.mdb'
       'DriverID=MSAcc')
     LoginPrompt = False
-    Left = 264
+    Left = 256
     Top = 48
   end
   object qry_patients: TFDQuery
@@ -72,21 +74,13 @@ object DataModule1: TDataModule1
     Left = 264
     Top = 216
   end
-  object UniQuery1: TUniQuery
-    Left = 424
-    Top = 184
-  end
-  object UniConnection1: TUniConnection
-    Left = 424
-    Top = 104
-  end
   object FDConnection3: TFDConnection
     Params.Strings = (
       'Database=F:\Projects\Gestion-de-Clinique\Win32\Debug\db.mdb'
       'DriverID=MSAcc')
     LoginPrompt = False
     AfterConnect = FDConnection1AfterConnect
-    Left = 176
+    Left = 168
     Top = 48
   end
 end
