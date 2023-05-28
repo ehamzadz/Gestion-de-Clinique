@@ -1,24 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-	<Transactions>
-    <Transaction>2022/12/23 15:43:30.000.748,=C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2022/12/23 16:25:35.000.405,=C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2022/12/23 18:56:00.000.011,C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\Github\Desktop App\Gestion de Clinique\U_Auth.pas</Transaction>
-    <Transaction>2022/12/23 18:56:00.000.011,C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\Github\Desktop App\Gestion de Clinique\U_Auth.fmx</Transaction>
-    <Transaction>2022/12/23 18:56:16.000.781,C:\Users\eHamzaDZ\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\Github\Desktop App\Gestion de Clinique\GC.dproj</Transaction>
-    <Transaction>2022/12/23 19:34:48.000.718,=D:\Github\Desktop App\Gestion de Clinique\Unit1.pas</Transaction>
-    <Transaction>2022/12/23 20:48:17.000.777,=D:\Github\Desktop App\Gestion de Clinique\Unit2.pas</Transaction>
-    <Transaction>2022/12/23 20:48:47.000.217,D:\Github\Desktop App\Gestion de Clinique\Unit2.fmx=D:\Github\Desktop App\Gestion de Clinique\U_Main.fmx</Transaction>
-    <Transaction>2022/12/23 20:48:47.000.217,D:\Github\Desktop App\Gestion de Clinique\Unit2.pas=D:\Github\Desktop App\Gestion de Clinique\U_Main.pas</Transaction>
-    <Transaction>2023/01/02 21:28:47.000.089,=D:\Github\Desktop App\Gestion-de-Clinique\Unit1.pas</Transaction>
-    <Transaction>2023/01/02 21:29:05.000.724,D:\Github\Desktop App\Gestion-de-Clinique\Unit1.dfm=D:\Github\Desktop App\Gestion-de-Clinique\DM.dfm</Transaction>
-    <Transaction>2023/01/02 21:29:05.000.724,D:\Github\Desktop App\Gestion-de-Clinique\Unit1.pas=D:\Github\Desktop App\Gestion-de-Clinique\DM.pas</Transaction>
-    <Transaction>2023/01/03 22:46:07.000.593,=D:\Github\Desktop App\Gestion-de-Clinique\Unit3.pas</Transaction>
-    <Transaction>2023/01/03 22:51:24.000.826,D:\Github\Desktop App\Gestion-de-Clinique\U_Load.fmx=D:\Github\Desktop App\Gestion-de-Clinique\Unit3.fmx</Transaction>
-    <Transaction>2023/01/03 22:51:24.000.826,D:\Github\Desktop App\Gestion-de-Clinique\U_Load.pas=D:\Github\Desktop App\Gestion-de-Clinique\Unit3.pas</Transaction>
-    <Transaction>2023/01/10 22:30:16.000.906,=D:\Github\Desktop App\Gestion-de-Clinique\Unit1.pas</Transaction>
-    <Transaction>2023/04/05 09:04:27.000.361,=Z:\Projects\Gestion-de-Clinique\Unit1.pas</Transaction>
-    <Transaction>2023/04/05 09:04:52.000.925,Z:\Projects\Gestion-de-Clinique\U_Add_Patient.fmx=Z:\Projects\Gestion-de-Clinique\Unit1.fmx</Transaction>
-    <Transaction>2023/04/05 09:04:52.000.925,Z:\Projects\Gestion-de-Clinique\U_Add_Patient.pas=Z:\Projects\Gestion-de-Clinique\Unit1.pas</Transaction>
-  </Transactions>
+  <ActiveMobileDevice>   <NoProfile Android64="R5CNA0HP31E" Android="R5CNA0HP31E"/>
+  </ActiveMobileDevice>
 </BorlandProject>
