@@ -119,7 +119,7 @@ Coordinates=1375,827,104,36
 Coordinates=2028,963,143,36
 
 []
-Coordinates=2214,153,117,36
+Coordinates=1366,1214,64,58
 Visible=True
 
 [btn_logout_from_profile_menu]
@@ -1266,9 +1266,6 @@ Coordinates=262,1183,87,36
 
 [Text96]
 Coordinates=1083,175,54,58
-
-[Image15]
-Coordinates=1366,1214,64,58
 
 [Rectangle87]
 Coordinates=173,1183,87,36
