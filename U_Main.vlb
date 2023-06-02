@@ -119,7 +119,7 @@ Coordinates=1375,827,104,36
 Coordinates=2028,963,143,36
 
 []
-Coordinates=1366,1214,64,58
+Coordinates=865,316,94,36
 Visible=True
 
 [btn_logout_from_profile_menu]
@@ -1141,14 +1141,8 @@ Coordinates=2114,1081,79,36
 Coordinates=300,30,86,234
 Visible=True
 
-[Rectangle104]
-Coordinates=865,316,94,36
-
 [Tab_doctord_acting]
 Coordinates=1049,386,128,36
-
-[Rectangle103]
-Coordinates=865,441,94,36
 
 [Rectangle94]
 Coordinates=1098,262,87,36
@@ -1192,17 +1186,11 @@ Coordinates=1107,1073,87,36
 [Rectangle99]
 Coordinates=1731,131,87,36
 
-[SpeedButton11]
-Coordinates=752,441,103,58
-
 [Rectangle96]
 Coordinates=1731,230,87,36
 
 [Rectangle84]
 Coordinates=1731,285,87,36
-
-[ColorAnimation40]
-Coordinates=1731,340,117,36
 
 [Rectangle97]
 Coordinates=1731,395,87,36
