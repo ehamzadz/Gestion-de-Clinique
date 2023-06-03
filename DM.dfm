@@ -1,6 +1,7 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
+  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
@@ -82,5 +83,13 @@ object DataModule1: TDataModule1
     AfterConnect = FDConnection1AfterConnect
     Left = 168
     Top = 48
+  end
+  object qry_waiting_room: TFDQuery
+    Active = True
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from tickets order by created_at asc')
+    Left = 328
+    Top = 304
   end
 end

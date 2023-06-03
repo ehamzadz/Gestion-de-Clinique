@@ -24,6 +24,7 @@ type
     qry_patients: TFDQuery;
     qry_commune: TFDQuery;
     FDConnection3: TFDConnection;
+    qry_waiting_room: TFDQuery;
     procedure FDConnection1AfterConnect(Sender: TObject);
   private
     { Private declarations }

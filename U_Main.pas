@@ -105,7 +105,7 @@ type
     Rectangle1: TRectangle;
     Rectangle3: TRectangle;
     Rectangle7: TRectangle;
-    edit_search_patients: TEdit;
+    edit_search_waiting_patients: TEdit;
     Rectangle8: TRectangle;
     ColorAnimation4: TColorAnimation;
     Text15: TText;
@@ -115,7 +115,7 @@ type
     MenuItem2: TMenuItem;
     Edit_num_recent_ticket: TEdit;
     Rectangle11: TRectangle;
-    grid_patients: TStringGrid;
+    grid_waiting_room: TStringGrid;
     PopupMenu_grid_patients: TPopupMenu;
     print_patient_id: TMenuItem;
     frxReport_patient_id: TfrxReport;
@@ -447,11 +447,11 @@ type
     Text99: TText;
     Text95: TText;
     Text101: TText;
-    Text102: TText;
-    Edit2: TEdit;
+    text_upcoming_patient_name: TText;
+    edit_upcoming_patient_record: TEdit;
     Text100: TText;
     Rectangle105: TRectangle;
-    Rectangle111: TRectangle;
+    btn_next_patient: TRectangle;
     Rectangle115: TRectangle;
     Rectangle116: TRectangle;
     Text113: TText;
@@ -463,23 +463,23 @@ type
     Edit4: TEdit;
     Text125: TText;
     Text126: TText;
-    Text127: TText;
+    text_consulting_patient_name: TText;
     Text128: TText;
     Text129: TText;
-    Text130: TText;
+    text_consulting_patient_daten: TText;
     Text131: TText;
     Text132: TText;
-    Text133: TText;
+    text_consulting_patient_sexe: TText;
     Text134: TText;
     Text135: TText;
-    Text136: TText;
+    text_consulting_patient_blood: TText;
     Text137: TText;
     Text138: TText;
-    Text139: TText;
-    Memo3: TMemo;
+    text_consulting_patient_ass: TText;
+    memo_consulting_patient_details: TMemo;
     Text140: TText;
     Text141: TText;
-    Rectangle120: TRectangle;
+    btn_affect_acte_patient: TRectangle;
     SpeedButton12: TSpeedButton;
     ColorAnimation36: TColorAnimation;
     Text103: TText;
@@ -490,6 +490,20 @@ type
     Image15: TImage;
     G_Green: TBrushObject;
     Brush2: TBrushObject;
+    Rectangle104: TRectangle;
+    Text102: TText;
+    Rectangle111: TRectangle;
+    Text105: TText;
+    Rectangle120: TRectangle;
+    Text106: TText;
+    Rectangle121: TRectangle;
+    Text107: TText;
+    rect_waiting_room: TRectangle;
+    img_waiting_room: TImage;
+    ColorAnimation40: TColorAnimation;
+    Text108: TText;
+    BindSourceDB3: TBindSourceDB;
+    LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -511,7 +525,6 @@ type
     procedure MenuItem2Click(Sender: TObject);
     procedure Rectangle8Click(Sender: TObject);
     procedure print_patient_idClick(Sender: TObject);
-    procedure edit_search_patientsTyping(Sender: TObject);
     procedure Rectangle13Click(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -549,6 +562,9 @@ type
     procedure PopupMenu1Popup(Sender: TObject);
     procedure MenuItem5Click(Sender: TObject);
     procedure Edit8Typing(Sender: TObject);
+    procedure Rectangle122Click(Sender: TObject);
+    procedure rect_waiting_roomClick(Sender: TObject);
+    procedure Rectangle115Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1001,16 +1017,16 @@ begin
   end;
 end;
 
-procedure Tfrm_main.edit_search_patientsTyping(Sender: TObject);
-begin
-  if edit_search_patients.Text ='' then begin
-    DM.Datamodule1.table_patients.Filtered := false;
-  end else begin
-    DM.Datamodule1.table_patients.Filtered := false;
-    DM.Datamodule1.table_patients.Filter := 'CODE_B like '+ quotedstr('%'+edit_search_patients.Text+'%') ;
-    DM.Datamodule1.table_patients.Filtered := true;
-  end;
-end;
+//procedure Tfrm_main.edit_search_patientsTyping(Sender: TObject);
+//begin
+//  if edit_search_patients.Text ='' then begin
+//    DM.Datamodule1.table_patients.Filtered := false;
+//  end else begin
+//    DM.Datamodule1.table_patients.Filtered := false;
+//    DM.Datamodule1.table_patients.Filter := 'CODE_B like '+ quotedstr('%'+edit_search_patients.Text+'%') ;
+//    DM.Datamodule1.table_patients.Filtered := true;
+//  end;
+//end;
 
 procedure Tfrm_main.edit_search_usersTyping(Sender: TObject);
 begin
@@ -1148,7 +1164,7 @@ begin
 //  showmessage(grid_patients.Cells[1,grid_patients.Selected]);
 
   DM.Datamodule1.table_patients.Filtered := false;
-  DM.Datamodule1.table_patients.Filter := 'CODE_B = '''+grid_patients.Cells[1,grid_patients.Selected]+'''';
+  DM.Datamodule1.table_patients.Filter := 'CODE_B = '''+grid_waiting_room.Cells[1,grid_waiting_room.Selected]+'''';
   DM.Datamodule1.table_patients.Filtered := true;
 
   FrxReport_patient_id.PrepareReport;
@@ -1178,9 +1194,44 @@ begin
 end;
 
 // Impression Ticket
+procedure Tfrm_main.Rectangle115Click(Sender: TObject);
+begin
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add(' select top 1 * from tickets where updated_at=created_at order by created_at asc ');
+//      DM.DataModule1.FDQuery1.ParamByName('updated_at').asstring := '';
+      DM.Datamodule1.FDQuery1.open;
+
+      edit_upcoming_patient_record.Text := DM.Datamodule1.FDQuery1.FieldByName('patient').AsString;
+
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add(' select * from patients where barcode=:barcode');
+      DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := edit_upcoming_patient_record.Text;
+      DM.Datamodule1.FDQuery1.open;
+
+      edit_upcoming_patient_record.Text := DM.Datamodule1.FDQuery1.FieldByName('record').AsString;
+      text_upcoming_patient_name.Text := DM.Datamodule1.FDQuery1.FieldByName('fullName').AsString;
+end;
+
+procedure Tfrm_main.Rectangle122Click(Sender: TObject);
+var
+  this :TButton;
+begin
+  this := TButton(sender);
+  current_tab.Parent := this;
+  img_dashboard.Opacity := 0.5;
+  img_patients.Opacity := 0.5;
+  img_users.Opacity := 0.5;
+  tabcontrol1.TabIndex := 1;
+
+  edit8.SetFocus;
+
+end;
+
 procedure Tfrm_main.Rectangle13Click(Sender: TObject);
 begin
-  edit_search_patientsTyping(nil);
+//  edit_search_patientsTyping(nil);
 end;
 
 procedure Tfrm_main.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -1486,6 +1537,24 @@ begin
 end;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ROLE
+procedure Tfrm_main.rect_waiting_roomClick(Sender: TObject);
+var
+  this :TButton;
+begin
+  this := TButton(sender);
+  current_tab.Parent := this;
+  img_dashboard.Opacity := 0.5;
+  img_patients.Opacity := 0.5;
+  img_users.Opacity := 0.5;
+  img_users.Opacity := 0.8;
+  tabcontrol1.TabIndex := 1;
+
+  edit_search_waiting_patients.SetFocus;
+
+  dm.DataModule1.qry_waiting_room.refresh;
+
+end;
+
 procedure Tfrm_main.roles(U_type: string);
 begin
 
@@ -1699,7 +1768,7 @@ end;
 
 procedure Tfrm_main.to_waiting_roomClick(Sender: TObject);
 begin
-  PATIENT := grid_patients.Cells[1,grid_patients.Selected];
+  PATIENT := grid_waiting_room.Cells[1,grid_waiting_room.Selected];
 
   showmessage('1');
 
