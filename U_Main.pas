@@ -760,7 +760,7 @@ begin
       end else begin
         DM.DataModule1.FDQuery1.SQL.Clear;
         DM.DataModule1.FDQuery1.SQL.Add('select top 1 * from tickets WHERE status=:status order by num DESC');
-      DM.DataModule1.FDQuery1.ParamByName('status').AsWideString := room;
+        DM.DataModule1.FDQuery1.ParamByName('status').AsWideString := room;
         DM.Datamodule1.FDQuery1.Open;
         ticket_number := DM.Datamodule1.FDQuery1.FieldByName('ticket_number').AsInteger+1;
       end;
@@ -775,17 +775,19 @@ begin
       DM.DataModule1.FDQuery1.ParamByName('patient').asstring := PATIENT;
       DM.Datamodule1.FDQuery1.Execute;
 
+
+      record_msg := 'Impression de Ticket  Num: '+ inttostr(ticket_number) + ' - ' + room;
+//      record_msg := 'Impression de Ticket Num:'+ inttostr(ticket_number)+' "' + room + '" pour "'+ PATIENT +'" ';
+      rec(record_msg);
+
       DM.Datamodule1.table_tickets.Filtered := false;
       DM.Datamodule1.table_tickets.Filter := 'num like '+inttostr(num);
       DM.Datamodule1.table_tickets.Filtered := true;
 
-      FrxReport_ticket.ShowReport();
+////      FrxReport_ticket.ShowReport();
 //      FrxReport_ticket.PrepareReport;
 //      FrxReport_ticket.PrintOptions.ShowDialog := False;
 //      FrxReport_ticket.Print;
-      record_msg := 'Impression de Ticket  Num:'+ inttostr(ticket_number) + ' - ' + room;
-//      record_msg := 'Impression de Ticket Num:'+ inttostr(ticket_number)+' "' + room + '" pour "'+ PATIENT +'" ';
-      rec(record_msg);
 
       DM.Datamodule1.table_tickets.Filtered := false;
       tabcontrol1.TabIndex := 4;
