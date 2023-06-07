@@ -459,8 +459,6 @@ type
     Rectangle118: TRectangle;
     Rectangle119: TRectangle;
     Text123: TText;
-    Text124: TText;
-    Edit4: TEdit;
     Text125: TText;
     Text126: TText;
     text_consulting_patient_name: TText;
@@ -511,6 +509,11 @@ type
     Image18: TImage;
     ColorAnimation41: TColorAnimation;
     Text107: TText;
+    Text110: TText;
+    Text111: TText;
+    edit_consulting_patient_record: TEdit;
+    Text112: TText;
+    edit_consulting_patient_barcode: TEdit;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -956,11 +959,28 @@ end;
 procedure Tfrm_main.btn_next_patientClick(Sender: TObject);
 begin
 
-  DM.DataModule1.FDQuery1.SQL.Clear;
-  DM.DataModule1.FDQuery1.SQL.Add('UPDATE tickets SET updated_at=:updated_at WHERE patient=:barcode');
-  DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
-  DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := edit_upcoming_patient_barcode.Text;
-  Datamodule1.FDQuery1.Execute;
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add(' select * from patients where barcode=:barcode');
+    DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := edit_upcoming_patient_barcode.Text;
+    DM.Datamodule1.FDQuery1.open;
+
+    edit_consulting_patient_record.Text := DM.Datamodule1.FDQuery1.FieldByName('record').AsString;
+    edit_consulting_patient_barcode.Text := DM.Datamodule1.FDQuery1.FieldByName('barcode').AsString;
+    text_consulting_patient_name.Text := DM.Datamodule1.FDQuery1.FieldByName('fullName').AsString;
+    text_consulting_patient_daten.Text := DM.Datamodule1.FDQuery1.FieldByName('date_of_birth').AsString;
+    text_consulting_patient_sexe.Text := DM.Datamodule1.FDQuery1.FieldByName('gender').AsString;
+    text_consulting_patient_blood.Text := DM.Datamodule1.FDQuery1.FieldByName('blood_type').AsString;
+    text_consulting_patient_ass.Text := DM.Datamodule1.FDQuery1.FieldByName('type_ass').AsString + ' ' + DM.Datamodule1.FDQuery1.FieldByName('percentage_ass').AsString;
+
+
+
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('UPDATE tickets SET updated_at=:updated_at WHERE patient=:barcode');
+    DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
+    DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := edit_upcoming_patient_barcode.Text;
+    Datamodule1.FDQuery1.Execute;
+
+    timer_next_patient.Enabled := true;
 
 end;
 
