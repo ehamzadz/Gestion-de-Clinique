@@ -1,7 +1,6 @@
 object DataModule1: TDataModule1
   Height = 480
   Width = 640
-  PixelsPerInch = 96
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 80
@@ -49,8 +48,8 @@ object DataModule1: TDataModule1
     IndexFieldNames = 'barcode'
     Connection = FDConnection1
     TableName = 'GC_DB.dbo.patients'
-    Left = 552
-    Top = 168
+    Left = 80
+    Top = 328
   end
   object FDConnection2: TFDConnection
     Params.Strings = (
@@ -88,8 +87,11 @@ object DataModule1: TDataModule1
     Active = True
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from tickets order by created_at asc')
-    Left = 328
-    Top = 304
+      'select tickets.*, patients.fullName from tickets '
+      'inner join patients '
+      'on tickets.patient = patients.barcode '
+      'order by created_at asc')
+    Left = 552
+    Top = 288
   end
 end

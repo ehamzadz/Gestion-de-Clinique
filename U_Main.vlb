@@ -940,9 +940,6 @@ Coordinates=2612,981,129,33
 [Rectangle75]
 Coordinates=105,1276,75,33
 
-[Edit8]
-Coordinates=2399,519,40,51
-
 [DateEdit2]
 Coordinates=2605,10,115,51
 
@@ -1441,9 +1438,6 @@ Coordinates=773,750,52,51
 [Rectangle121]
 Coordinates=580,1099,80,33
 
-[Text105]
-Coordinates=1886,519,52,51
-
 [Rectangle111]
 Coordinates=1464,1040,80,33
 
@@ -1453,14 +1447,11 @@ Coordinates=2081,1217,80,33
 [Text106]
 Coordinates=2661,596,52,51
 
-[Text107]
-Coordinates=420,750,52,51
-
 [edit_search_waiting_patients]
 Coordinates=1873,596,158,51
 
 [grid_waiting_room]
-Coordinates=730,10,106,123
+Coordinates=720,10,106,141
 Visible=True
 
 [Text108]
@@ -1480,5 +1471,14 @@ Coordinates=470,10,170,33
 Visible=False
 
 [BindSourceDB3]
-Coordinates=470,10,151,177
+Coordinates=470,10,151,195
+
+[text_waiting_counter]
+Coordinates=420,750,52,51
+
+[text_finished_counter]
+Coordinates=1886,519,52,51
+
+[edit_searching_patient]
+Coordinates=2399,519,40,51
 

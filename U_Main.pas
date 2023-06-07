@@ -361,7 +361,7 @@ type
     Rectangle80: TRectangle;
     Rectangle81: TRectangle;
     Rectangle82: TRectangle;
-    Edit8: TEdit;
+    edit_searching_patient: TEdit;
     Rectangle83: TRectangle;
     SpeedButton5: TSpeedButton;
     ColorAnimation31: TColorAnimation;
@@ -493,17 +493,24 @@ type
     Rectangle104: TRectangle;
     Text102: TText;
     Rectangle111: TRectangle;
-    Text105: TText;
+    text_finished_counter: TText;
     Rectangle120: TRectangle;
     Text106: TText;
     Rectangle121: TRectangle;
-    Text107: TText;
+    text_waiting_counter: TText;
     rect_waiting_room: TRectangle;
     img_waiting_room: TImage;
     ColorAnimation40: TColorAnimation;
     Text108: TText;
     BindSourceDB3: TBindSourceDB;
     LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource;
+    timer_next_patient: TTimer;
+    Text105: TText;
+    edit_upcoming_patient_barcode: TEdit;
+    rect_consulting_room: TRectangle;
+    Image18: TImage;
+    ColorAnimation41: TColorAnimation;
+    Text107: TText;
     procedure Rect_dashboardClick(Sender: TObject);
     procedure Rect_patientsClick(Sender: TObject);
     procedure Rect_usersClick(Sender: TObject);
@@ -565,6 +572,10 @@ type
     procedure Rectangle122Click(Sender: TObject);
     procedure rect_waiting_roomClick(Sender: TObject);
     procedure Rectangle115Click(Sender: TObject);
+    procedure edit_searching_patientTyping(Sender: TObject);
+    procedure btn_next_patientClick(Sender: TObject);
+    procedure timer_next_patientTimer(Sender: TObject);
+    procedure rect_consulting_roomClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -942,6 +953,17 @@ begin
   else frm_main.WindowState := TWindowState.wsNormal;
 end;
 
+procedure Tfrm_main.btn_next_patientClick(Sender: TObject);
+begin
+
+  DM.DataModule1.FDQuery1.SQL.Clear;
+  DM.DataModule1.FDQuery1.SQL.Add('UPDATE tickets SET updated_at=:updated_at WHERE patient=:barcode');
+  DM.DataModule1.FDQuery1.ParamByName('updated_at').asdatetime := now;
+  DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := edit_upcoming_patient_barcode.Text;
+  Datamodule1.FDQuery1.Execute;
+
+end;
+
 procedure Tfrm_main.btn_switchClick(Sender: TObject);
 begin
   if i=1 then begin
@@ -1004,17 +1026,17 @@ end;
 
 procedure Tfrm_main.Edit8Typing(Sender: TObject);
 begin
-
-//  ComboBox4.Items[ComboBox4.ItemIndex];
-
-
-  if edit8.Text ='' then begin
-    DM.Datamodule1.qry_patients.Filtered := false;
-  end else begin
-    DM.Datamodule1.qry_patients.Filtered := false;
-    DM.Datamodule1.qry_patients.Filter := 'barcode like '+ quotedstr('%'+edit8.Text+'%') + ' OR patient_id like '+ quotedstr('%'+edit8.Text+'%') + ' OR fullName like '+ quotedstr('%'+edit8.Text+'%');
-    DM.Datamodule1.qry_patients.Filtered := true;
-  end;
+//
+////  ComboBox4.Items[ComboBox4.ItemIndex];
+//
+//
+//  if edit8.Text ='' then begin
+//    DM.Datamodule1.qry_patients.Filtered := false;
+//  end else begin
+//    DM.Datamodule1.qry_patients.Filtered := false;
+//    DM.Datamodule1.qry_patients.Filter := 'barcode like '+ quotedstr('%'+edit8.Text+'%') + ' OR patient_id like '+ quotedstr('%'+edit8.Text+'%') + ' OR fullName like '+ quotedstr('%'+edit8.Text+'%');
+//    DM.Datamodule1.qry_patients.Filtered := true;
+//  end;
 end;
 
 //procedure Tfrm_main.edit_search_patientsTyping(Sender: TObject);
@@ -1027,6 +1049,21 @@ end;
 //    DM.Datamodule1.table_patients.Filtered := true;
 //  end;
 //end;
+
+procedure Tfrm_main.edit_searching_patientTyping(Sender: TObject);
+Begin
+//  ComboBox4.Items[ComboBox4.ItemIndex];
+
+
+  if edit_searching_patient.Text ='' then begin
+    DM.Datamodule1.qry_patients.Filtered := false;
+  end else begin
+    DM.Datamodule1.qry_patients.Filtered := false;
+    DM.Datamodule1.qry_patients.Filter := 'barcode like '+ quotedstr('%'+edit_searching_patient.Text+'%') + ' OR patient_id like '+ quotedstr('%'+edit_searching_patient.Text+'%') + ' OR fullName like '+ quotedstr('%'+edit_searching_patient.Text+'%');
+    DM.Datamodule1.qry_patients.Filtered := true;
+  end;
+
+end;
 
 procedure Tfrm_main.edit_search_usersTyping(Sender: TObject);
 begin
@@ -1131,7 +1168,7 @@ begin
   // User Roles
   roles(USER_type);
 
-  edit8.SetFocus;
+  edit_searching_patient.SetFocus;
 
   showmessage(USER_type);
 
@@ -1225,13 +1262,14 @@ begin
   img_users.Opacity := 0.5;
   tabcontrol1.TabIndex := 1;
 
-  edit8.SetFocus;
+  edit_searching_patient.SetFocus;
 
 end;
 
 procedure Tfrm_main.Rectangle13Click(Sender: TObject);
 begin
 //  edit_search_patientsTyping(nil);
+  timer_next_patient.Enabled := true;
 end;
 
 procedure Tfrm_main.Rectangle1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -1378,7 +1416,7 @@ begin
         DM.DataModule1.qry_patients.refresh;
         DM.DataModule1.qry_patients.first;
 
-        edit8.SetFocus;
+        edit_searching_patient.SetFocus;
       end else begin
         rec('Trying to add available patient / ID: ' +edit__id.Text);
         alert('Trying to add available patient / ID: ' + edit__id.Text,'50%');
@@ -1397,7 +1435,9 @@ begin
 
   // Add New Patient
 
-  tabcontrol1.TabIndex := 3;
+  tabcontrol1.TabIndex := 4;
+
+  edit_searching_patient.SetFocus;
 
 
 //  if MessageDlg('Confirm ?',
@@ -1464,6 +1504,24 @@ begin
 //    end;
 end;
 
+procedure Tfrm_main.rect_consulting_roomClick(Sender: TObject);
+var
+  this :TButton;
+  waiting_counter, finished_counter :integer;
+begin
+  this := TButton(sender);
+  current_tab.Parent := this;
+  img_dashboard.Opacity := 0.5;
+  img_patients.Opacity := 0.5;
+  img_users.Opacity := 0.5;
+  img_users.Opacity := 0.5;
+  rect_consulting_room.Opacity := 0.8;
+  tabcontrol1.TabIndex := 5;
+
+  timer_next_patient.Enabled := true;
+
+end;
+
 procedure Tfrm_main.Rect_dashboardClick(Sender: TObject);
 var
   this :TButton;
@@ -1475,7 +1533,7 @@ begin
   img_users.Opacity := 0.5;
   tabcontrol1.TabIndex := 2;
 
-  edit8.SetFocus;
+  edit_searching_patient.SetFocus;
 end;
 
 procedure Tfrm_main.Rect_patientsClick(Sender: TObject);
@@ -1507,7 +1565,7 @@ begin
   floatanimation11.Enabled := false;
   floatanimation12.Enabled := false;
 
-  edit8.SetFocus;
+  edit_searching_patient.SetFocus;
 
 end;
 
@@ -1540,6 +1598,7 @@ end;
 procedure Tfrm_main.rect_waiting_roomClick(Sender: TObject);
 var
   this :TButton;
+  waiting_counter, finished_counter :integer;
 begin
   this := TButton(sender);
   current_tab.Parent := this;
@@ -1551,7 +1610,41 @@ begin
 
   edit_search_waiting_patients.SetFocus;
 
-  dm.DataModule1.qry_waiting_room.refresh;
+//  select tickets.*, patients.fullName from tickets
+//  inner join patients
+//  on tickets.patient = patients.barcode
+//  order by created_at asc
+
+    DM.DataModule1.qry_waiting_room.SQL.Clear;
+    DM.DataModule1.qry_waiting_room.SQL.Add('select tickets.*, patients.fullName from tickets');
+    DM.DataModule1.qry_waiting_room.SQL.Add('inner join patients');
+    DM.DataModule1.qry_waiting_room.SQL.Add('on tickets.patient = patients.barcode');
+    DM.DataModule1.qry_waiting_room.SQL.Add('WHERE CAST(tickets.created_at AS DATE) = :Today');
+    DM.DataModule1.qry_waiting_room.SQL.Add('AND tickets.created_at = tickets.updated_at');
+    DM.DataModule1.qry_waiting_room.SQL.Add('order by tickets.created_at asc');
+    DM.DataModule1.qry_waiting_room.ParamByName('Today').asdate := DATE;
+    DM.Datamodule1.qry_waiting_room.Open;
+
+
+    // Count the number of Waiting Patients returned by "qry_waiting_room"
+    waiting_counter := DM.Datamodule1.qry_waiting_room.RecordCount;
+    text_waiting_counter.Text := inttostr(waiting_counter);
+
+
+
+    // Count the number of Finished Patients
+    // this way Will replcae with counting the records from Actes table, so whe only count patient consulted by doctor
+    DM.DataModule1.FDQuery1.SQL.Clear;
+    DM.DataModule1.FDQuery1.SQL.Add('select count(*) from tickets');
+    DM.DataModule1.FDQuery1.SQL.Add('WHERE CAST(created_at AS DATE) = :Today');
+    DM.DataModule1.FDQuery1.SQL.Add('AND created_at <> updated_at');
+    DM.DataModule1.FDQuery1.ParamByName('Today').asdate := DATE;
+    DM.Datamodule1.FDQuery1.Open;
+    finished_counter := DM.Datamodule1.FDQuery1.fields[0].asinteger;
+    text_finished_counter.Text := inttostr(finished_counter);
+
+
+
 
 end;
 
@@ -1764,6 +1857,30 @@ begin
 
 
 
+end;
+
+procedure Tfrm_main.timer_next_patientTimer(Sender: TObject);
+begin
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add(' select top 1 * from tickets where updated_at=created_at order by created_at asc ');
+//      DM.DataModule1.FDQuery1.ParamByName('updated_at').asstring := '';
+      DM.Datamodule1.FDQuery1.open;
+
+      edit_upcoming_patient_record.Text := DM.Datamodule1.FDQuery1.FieldByName('patient').AsString;
+
+
+      DM.DataModule1.FDQuery1.SQL.Clear;
+      DM.DataModule1.FDQuery1.SQL.Add(' select * from patients where barcode=:barcode');
+      DM.DataModule1.FDQuery1.ParamByName('barcode').asstring := edit_upcoming_patient_record.Text;
+      DM.Datamodule1.FDQuery1.open;
+
+      edit_upcoming_patient_record.Text := DM.Datamodule1.FDQuery1.FieldByName('record').AsString;
+      edit_upcoming_patient_barcode.Text := DM.Datamodule1.FDQuery1.FieldByName('barcode').AsString;
+      text_upcoming_patient_name.Text := DM.Datamodule1.FDQuery1.FieldByName('fullName').AsString;
+
+      // Will turn off the timer after first execution
+      timer_next_patient.Enabled := false;
 end;
 
 procedure Tfrm_main.to_waiting_roomClick(Sender: TObject);

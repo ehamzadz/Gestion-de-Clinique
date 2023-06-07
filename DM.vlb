@@ -10,3 +10,27 @@ Coordinates=10,10,60,51
 [table_records]
 Coordinates=0,0,81,123
 
+[qry_commune]
+Coordinates=43,484,84,51
+
+[table_tickets]
+Coordinates=132,1,76,159
+
+[qry_waiting_room]
+Coordinates=283,1,103,177
+
+[FDConnection3]
+Coordinates=289,179,90,33
+
+[table_users]
+Coordinates=132,179,71,123
+
+[table_patients]
+Coordinates=0,0,113,465
+
+[qry_patients]
+Coordinates=132,321,113,465
+
+[FDConnection2]
+Coordinates=289,231,90,33
+
